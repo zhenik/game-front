@@ -9,6 +9,9 @@
           <router-link to="/signin">Sign In</router-link>
         </li>
         <li>
+          <router-link to="/profile">Profile</router-link>
+        </li>
+        <li>
           <router-link to="/dashboard">Dashboard</router-link>
         </li>
       </ul>

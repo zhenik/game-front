@@ -1,7 +1,7 @@
 <template>
   <div id="signin">
     <div class="signin-form">
-      <form @submit.prevent="onSubmit">
+      <form @submit.prevent="submit">
         <div class="input">
           <label for="email">Mail</label>
           <input
@@ -32,13 +32,38 @@ export default {
       password: ''
     }
   },
+  computed: {
+    user () {
+      const user =  this.$store.getters.user;
+      console.log("computed.user( " + JSON.stringify(user) + " )");
+      return user;
+    },
+    error () {
+      return this.$store.getters.error
+    },
+    loading () {
+      return this.$store.getters.loading
+    }
+  },
+  watch: {
+    user (newValue, oldValue) {
+
+      console.log("watch.user.newValue "+ JSON.stringify(newValue));
+      console.log("watch.user.oldValue "+ JSON.stringify(oldValue));
+      // if (value !== null && value !== undefined) {
+      //   this.$router.push('/profile');
+      //   // this.$router.replace({ name: "Dashboard" });
+      // }
+    }
+  },
   methods: {
-    onSubmit () {
-      const formData = {
+    submit () {
+      const payload = {
         email: this.email,
         password: this.password
-      }
-      console.log(formData)
+      };
+      console.log("Payload -> " + JSON.stringify(payload));
+      this.$store.dispatch('signUserIn', payload);
     }
   }
 }
