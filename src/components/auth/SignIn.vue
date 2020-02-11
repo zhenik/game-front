@@ -25,6 +25,7 @@
 </template>
 
 <script>
+// import { mapGetters } from "vuex";
 export default {
   data () {
     return {
@@ -34,9 +35,7 @@ export default {
   },
   computed: {
     user () {
-      const user =  this.$store.getters.user;
-      console.log("computed.user( " + JSON.stringify(user) + " )");
-      return user;
+      return this.$store.getters.user;
     },
     error () {
       return this.$store.getters.error
@@ -46,14 +45,10 @@ export default {
     }
   },
   watch: {
-    user (newValue, oldValue) {
-
-      console.log("watch.user.newValue "+ JSON.stringify(newValue));
-      console.log("watch.user.oldValue "+ JSON.stringify(oldValue));
-      // if (value !== null && value !== undefined) {
-      //   this.$router.push('/profile');
-      //   // this.$router.replace({ name: "Dashboard" });
-      // }
+    user (value) {
+      if (value !== null && value !== undefined) {
+        this.$router.push('/profile');
+      }
     }
   },
   methods: {
