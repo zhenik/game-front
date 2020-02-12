@@ -13,6 +13,13 @@ new Vue({
   store,
   created () {
     firebase.initializeApp(config)
+    // firebase.auth().onAuthStateChanged((user) => {
+    //   if (user) {
+    //     // this.$store.dispatch('/profile', user)
+    //   } else {
+    //     this.$router.push('/signin');
+    //   }
+    // })
   },
   render: h => h(App)
 }).$mount('#app');
