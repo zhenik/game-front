@@ -30,7 +30,12 @@ const router = new VueRouter({
       path: '/signin',
       name: 'SignIn',
       component: SignInPage
-    }
+    },
+    // {
+    //   path: "*",
+    //   component: NotFound,
+    //   name: "404"
+    // }
   ]
 });
 
