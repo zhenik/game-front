@@ -4,8 +4,10 @@ import * as firebase from 'firebase'
 import { config } from './firebase.js'
 import router from './router/index'
 import { store } from './store'
+import ApiService from "./api/index";
 
 Vue.config.productionTip = false;
+ApiService.init();
 
 new Vue({
   // el: '#app',
