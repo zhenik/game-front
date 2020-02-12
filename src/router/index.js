@@ -11,6 +11,10 @@ Vue.use(VueRouter);
 const router = new VueRouter({
   mode: 'history', routes: [
     {
+      path: '/',
+      beforeEnter: AuthGuard
+    },
+    {
       path: '/profile',
       name: 'Profile',
       component: Profile,

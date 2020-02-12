@@ -57,7 +57,6 @@ export default {
         email: this.email,
         password: this.password
       };
-      console.log("Payload -> " + JSON.stringify(payload));
       this.$store.dispatch('signUserIn', payload);
     }
   }

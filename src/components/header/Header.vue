@@ -1,23 +1,57 @@
 <template>
   <header id="header">
     <div class="logo">
-      <router-link to="/">Vue - Complete Guide</router-link>
+      <router-link to="/">Welcome to OCN</router-link>
     </div>
     <nav>
-      <ul>
-        <li>
-          <router-link to="/signin">Sign In</router-link>
-        </li>
+      <ul v-if="authenticated">
+<!--        <li>-->
+<!--          <router-link to="/signin">Sign In</router-link>-->
+<!--        </li>-->
         <li>
           <router-link to="/profile">Profile</router-link>
         </li>
         <li>
           <router-link to="/dashboard">Dashboard</router-link>
         </li>
+        <li>
+          <button @click="onLogout" class="logout">Logout</button>
+        </li>
       </ul>
     </nav>
   </header>
 </template>
+
+<script>
+  export default {
+    computed: {
+      authenticated () {
+        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+      }
+    },
+    methods: {
+      onLogout () {
+        this.$store.dispatch('logout')
+        this.$router.push('/signin')
+      }
+    }
+  }
+  // computed: {
+  //   // userIsAuthenticated () {
+  //   //   return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+  //   // }
+  // },
+  // watch: {
+  //   userIsAuthenticated () {
+  //     const signedIn = this.$store.getters.user !== null && this.$store.getters.user !== undefined;
+  //     if (signedIn) {
+  //       this.$router.push('/dashboard');
+  //     } else {
+  //       this.$router.push('/signin');
+  //     }
+  //   }
+  // },
+</script>
 
 <style scoped>
   #header {
@@ -67,5 +101,12 @@
   li a:active,
   li a.router-link-active {
     color: #fa923f;
+  }
+  .logout {
+    background-color: transparent;
+    border: none;
+    font: inherit;
+    color: white;
+    cursor: pointer;
   }
 </style>
