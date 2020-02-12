@@ -83,6 +83,9 @@ export default {
     },
     userRole (state) {
       return state.role
+    },
+    profile(state) {
+      return { user: state.user, role: state.role }
     }
   }
 }

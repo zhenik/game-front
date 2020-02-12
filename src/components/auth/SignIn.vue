@@ -25,7 +25,7 @@
 </template>
 
 <script>
-// import { mapGetters } from "vuex";
+import { mapGetters } from "vuex";
 export default {
   data () {
     return {
@@ -34,15 +34,21 @@ export default {
     }
   },
   computed: {
-    user () {
-      return this.$store.getters.user;
-    },
-    error () {
-      return this.$store.getters.error
-    },
-    loading () {
-      return this.$store.getters.loading
-    }
+    ...mapGetters({
+      user: "user",
+      error: "error",
+      loading: "loading",
+      profile: "profile"
+    }),
+    // user () {
+    //   return this.$store.getters.user;
+    // },
+    // error () {
+    //   return this.$store.getters.error
+    // },
+    // loading () {
+    //   return this.$store.getters.loading
+    // }
   },
   watch: {
     user (value) {
