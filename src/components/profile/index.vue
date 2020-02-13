@@ -1,6 +1,6 @@
 <template>
   <div>
-    <user-card v-bind:profile="getProfile"></user-card>
+    <user-card v-bind:profile="profile"></user-card>
   </div>
 
 </template>
@@ -16,9 +16,7 @@
     },
     computed: {
       ...mapGetters({
-        // user: "user",
-        role: "userRole",
-        getProfile: 'profile'
+        profile: 'profile'
       }),
     }
   }
