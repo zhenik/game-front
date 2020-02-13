@@ -5,9 +5,9 @@
     </div>
     <nav>
       <ul v-if="authenticated">
-<!--        <li>-->
-<!--          <router-link to="/signin">Sign In</router-link>-->
-<!--        </li>-->
+        <li>
+          <router-link to="/lists">Lists</router-link>
+        </li>
         <li>
           <router-link to="/profile">Profile</router-link>
         </li>
@@ -26,7 +26,7 @@
   export default {
     computed: {
       authenticated () {
-        return this.$store.getters.user !== null && this.$store.getters.user !== undefined
+        return this.$store.getters.authenticatedAndAuthorized
       }
     },
     methods: {
@@ -36,21 +36,6 @@
       }
     }
   }
-  // computed: {
-  //   // userIsAuthenticated () {
-  //   //   return this.$store.getters.user !== null && this.$store.getters.user !== undefined
-  //   // }
-  // },
-  // watch: {
-  //   userIsAuthenticated () {
-  //     const signedIn = this.$store.getters.user !== null && this.$store.getters.user !== undefined;
-  //     if (signedIn) {
-  //       this.$router.push('/dashboard');
-  //     } else {
-  //       this.$router.push('/signin');
-  //     }
-  //   }
-  // },
 </script>
 
 <style scoped>
