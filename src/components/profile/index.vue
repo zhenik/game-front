@@ -6,7 +6,7 @@
 </template>
 
 <script>
-  import UserCard from './profile/UserCard.vue'
+  import UserCard from './components/UserCard.vue'
   import { mapGetters } from 'vuex';
 
   export default {

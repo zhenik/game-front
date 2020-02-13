@@ -2,8 +2,8 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 
 import SignInPage from '../components/auth/SignIn'
-import Profile from '../components/dashboard/Profile'
-import Dashboard from '../components/dashboard/Dashboard'
+import Profile from '../components/profile/index'
+import Dashboard from '../components/dashboard/index'
 import AuthGuard from './auth-guard'
 
 Vue.use(VueRouter);
