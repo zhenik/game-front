@@ -35,26 +35,15 @@ export default {
   },
   computed: {
     ...mapGetters({
-      user: "user",
       error: "error",
       loading: "loading",
-      profile: "profile"
+      auth: "authenticatedAndAuthorized"
     }),
-    // user () {
-    //   return this.$store.getters.user;
-    // },
-    // error () {
-    //   return this.$store.getters.error
-    // },
-    // loading () {
-    //   return this.$store.getters.loading
-    // }
   },
   watch: {
-    user (value) {
-      if (value !== null && value !== undefined) {
-        this.$router.push('/profile');
-      }
+    // }===|==>---- only when user authenticated and then authorized
+    auth(yes) {
+      if (yes) this.$router.push('/profile');
     }
   },
   methods: {

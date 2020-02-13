@@ -4,14 +4,14 @@ import { UsersService } from "../../api";
 export default {
   state: {
     user: null,
-    role: null
+    profile: null
   },
   mutations: {
     setUser (state, payload) {
       state.user = payload
     },
-    setRole (state, role) {
-      state.role = role
+    setProfile(state, profile) {
+      state.profile = profile
     }
   },
   actions: {
@@ -49,7 +49,7 @@ export default {
                 .then(
                     response => {
                       commit('setLoading', false);
-                      commit('setRole', response.data.role)
+                      commit('setProfile', response.data)
                     })
                 .catch(
                     error => {
@@ -59,9 +59,10 @@ export default {
                       // logout firebase, if authorization failed
                       firebase.auth().signOut();
                       commit('setUser', null);
-                      commit('setRole', null);
+                      commit('setProfile', null);
                     }
                 );
+            return null; // release promise
           })
           .catch(
               error => {
@@ -74,18 +75,21 @@ export default {
     logout ({commit}) {
       firebase.auth().signOut();
       commit('setUser', null);
-      commit('setRole', null);
+      commit('setProfile', null);
     }
   },
   getters: {
     user (state) {
       return state.user
     },
-    userRole (state) {
-      return state.role
-    },
     profile(state) {
-      return { user: state.user, role: state.role }
+      // console.log("state.profile "+JSON.stringify(state.profile));
+      return state.profile
+    },
+    authenticatedAndAuthorized(state) {
+      const authenticated   = (state.user !== null && state.user !== undefined);
+      const authorized      = (state.profile !== null && state.profile !== undefined);
+      return (authenticated && authorized);
     }
   }
 }
