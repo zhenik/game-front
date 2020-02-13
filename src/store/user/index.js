@@ -90,6 +90,17 @@ export default {
       const authenticated   = (state.user !== null && state.user !== undefined);
       const authorized      = (state.profile !== null && state.profile !== undefined);
       return (authenticated && authorized);
+    },
+    isAdmin(state) {
+      if (state.profile !== null && state.profile !== undefined) {
+        if (state.profile.role === 'ADMIN'){
+          return true
+        } else {
+          return false
+        }
+      } else {
+        return false
+      }
     }
   }
 }
