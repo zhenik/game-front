@@ -97,3 +97,10 @@
     },
   }
 </script>
+
+
+<!--scoped - means no affect to other components (classes or ids)-->
+<!--write your custom css here-->
+<style scoped>
+
+</style>
