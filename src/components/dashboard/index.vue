@@ -1,7 +1,7 @@
 <template>
   <div class="dashboard">
     <h2>This is dashboard</h2>
-    <div v-if="isAdmin"></div>
+<!--    <div v-if="isAdmin"></div>-->
     <admin-dashboard v-if="isAdmin"></admin-dashboard>
     <user-dashboard v-else></user-dashboard>
   </div>
