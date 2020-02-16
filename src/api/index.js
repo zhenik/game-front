@@ -48,3 +48,12 @@ export const UsersService = {
     return ApiService.get("users", `${email}`);
   },
 };
+
+export const ListsService = {
+  getLists(email) {
+    const params = {
+      email: email
+    };
+    return ApiService.query("/lists", {params});
+  }
+};

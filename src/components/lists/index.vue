@@ -12,89 +12,36 @@
 </template>
 
 <script>
-  // import { mapGetters } from "vuex";
+  import { mapGetters, mapActions } from "vuex";
   import ListQuestionsRaw from "./shared/components/ListQuestionsRaw";
   import AdminWhatever from "./admin/Whatever";
   import UserWhatever from "./user/Whatever";
   export default {
     data() {
       return {
-        lists: [
-          {
-            "id": "5e491e1fc531c6607e6f4822",
-            "updatedAt": "2020-02-16T11:49:03.813",
-            "createdAt": "2020-02-16T11:49:03.813",
-            "collectionId": null,
-            "assignedToEmail": "zhenik@gmail.com",
-            "assignedDate": "2020-02-16T11:49:03.813",
-            "delivered": null,
-            "deadline": null,
-            "questions": [
-              {
-                "id": 1,
-                "text": "How old are you?",
-                "answer": null,
-                "comment": null,
-                "score": 5
-              },
-              {
-                "id": 2,
-                "text": "How old are you?",
-                "answer": null,
-                "comment": null,
-                "score": 5
-              }
-            ],
-            "state": "WORK_IN_PROGRESS"
-          },
-          {
-            "id": "5e49564a23fb7133d650b52f",
-            "updatedAt": "2020-02-16T15:48:42.373",
-            "createdAt": "2020-02-16T15:48:42.371",
-            "collectionId": null,
-            "assignedToEmail": null,
-            "assignedDate": null,
-            "delivered": null,
-            "deadline": null,
-            "questions": [
-              {
-                "id": 1,
-                "text": "How old are you?",
-                "answer": null,
-                "comment": null,
-                "score": 0
-              },
-              {
-                "id": 2,
-                "text": "How old are you?",
-                "answer": null,
-                "comment": null,
-                "score": 0
-              },
-              {
-                "id": 3,
-                "text": "Where is your car dude?",
-                "answer": null,
-                "comment": null,
-                "score": 0
-              }
-            ],
-            "state": "NOT_ASSIGNED"
-          }
-        ],
-        isAdmin: true
+        list: null
       }
     },
-    // computed: {
-    //   ...mapGetters({
-    //     isAdmin: "isAdmin"
-    //   }),
-    // },
+    computed: {
+      ...mapGetters({
+        getProfile:     "profile",
+        isAdmin:        "isAdmin",
+        lists:          "lists"
+      }),
+      ...mapActions({
+        fetchLists:     "fetchLists"
+      }),
+    },
     components: {
       listRaw: ListQuestionsRaw,
       adminWhatever: AdminWhatever,
       userWhatever: UserWhatever
     },
+    methods: {
+    },
+    created() {
+      this.fetchLists()
+    }
   }
 </script>
 
