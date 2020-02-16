@@ -5,6 +5,9 @@ import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
 import Dashboard from '../components/dashboard/index'
 import Lists from '../components/lists/index'
+
+// admin routes
+import NewList from '../components/lists/admin/NewList'
 import AuthGuard from './auth-guard'
 
 Vue.use(VueRouter);
@@ -33,11 +36,29 @@ const router = new VueRouter({
       component: SignInPage
     },
     {
-      path: '/lists',
       name: 'Lists',
+      path: '/lists',
       component: Lists,
       beforeEnter: AuthGuard
     },
+    {
+      name: "NewList",
+      path: "/new",
+      component: NewList,
+      beforeEnter: AuthGuard
+    }
+    // {
+    //   name: "List",
+    //   path: "/lists/:slug",
+    //   component: () => import("@/views/Article"),
+    //   props: true
+    // },
+    // {
+    //   name: "article-edit",
+    //   path: "/editor/:slug?",
+    //   props: true,
+    //   component: () => import("@/views/ArticleEdit")
+    // }
     // {
     //   path: "*",
     //   component: NotFound,

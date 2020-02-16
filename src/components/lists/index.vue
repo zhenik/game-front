@@ -24,7 +24,6 @@
     },
     computed: {
       ...mapGetters({
-        getProfile:     "profile",
         isAdmin:        "isAdmin",
         lists:          "lists"
       }),
@@ -38,9 +37,12 @@
       userWhatever: UserWhatever
     },
     methods: {
+      fetchData() {
+        this.$store.dispatch("fetchLists");
+      }
     },
     created() {
-      this.fetchLists()
+      this.fetchData()
     }
   }
 </script>

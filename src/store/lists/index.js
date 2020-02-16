@@ -13,12 +13,12 @@ export default {
     fetchLists({commit, rootState}) {
       // console.log("rootState " + JSON.stringify(rootState));
       const email = rootState.user.profile.email;
-      console.log("RootState email -> " + email);
+      // console.log("RootState email -> " + email);
 
       commit('setLoading', true);
       commit('clearError');
       ListsService.getLists(email).then(response => {
-            console.log("email " + email);
+            // console.log("email " + email);
 
             commit('setLoading', false);
             commit('setLists', response.data)
