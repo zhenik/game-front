@@ -45,7 +45,7 @@ const router = new VueRouter({
       name: "NewList",
       path: "/new",
       component: NewList,
-      beforeEnter: AuthGuard
+      // beforeEnter: AuthGuard
     }
     // {
     //   name: "List",
