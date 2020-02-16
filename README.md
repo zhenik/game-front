@@ -1,24 +1,27 @@
-# game-front
+# Game-front
 
-## Project setup
+## Required software
+* [Yarn](https://classic.yarnpkg.com/en/docs/install/#mac-stable), if you use macOS, install it via package manager `brew`
+* [Vue cli](https://cli.vuejs.org/guide/installation.html), install via yarn
+```bash
+yarn global add @vue/cli
 ```
-yarn install
-```
+* in some cases install `node`, via package manager `brew`
 
-### Compiles and hot-reloads for development
-```
-yarn serve
-```
 
-### Compiles and minifies for production
-```
-yarn build
-```
-
-### Lints and fixes files
-```
-yarn lint
+## How to run 
+```bash
+yarn run dev
 ```
 
-### Customize configuration
-See [Configuration Reference](https://cli.vuejs.org/config/).
+## Instant prototyping
+Component must be decoupled from application. Other requirements:
+- No access to application logic files: store, routing, service, etc..
+- Access only to other ui component
+
+example:
+```bash 
+vue serve ./src/components/lists/index.vue
+```
+Component view is available on `http://localhost:8081`
+
