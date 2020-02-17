@@ -10,8 +10,6 @@
       <br/>
       <!--assigned to-->
       <div class="form-group assigned-to">
-<!--        <label class="control-label col-sm-offset-2" for="company">Assigned to:</label>-->
-<!--        <label class="control-label" for="company">Assigned to:</label>-->
         <div>
           <select id="company" class="form-control">
             <option>-</option>
@@ -27,6 +25,7 @@
           v-bind:question="question"
           :key="question.id"
           @remove="removeQuestionElement"
+          v-on:update:question="setQuestionData"
       ></question-component>
 
     </div>
@@ -36,9 +35,9 @@
 <script>
   import Question from './Question'
   export default {
+    name: "NewList",
     data() {
       return {
-        fields: [],
         questions: [],
         count: 0
       }
@@ -46,13 +45,23 @@
     methods: {
       addQuestionElement: function () {
         this.questions.push({
-          id: this.count++
+          id: this.count++,
+          text: null,
+          comment: null
         });
       },
       removeQuestionElement(id) {
         console.log('removing form element', id)
         const index = this.questions.findIndex(f => f.id === id);
         this.questions.splice(index,1)
+      },
+      setQuestionData(updatedQuestion) {
+        console.log('parent:question '+ JSON.stringify(updatedQuestion))
+        this.questions.forEach((q, index) => {
+          if (q.id === updatedQuestion.id) {
+            this.questions[index] = updatedQuestion
+          }
+        })
       }
     },
     components: {
