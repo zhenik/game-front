@@ -1,32 +1,42 @@
 <template>
   <div id="new-list">
     <div class="new-list-form">
-      <div class="btn-group">
+      <div class="btn-group mr-4">
         <!--new question-->
         <button type="button"
-                class="btn btn-success btn-filter"
+                class="btn btn-info btn-filter"
                 v-on:click="addQuestionElement">Add question</button>
       </div>
-      <br/>
-      <!--assigned to-->
-      <div class="form-group assigned-to">
-        <div>
-          <select id="company" class="form-control">
-            <option>-</option>
-            <option>medium</option>
-            <option>large</option>
-          </select>
-        </div>
+      <div class="btn-group mr-2">
+        <!--create list-->
+        <button type="button"
+                class="btn btn-primary btn-filter"
+                v-on:click="addQuestionElement">Save list</button>
       </div>
 
-<!--      <component v-for="field in fields" v-bind:is="field.type" :key="field.id"></component>-->
-      <question-component
-          v-for="question in questions"
-          v-bind:question="question"
-          :key="question.id"
-          @remove="removeQuestionElement"
-          v-on:update:question="setQuestionData"
-      ></question-component>
+      <br/>
+      <!--assigned to-->
+      <div class="input-group mt-3">
+        <div class="input-group-prepend">
+          <label class="input-group-text" for="inputGroupSelect01">Assign to:</label>
+        </div>
+        <select class="custom-select" id="inputGroupSelect01">
+          <option selected>Choose...</option>
+          <option value="1">One</option>
+          <option value="2">Two</option>
+          <option value="3">Three</option>
+        </select>
+      </div>
+
+      <div class="list-group">
+        <question-component
+            v-for="question in questions"
+            v-bind:question="question"
+            :key="question.id"
+            @remove="removeQuestionElement"
+            v-on:update:question="setQuestionData"
+        ></question-component>
+      </div>
 
     </div>
   </div>
@@ -76,11 +86,6 @@
     padding: 20px;
     box-shadow: 0 2px 3px #ccc;
   }
-
-  .assigned-to {
-    margin-top: 10px;
-  }
-
 
 </style>
 

@@ -1,6 +1,6 @@
 <template>
   <div class="col-12">
-    <div class="card">
+    <div class="card mt-2">
       <h5 class="card-header">ID: {{localQuestion.id}}</h5>
       <div class="card-body">
         <div class="card-text">
