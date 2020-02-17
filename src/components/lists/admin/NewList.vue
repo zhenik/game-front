@@ -1,15 +1,18 @@
 <template>
   <div id="new-list">
     <div class="new-list-form">
-      <!--new question-->
-<!--      <button type="button" v-on:click="addFormElement('form-textarea')">Add form-textarea</button>-->
-<!--      <button type="button" v-on:click="addFormElement('question')">Add question</button>-->
-      <button type="button" v-on:click="addQuestionElement">Add question</button>
-
+      <div class="btn-group">
+        <!--new question-->
+        <button type="button"
+                class="btn btn-success btn-filter"
+                v-on:click="addQuestionElement">Add question</button>
+      </div>
+      <br/>
       <!--assigned to-->
-      <div class="form-group">
-        <label class="control-label col-sm-offset-2 col-sm-2" for="company">Assigned to:</label>
-        <div class="col-sm-6 col-md-4">
+      <div class="form-group assigned-to">
+<!--        <label class="control-label col-sm-offset-2" for="company">Assigned to:</label>-->
+<!--        <label class="control-label" for="company">Assigned to:</label>-->
+        <div>
           <select id="company" class="form-control">
             <option>-</option>
             <option>medium</option>
@@ -65,9 +68,10 @@
     box-shadow: 0 2px 3px #ccc;
   }
 
+  .assigned-to {
+    margin-top: 10px;
+  }
+
 
 </style>
 
-Vue.component('form-textarea', {
-  template: '#form-textarea'
-});
