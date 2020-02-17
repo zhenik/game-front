@@ -3,21 +3,28 @@
     <div class="new-list-form">
       <!--new question-->
 <!--      <button type="button" v-on:click="addFormElement('form-textarea')">Add form-textarea</button>-->
-      <button type="button" v-on:click="addFormElement('question')">Add form-textarea</button>
+<!--      <button type="button" v-on:click="addFormElement('question')">Add question</button>-->
+      <button type="button" v-on:click="addQuestionElement">Add question</button>
 
       <!--assigned to-->
       <div class="form-group">
         <label class="control-label col-sm-offset-2 col-sm-2" for="company">Assigned to:</label>
         <div class="col-sm-6 col-md-4">
           <select id="company" class="form-control">
-            <option>small</option>
+            <option>-</option>
             <option>medium</option>
             <option>large</option>
           </select>
         </div>
       </div>
 
-      <component v-for="field in fields" v-bind:is="field.type" :key="field.id"></component>
+<!--      <component v-for="field in fields" v-bind:is="field.type" :key="field.id"></component>-->
+      <question-component
+          v-for="question in questions"
+          v-bind:question="question"
+          :key="question.id"
+          @remove="removeQuestionElement"
+      ></question-component>
 
     </div>
   </div>
@@ -29,18 +36,24 @@
     data() {
       return {
         fields: [],
+        questions: [],
         count: 0
       }
     },
     methods: {
-      addFormElement: function (type) {
-        this.fields.push({
-          'type': type, id: this.count++
+      addQuestionElement: function () {
+        this.questions.push({
+          id: this.count++
         });
+      },
+      removeQuestionElement(id) {
+        console.log('removing form element', id)
+        const index = this.questions.findIndex(f => f.id === id);
+        this.questions.splice(index,1)
       }
     },
     components: {
-      question: Question
+      questionComponent: Question
     }
   }
 </script>
