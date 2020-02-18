@@ -1,5 +1,4 @@
-import {ListsService} from "../../api";
-import {UsersService} from "../../api";
+import {ListsService, UsersService} from "../../api";
 
 export default {
   state: {
@@ -51,7 +50,12 @@ export default {
             console.log(error);
             commit('setUsersEmails', null);
           });
-    }
+    },
+    async createList(context, payload) {
+      await ListsService.post(payload);
+      context.dispatch('fetchLists')
+      // return null;
+    },
   },
   getters: {
     lists(state) {

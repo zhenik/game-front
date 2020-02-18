@@ -62,5 +62,24 @@ export const ListsService = {
       email: email
     };
     return ApiService.query("/lists", {params});
+  },
+  post(payload) {
+    const data = JSON.stringify(payload)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+    // console.log("List payload   "+ JSON.stringify(payload))
+    console.log("List prepared  " + data)
+
+    return Vue.axios.post("/lists", data, config)
+
   }
+  // post(slug, payload) {
+  //   return ApiService.post(`articles/${slug}/comments`, {
+  //     comment: { body: payload }
+  //   });
+  // },
+
 };

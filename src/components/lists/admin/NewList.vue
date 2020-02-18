@@ -62,6 +62,7 @@
             <button
                 type="button"
                 class="btn btn-primary"
+                data-dismiss="modal"
                 v-on:click="saveList"
             >Yes</button>
           </div>
@@ -113,30 +114,17 @@
         })
       },
       saveList() {
-        const assignedDate  = this.userAssignedTo !== null ? Date.now() : null
         const newList       = {
           assignedToEmail:    this.userAssignedTo,
-          assignedDate:       assignedDate,
           deadline:           this.deadline,
           questions:          this.questions
         };
-        console.log("new list "+ JSON.stringify(newList))
+        console.log("new list "+ JSON.stringify(newList));
 
+        this.$store
+            .dispatch('createList', newList)
+            .then( () => this.$router.push('/lists'));
       }
-      // watch: {
-      //   // }===|==>---- only when user authenticated and then authorized
-      //   auth(yes) {
-      //     if (yes) this.$router.push('/profile');
-      //   }
-      // },
-      // methods: {
-      //   submit () {
-      //     const payload = {
-      //       email: this.email,
-      //       password: this.password
-      //     };
-      //     this.$store.dispatch('signUserIn', payload);
-      //   }
     },
     beforeCreate() {
       // fetch data
