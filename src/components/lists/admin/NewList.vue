@@ -11,7 +11,9 @@
         <!--create list-->
         <button type="button"
                 class="btn btn-primary btn-filter"
-                v-on:click="saveList">Save list</button>
+                data-toggle="modal"
+                data-target="#exampleModalCenter"
+        >Save list</button>
       </div>
 
       <br/>
@@ -40,8 +42,34 @@
             v-on:update:question="setQuestionData"
         ></question-component>
       </div>
-
     </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Modal title</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Create list with {{questions.length}} questions ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                v-on:click="saveList"
+            >Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+
   </div>
 </template>
 
@@ -93,7 +121,22 @@
           questions:          this.questions
         };
         console.log("new list "+ JSON.stringify(newList))
+
       }
+      // watch: {
+      //   // }===|==>---- only when user authenticated and then authorized
+      //   auth(yes) {
+      //     if (yes) this.$router.push('/profile');
+      //   }
+      // },
+      // methods: {
+      //   submit () {
+      //     const payload = {
+      //       email: this.email,
+      //       password: this.password
+      //     };
+      //     this.$store.dispatch('signUserIn', payload);
+      //   }
     },
     beforeCreate() {
       // fetch data
