@@ -11,7 +11,7 @@
         <!--create list-->
         <button type="button"
                 class="btn btn-primary btn-filter"
-                >Save list</button>
+                v-on:click="saveList">Save list</button>
       </div>
 
       <br/>
@@ -52,9 +52,10 @@
     name: "NewList",
     data() {
       return {
-        questions: [],
+        questions:      [],
         userAssignedTo: null,
-        count: 0
+        deadline:       null,
+        count:          0
       }
     },
     computed: {
@@ -65,13 +66,13 @@
     methods: {
       addQuestionElement: function () {
         this.questions.push({
-          id: this.count++,
-          text: null,
-          comment: null
+          id:       this.count++,
+          text:     null,
+          comment:  null
         });
       },
       removeQuestionElement(id) {
-        console.log('removing form element', id)
+        console.log('removing form element', id);
         const index = this.questions.findIndex(f => f.id === id);
         this.questions.splice(index,1)
       },
@@ -82,6 +83,16 @@
             this.questions[index] = updatedQuestion
           }
         })
+      },
+      saveList() {
+        const assignedDate  = this.userAssignedTo !== null ? Date.now() : null
+        const newList       = {
+          assignedToEmail:    this.userAssignedTo,
+          assignedDate:       assignedDate,
+          deadline:           this.deadline,
+          questions:          this.questions
+        };
+        console.log("new list "+ JSON.stringify(newList))
       }
     },
     beforeCreate() {
