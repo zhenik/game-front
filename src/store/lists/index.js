@@ -1,12 +1,17 @@
 import {ListsService} from "../../api";
+import {UsersService} from "../../api";
 
 export default {
   state: {
-    lists: null
+    lists: null,
+    usersEmails: null
   },
   mutations: {
     setLists(state, payload) {
       state.lists = payload
+    },
+    setUsersEmails(state, payload) {
+      state.usersEmails = payload
     }
   },
   actions: {
@@ -30,11 +35,30 @@ export default {
             commit('setLists', null);
           });
       return null; // release
+    },
+    fetchUsersWithRoleUser({commit}) {
+      commit('setLoading', true);
+      commit('clearError');
+      UsersService.getUsersWithRoleUser()
+          .then(response => {
+            const usersEmails = response.data.map(user => user.email);
+            commit('setLoading', false);
+            commit('setUsersEmails', usersEmails)
+          })
+          .catch(error => {
+            commit('setLoading', false);
+            commit('setError', error);
+            console.log(error);
+            commit('setUsersEmails', null);
+          });
     }
   },
   getters: {
     lists(state) {
       return state.lists
+    },
+    getUsersEmails(state) {
+      return state.usersEmails
     }
   }
 }

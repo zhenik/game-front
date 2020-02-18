@@ -11,7 +11,7 @@
         <!--create list-->
         <button type="button"
                 class="btn btn-primary btn-filter"
-                v-on:click="addQuestionElement">Save list</button>
+                >Save list</button>
       </div>
 
       <br/>
@@ -20,11 +20,14 @@
         <div class="input-group-prepend">
           <label class="input-group-text" for="inputGroupSelect01">Assign to:</label>
         </div>
-        <select class="custom-select" id="inputGroupSelect01">
-          <option selected>Choose...</option>
-          <option value="1">One</option>
-          <option value="2">Two</option>
-          <option value="3">Three</option>
+        <select v-model="userAssignedTo" class="custom-select" id="inputGroupSelect01">
+          <option value="" selected>None</option>
+          {{getUsersEmails}}
+          <option
+              v-for="option in getUsersEmails"
+              :key="option">
+            {{ option }}
+          </option>
         </select>
       </div>
 
@@ -44,13 +47,20 @@
 
 <script>
   import Question from './Question'
+  import { mapGetters } from 'vuex'
   export default {
     name: "NewList",
     data() {
       return {
         questions: [],
+        userAssignedTo: null,
         count: 0
       }
+    },
+    computed: {
+      ...mapGetters({
+        getUsersEmails: "getUsersEmails"
+      }),
     },
     methods: {
       addQuestionElement: function () {
@@ -73,6 +83,10 @@
           }
         })
       }
+    },
+    beforeCreate() {
+      // fetch data
+      this.$store.dispatch("fetchUsersWithRoleUser");
     },
     components: {
       questionComponent: Question

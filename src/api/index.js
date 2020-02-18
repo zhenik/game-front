@@ -47,6 +47,13 @@ export const UsersService = {
   getUser(email) {
     return ApiService.get("users", `${email}`);
   },
+  // only role=USER
+  getUsersWithRoleUser() {
+    const params = {
+      role: 'USER'
+    };
+    return ApiService.query("users", {params})
+  }
 };
 
 export const ListsService = {
