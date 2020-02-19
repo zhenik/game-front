@@ -75,7 +75,7 @@
 </template>
 
 <script>
-  import Question from './Question'
+  import Question from './NewQuestion'
   import { mapGetters } from 'vuex'
   export default {
     name: "NewList",

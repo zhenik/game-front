@@ -13,8 +13,8 @@
 
 <script>
   import { mapGetters, mapActions } from "vuex";
-  import ListQuestionsRaw from "./shared/components/ListQuestionsRaw";
-  import AdminWhatever from "./admin/Whatever";
+  import ListQuestionsRaw from "./shared/components/ListRow";
+  import AdminWhatever from "./admin/AdminListsHeader";
   import UserWhatever from "./user/Whatever";
   export default {
     data() {
