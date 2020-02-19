@@ -70,16 +70,10 @@ export const ListsService = {
         'Content-Type': 'application/json',
       }
     };
-    // console.log("List payload   "+ JSON.stringify(payload))
     console.log("List prepared  " + data)
-
-    return Vue.axios.post("/lists", data, config)
-
-  }
-  // post(slug, payload) {
-  //   return ApiService.post(`articles/${slug}/comments`, {
-  //     comment: { body: payload }
-  //   });
-  // },
-
+    return Vue.axios.post("lists", data, config) // extract method to ApiService
+  },
+  get(slug) {
+    return ApiService.get("lists", slug);
+  },
 };

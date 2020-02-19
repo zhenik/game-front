@@ -5,6 +5,7 @@ import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
 import Dashboard from '../components/dashboard/index'
 import Lists from '../components/lists/index'
+import ListElement from '../components/lists/shared/components/ListElement'
 
 // admin routes
 import NewList from '../components/lists/admin/NewList'
@@ -40,6 +41,13 @@ const router = new VueRouter({
       path: '/lists',
       component: Lists,
       beforeEnter: AuthGuard
+    },
+    {
+      name: "ListElement",
+      path: "/lists/:slug",
+      component: ListElement,
+      props: true,
+      // beforeEnter: AuthGuard
     },
     {
       name: "NewList",

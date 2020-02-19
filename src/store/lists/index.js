@@ -3,7 +3,8 @@ import {ListsService, UsersService} from "../../api";
 export default {
   state: {
     lists: null,
-    usersEmails: null
+    usersEmails: null,
+    currentList: null
   },
   mutations: {
     setLists(state, payload) {
@@ -11,17 +12,21 @@ export default {
     },
     setUsersEmails(state, payload) {
       state.usersEmails = payload
+    },
+    setCurrentList(state, payload) {
+      state.currentList = payload
     }
   },
   actions: {
-    fetchLists({commit, rootState}) {
+    async fetchLists({commit, rootState}) {
       // console.log("rootState " + JSON.stringify(rootState));
       const email = rootState.user.profile.email;
       // console.log("RootState email -> " + email);
 
       commit('setLoading', true);
       commit('clearError');
-      ListsService.getLists(email).then(response => {
+      ListsService.getLists(email)
+          .then(response => {
             // console.log("email " + email);
 
             commit('setLoading', false);
@@ -35,7 +40,7 @@ export default {
           });
       return null; // release
     },
-    fetchUsersWithRoleUser({commit}) {
+    async fetchUsersWithRoleUser({commit}) {
       commit('setLoading', true);
       commit('clearError');
       UsersService.getUsersWithRoleUser()
@@ -56,6 +61,25 @@ export default {
       context.dispatch('fetchLists')
       // return null;
     },
+    async fetchCurrentList({commit}, listSlug) {
+      commit('setLoading', true);
+      commit('clearError');
+      ListsService.get(listSlug)
+          .then(response => {
+            commit('setLoading', false);
+            commit('setCurrentList', response.data);
+          })
+          .catch(error => {
+            commit('setLoading', false);
+            commit('setError', error);
+            console.log(error)
+            commit('setCurrentList', null);
+      });
+      return null; // release
+    },
+    cleanCurrentList({commit}) {
+      commit('setCurrentList', null);
+    }
   },
   getters: {
     lists(state) {
@@ -63,6 +87,9 @@ export default {
     },
     getUsersEmails(state) {
       return state.usersEmails
-    }
+    },
+    getCurrentList(state) {
+      return state.currentList;
+    },
   }
 }

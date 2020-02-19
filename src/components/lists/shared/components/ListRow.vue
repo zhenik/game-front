@@ -1,18 +1,20 @@
 <template>
   <div class="list-questions-raw">
-    <a href="#" class="list-group-item list-group-item-action flex-column align-items-start"
+    <router-link :to="listLink" class="list-group-item list-group-item-action flex-column align-items-start"
        @mouseout="isHovering = false" @mouseover="isHovering = true"
        :class="{active: isHovering}"
     >
-      <div class="d-flex w-100 justify-content-between">
-        <h5 class="mb-1">List id: {{listQuestions.id}}</h5>
-        <small>created: {{dateDelta}}</small>
+      <div>
+        <div class="d-flex w-100 justify-content-between">
+          <h5 class="mb-1">List id: {{listQuestions.id}}</h5>
+          <small>created: {{dateDelta}}</small>
+        </div>
+        <div class="d-flex w-100 justify-content-between">
+          <small>state: {{listQuestions.state}}</small>
+        </div>
+        <small v-if="listQuestions.assignedToEmail !== null">assigned to: {{listQuestions.assignedToEmail}}</small>
       </div>
-      <div class="d-flex w-100 justify-content-between">
-        <small>state: {{listQuestions.state}}</small>
-      </div>
-      <small v-if="listQuestions.assignedToEmail !== null">assigned to: {{listQuestions.assignedToEmail}}</small>
-    </a>
+    </router-link>
   </div>
 </template>
 
@@ -35,6 +37,14 @@
         } else {
           return "today"
         }
+      },
+      listLink() {
+        return {
+          name: "ListElement",
+          params: {
+            slug: this.listQuestions.id
+          }
+        };
       }
     },
     methods: {
