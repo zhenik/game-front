@@ -4,12 +4,21 @@
     <h2>List element</h2>
     {{ this.list }}
 
-    <question-raw
-        v-for="question in this.list.questions"
-        v-bind:question="question"
-        :key="question.id"
-        v-on:update:question="setQuestionData"
-    ></question-raw>
+    <div class="le-questions-container">
+      <question-raw
+          v-for="question in this.list.questions"
+          v-bind:question="question"
+          :key="question.id"
+          v-on:update:question="setQuestionData"
+      ></question-raw>
+    </div>
+
+    <div class="le-button-group">
+      <button type="button" class="btn btn-primary btn-lg">Save</button>
+      <button type="button" class="btn btn-info btn-lg">Export</button>
+      <button type="button" class="btn btn-warning btn-lg">Deliver</button>
+    </div>
+
   </div>
 
 </template>
