@@ -2,39 +2,14 @@
   <div>
     <h3 v-if="isAdmin">Edit list</h3>
     <h2>List element</h2>
-    {{ list }}
+    {{ this.list }}
 
     <question-raw
-        v-for="question in list.questions"
+        v-for="question in this.list.questions"
         v-bind:question="question"
         :key="question.id"
         v-on:update:question="setQuestionData"
     ></question-raw>
-<!--    <ul class="list-group">-->
-<!--      <li-->
-<!--          v-for="question in list.questions"-->
-<!--          v-bind:question="question"-->
-<!--          :key="question.id"-->
-<!--          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">-->
-
-<!--        {{question.text}}-->
-<!--        <div class="btn-group mr-2 btn-group-toggle" data-toggle="buttons">-->
-<!--          <label class="btn btn-secondary">-->
-<!--            <input type="radio"-->
-<!--                   :value="question.answer"-->
-<!--                   v-model="picked"-->
-<!--                   > Yes-->
-<!--          </label>-->
-<!--          <label class="btn btn-secondary">-->
-<!--            <input type="radio"-->
-<!--                   :value="question.answer"-->
-<!--                   v-model="picked"-->
-<!--            > No-->
-<!--          </label>-->
-<!--        </div>-->
-<!--        You have selected : {{question.answer}}-->
-<!--      </li>-->
-<!--    </ul>-->
   </div>
 
 </template>
@@ -67,7 +42,11 @@
         picked: ''
       }
     },
-    mounted() {
+    // mounted() {
+    //   let currentList = this.$store.getters.getCurrentList
+    //   this.list = currentList
+    // },
+    created() {
       let currentList = this.$store.getters.getCurrentList
       this.list = currentList
     },
@@ -83,7 +62,7 @@
         console.log('parent:question '+ JSON.stringify(updatedQuestion))
         this.list.questions.forEach((q, index) => {
           if (q.id === updatedQuestion.id) {
-            this.questions[index] = updatedQuestion
+            this.list.questions[index] = updatedQuestion
           }
         })
       },
