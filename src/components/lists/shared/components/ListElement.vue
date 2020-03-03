@@ -4,37 +4,37 @@
     <h2>List element</h2>
     {{ list }}
 
-    <ul class="list-group">
-      <li
-          v-for="question in list.questions"
-          v-bind:question="question"
-          :key="question.id"
-          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">
+    <question-raw
+        v-for="question in list.questions"
+        v-bind:question="question"
+        :key="question.id"
+        v-on:update:question="setQuestionData"
+    ></question-raw>
+<!--    <ul class="list-group">-->
+<!--      <li-->
+<!--          v-for="question in list.questions"-->
+<!--          v-bind:question="question"-->
+<!--          :key="question.id"-->
+<!--          class="list-group-item list-group-item-action d-flex justify-content-between align-items-center">-->
 
-        {{question.text}}
-
-        <div class="btn-group mr-2 btn-group-toggle" data-toggle="buttons">
-          <label class="btn btn-secondary">
-            <input type="radio"
-                   :value="question.answer"
-                   v-model="picked"
-                   > Yes
-          </label>
-          <label class="btn btn-secondary">
-            <input type="radio"
-                   :value="question.answer"
-                   v-model="picked"
-            > No
-          </label>
-        </div>
-
-        You have selected : {{question.answer}}
-
-      </li>
-
-    </ul>
-
-
+<!--        {{question.text}}-->
+<!--        <div class="btn-group mr-2 btn-group-toggle" data-toggle="buttons">-->
+<!--          <label class="btn btn-secondary">-->
+<!--            <input type="radio"-->
+<!--                   :value="question.answer"-->
+<!--                   v-model="picked"-->
+<!--                   > Yes-->
+<!--          </label>-->
+<!--          <label class="btn btn-secondary">-->
+<!--            <input type="radio"-->
+<!--                   :value="question.answer"-->
+<!--                   v-model="picked"-->
+<!--            > No-->
+<!--          </label>-->
+<!--        </div>-->
+<!--        You have selected : {{question.answer}}-->
+<!--      </li>-->
+<!--    </ul>-->
   </div>
 
 </template>
@@ -42,6 +42,7 @@
 <script>
   import {mapGetters} from "vuex";
   import { store } from "@/store";
+  import QuestionRaw from './QuestionRaw'
 
   export default {
     name: "ListElement",
@@ -75,7 +76,20 @@
       next();
     },
     computed: {
-      ...mapGetters(["getCurrentList", "getCurrentQuestions", "isAdmin"]),
+      ...mapGetters(["getCurrentList", "isAdmin"]),
     },
+    methods: {
+      setQuestionData(updatedQuestion) {
+        console.log('parent:question '+ JSON.stringify(updatedQuestion))
+        this.list.questions.forEach((q, index) => {
+          if (q.id === updatedQuestion.id) {
+            this.questions[index] = updatedQuestion
+          }
+        })
+      },
+    },
+    components: {
+      questionRaw: QuestionRaw
+    }
   }
 </script>
