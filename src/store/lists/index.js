@@ -1,5 +1,4 @@
 import {ListsService, UsersService} from "../../api";
-import Vue from "vue";
 
 const initialState = {
     lists: null,
@@ -73,8 +72,8 @@ export const actions = {
           .catch(error => {
             commit('setLoading', false);
             commit('setError', error);
-            console.log(error)
-            commit('setCurrentList', null);
+            console.log(error);
+            commit('setCurrentList', initialState.currentList);
       });
       return null; // release
     },
@@ -85,7 +84,7 @@ export const actions = {
       return ListsService.update(slug, payload)
     },
     currentListResetState({commit}) {
-      commit('setCurrentList');
+      commit('setCurrentList', initialState.currentList);
     },
     listEditQuestionAnswer({ commit }, updatedQuestion){
       commit('answerQuestion', updatedQuestion)
@@ -99,12 +98,16 @@ export const mutations = {
     setUsersEmails(state, payload) {
       state.usersEmails = payload
     },
-    setCurrentList(state) {
-      for (let f in state.currentList) {
-        Vue.set(state, f, initialState[f]);
-      }
+    setCurrentList(state, payload) {
+      state.currentList = payload
     },
+    // resetCurrentList(state) {
+    //   for (let f in state.currentList) {
+    //     Vue.set(state, f, initialState[f]);
+    //   }
+    // },
     answerQuestion(state, updatedQuestion) {
+      console.log("Updated question -> "+JSON.stringify(updatedQuestion))
       state.currentList.questions.forEach((q, index) => {
         if (q.id === updatedQuestion.id) {
           state.currentList.questions[index] = updatedQuestion

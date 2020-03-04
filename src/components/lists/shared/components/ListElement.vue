@@ -11,14 +11,6 @@
           :key="question.id"
           v-on:update:question="setQuestionData"
       ></question-raw>
-
-<!--      <div class="le-questions-container">-->
-<!--        <question-raw-->
-<!--            v-for="question in currentList.questions"-->
-<!--            v-bind:question="question"-->
-<!--            :key="question.id"-->
-<!--            v-on:update:question="setQuestionData"-->
-<!--        ></question-raw>-->
     </div>
 
     <div class="le-button-group">
@@ -78,13 +70,6 @@
     methods: {
       setQuestionData(updatedQuestion) {
         this.$store.dispatch("listEditQuestionAnswer", updatedQuestion);
-
-        // console.log('parent:question '+ JSON.stringify(updatedQuestion))
-        // currentList.questions.forEach((q, index) => {
-        //   if (q.id === updatedQuestion.id) {
-        //     currentList.questions[index] = updatedQuestion
-        //   }
-        // })
       },
       saveListReview() {
         const listToSave = this.list;
