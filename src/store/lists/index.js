@@ -77,6 +77,12 @@ export default {
       });
       return null; // release
     },
+    // todo: async ?
+    async updateList(payload, slug) {
+      console.log("Payload  -> "+JSON.stringify(payload))
+      console.log("Slug     -> "+JSON.stringify(slug))
+      return ListsService.update(slug, payload)
+    },
     cleanCurrentList({commit}) {
       commit('setCurrentList', null);
     }
