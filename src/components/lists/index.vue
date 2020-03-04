@@ -12,24 +12,13 @@
 </template>
 
 <script>
-  import { mapGetters, mapActions } from "vuex";
+  import { mapGetters } from "vuex";
   import ListQuestionsRaw from "./shared/components/ListRow";
   import AdminWhatever from "./admin/AdminListsHeader";
   import UserWhatever from "./user/Whatever";
   export default {
-    data() {
-      return {
-        list: null
-      }
-    },
     computed: {
-      ...mapGetters({
-        isAdmin:        "isAdmin",
-        lists:          "lists"
-      }),
-      ...mapActions({
-        fetchLists:     "fetchLists"
-      }),
+      ...mapGetters(["isAdmin", "lists"])
     },
     components: {
       listRaw: ListQuestionsRaw,
@@ -41,15 +30,12 @@
         this.$store.dispatch("fetchLists");
       }
     },
-    created() {
+    mounted() {
       this.fetchData()
     }
   }
 </script>
 
-
-<!--scoped - means no affect to other components (classes or ids)-->
-<!--write your custom css here-->
 <style scoped>
 
 </style>

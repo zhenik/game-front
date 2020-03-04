@@ -1,23 +1,24 @@
 import {ListsService, UsersService} from "../../api";
+import Vue from "vue";
 
-export default {
-  state: {
+const initialState = {
     lists: null,
     usersEmails: null,
-    currentList: null
-  },
-  mutations: {
-    setLists(state, payload) {
-      state.lists = payload
-    },
-    setUsersEmails(state, payload) {
-      state.usersEmails = payload
-    },
-    setCurrentList(state, payload) {
-      state.currentList = payload
+    currentList: {
+      id: '',
+      updatedAt: '',
+      createdAt: null,
+      assignedToEmail: '',
+      assignedDate: null,
+      delivered: null,
+      deadline: null,
+      questions: [],
+      state: ''
     }
-  },
-  actions: {
+};
+
+export const state = { ...initialState };
+export const actions = {
     async fetchLists({commit, rootState}) {
       // console.log("rootState " + JSON.stringify(rootState));
       const email = rootState.user.profile.email;
@@ -83,19 +84,49 @@ export default {
       console.log("Slug     -> "+JSON.stringify(slug))
       return ListsService.update(slug, payload)
     },
-    cleanCurrentList({commit}) {
-      commit('setCurrentList', null);
+    currentListResetState({commit}) {
+      commit('setCurrentList');
+    },
+    listEditQuestionAnswer({ commit }, updatedQuestion){
+      commit('answerQuestion', updatedQuestion)
     }
-  },
-  getters: {
+  }
+export const mutations = {
+    setLists(state, payload) {
+      state.lists = payload
+      console.log("state -> "+JSON.stringify(state))
+    },
+    setUsersEmails(state, payload) {
+      state.usersEmails = payload
+    },
+    setCurrentList(state) {
+      for (let f in state.currentList) {
+        Vue.set(state, f, initialState[f]);
+      }
+    },
+    answerQuestion(state, updatedQuestion) {
+      state.currentList.questions.forEach((q, index) => {
+        if (q.id === updatedQuestion.id) {
+          state.currentList.questions[index] = updatedQuestion
+        }
+      })
+    }
+}
+export const getters = {
     lists(state) {
       return state.lists
     },
     getUsersEmails(state) {
       return state.usersEmails
     },
-    getCurrentList(state) {
+    currentList(state) {
       return state.currentList;
     },
   }
-}
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+};

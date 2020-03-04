@@ -2,15 +2,23 @@
   <div>
     <h3 v-if="isAdmin">Edit list</h3>
     <h2>List element</h2>
-    {{ this.list }}
+    {{ currentList }}
 
     <div class="le-questions-container">
       <question-raw
-          v-for="question in this.list.questions"
+          v-for="question in currentList.questions"
           v-bind:question="question"
           :key="question.id"
           v-on:update:question="setQuestionData"
       ></question-raw>
+
+<!--      <div class="le-questions-container">-->
+<!--        <question-raw-->
+<!--            v-for="question in currentList.questions"-->
+<!--            v-bind:question="question"-->
+<!--            :key="question.id"-->
+<!--            v-on:update:question="setQuestionData"-->
+<!--        ></question-raw>-->
     </div>
 
     <div class="le-button-group">
@@ -52,43 +60,31 @@
         required: true
       },
     },
-    data() {
-      return {
-        list: {
-          id: '',
-          updatedAt: '',
-          createdAt: '',
-          assignedToEmail: '',
-          assignedDate: '',
-          delivered: '',
-          deadline: '',
-          questions: [],
-        }
-      }
-    },
-    // mounted() {
-    //   let currentList = this.$store.getters.getCurrentList
-    //   this.list = currentList
-    // },
-    created() {
-      let currentList = this.$store.getters.getCurrentList
-      this.list = currentList
+    async beforeRouteUpdate(to, from, next) {
+      await store.dispatch("currentListResetState");
+      return next();
     },
     async beforeRouteEnter(to, from, next) {
       await store.dispatch('fetchCurrentList', to.params.slug)
       next();
     },
+    async beforeRouteLeave(to, from, next) {
+      await store.dispatch("currentListResetState");
+      next();
+    },
     computed: {
-      ...mapGetters(["getCurrentList", "isAdmin"]),
+      ...mapGetters(["currentList", "isAdmin"]),
     },
     methods: {
       setQuestionData(updatedQuestion) {
+        this.$store.dispatch("listEditQuestionAnswer", updatedQuestion);
+
         // console.log('parent:question '+ JSON.stringify(updatedQuestion))
-        this.list.questions.forEach((q, index) => {
-          if (q.id === updatedQuestion.id) {
-            this.list.questions[index] = updatedQuestion
-          }
-        })
+        // currentList.questions.forEach((q, index) => {
+        //   if (q.id === updatedQuestion.id) {
+        //     currentList.questions[index] = updatedQuestion
+        //   }
+        // })
       },
       saveListReview() {
         const listToSave = this.list;
