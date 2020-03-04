@@ -14,9 +14,25 @@
     </div>
 
     <div class="le-button-group">
-      <button type="button" class="btn btn-primary btn-lg">Save</button>
+      <button type="button"
+              class="btn btn-primary btn-lg"
+              data-toggle="modal"
+              data-target=".bd-example-modal-sm"
+              v-on:click="saveListReview"
+      >Save</button>
       <button type="button" class="btn btn-info btn-lg">Export</button>
       <button type="button" class="btn btn-warning btn-lg">Deliver</button>
+    </div>
+
+    <!-- Small modal -->
+    <div>
+      <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm">
+          <div class="modal-content">
+            List saved
+          </div>
+        </div>
+      </div>
     </div>
 
   </div>
@@ -47,8 +63,7 @@
           delivered: '',
           deadline: '',
           questions: [],
-        },
-        picked: ''
+        }
       }
     },
     // mounted() {
@@ -68,13 +83,23 @@
     },
     methods: {
       setQuestionData(updatedQuestion) {
-        console.log('parent:question '+ JSON.stringify(updatedQuestion))
+        // console.log('parent:question '+ JSON.stringify(updatedQuestion))
         this.list.questions.forEach((q, index) => {
           if (q.id === updatedQuestion.id) {
             this.list.questions[index] = updatedQuestion
           }
         })
       },
+      saveListReview() {
+        const listToSave = this.list;
+        const listId = this.slug;
+        console.log("list to save -> "+JSON.stringify(listToSave));
+        console.log("list slug -> "+JSON.stringify(listId));
+        // this.$store
+        //     .dispatch('updateList', listToSave, listId)
+
+        // .then( () => this.$router.push('/lists'));
+      }
     },
     components: {
       questionRaw: QuestionRaw

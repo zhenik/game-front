@@ -55,8 +55,7 @@
       localQuestion: {
         deep: true,
         handler() {
-          console.log("state: "+ JSON.stringify(this.localQuestion));
-          // this.question.
+          // console.log("state: "+ JSON.stringify(this.localQuestion));
           this.$emit('update:question', this.localQuestion);
         }
       }
