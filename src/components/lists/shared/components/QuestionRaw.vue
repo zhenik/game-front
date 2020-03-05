@@ -32,6 +32,14 @@
                    :name="'question'+localQuestion.id"
                    > Irrelevant
           </label>
+          <label class="btn btn-secondary"
+                 :class="{ active:  'NONE' === localQuestion.answer}">
+            <input type="radio"
+                   v-model="localQuestion.answer"
+                   value="NONE"
+                   :name="'question'+localQuestion.id"
+            > None
+          </label>
         </div>
       </span>
     </div>
@@ -59,8 +67,6 @@
           this.$emit('update:question', this.localQuestion);
         }
       }
-    },
-    computed: {}
-    // methods: {}
+    }
   }
 </script>
