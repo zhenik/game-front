@@ -3,6 +3,7 @@ import {ListsService, UsersService} from "../../api";
 const initialState = {
     lists: null,
     usersEmails: null,
+    listSlug: '',
     currentList: {
       id: '',
       updatedAt: '',
@@ -64,6 +65,7 @@ export const actions = {
     async fetchCurrentList({commit}, listSlug) {
       commit('setLoading', true);
       commit('clearError');
+      commit('setListSlug', listSlug);
       ListsService.get(listSlug)
           .then(response => {
             commit('setLoading', false);
@@ -74,17 +76,19 @@ export const actions = {
             commit('setError', error);
             console.log(error);
             commit('setCurrentList', initialState.currentList);
+            commit('setListSlug', initialState.listSlug);
       });
       return null; // release
     },
     // todo: async ?
-    async updateList(payload, slug) {
-      console.log("Payload  -> "+JSON.stringify(payload))
-      console.log("Slug     -> "+JSON.stringify(slug))
-      return ListsService.update(slug, payload)
+    async updateList({ state }) {
+      // console.log("Payload action -> "+JSON.stringify(state.currentList));
+      // console.log("Slug action    -> "+JSON.stringify(state.listSlug));
+      return ListsService.update(state.listSlug, state.currentList)
     },
     currentListResetState({commit}) {
       commit('setCurrentList', initialState.currentList);
+      commit('setListSlug', initialState.listSlug);
     },
     listEditQuestionAnswer({ commit }, updatedQuestion){
       commit('answerQuestion', updatedQuestion)
@@ -98,14 +102,12 @@ export const mutations = {
     setUsersEmails(state, payload) {
       state.usersEmails = payload
     },
+    setListSlug(state, listSlug) {
+      state.listSlug = listSlug
+    },
     setCurrentList(state, payload) {
       state.currentList = payload
     },
-    // resetCurrentList(state) {
-    //   for (let f in state.currentList) {
-    //     Vue.set(state, f, initialState[f]);
-    //   }
-    // },
     answerQuestion(state, updatedQuestion) {
       console.log("Updated question -> "+JSON.stringify(updatedQuestion))
       state.currentList.questions.forEach((q, index) => {

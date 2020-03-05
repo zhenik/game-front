@@ -72,14 +72,7 @@
         this.$store.dispatch("listEditQuestionAnswer", updatedQuestion);
       },
       saveListReview() {
-        const listToSave = this.list;
-        const listId = this.slug;
-        console.log("list to save -> "+JSON.stringify(listToSave));
-        console.log("list slug -> "+JSON.stringify(listId));
-        // this.$store
-        //     .dispatch('updateList', listToSave, listId)
-
-        // .then( () => this.$router.push('/lists'));
+        this.$store.dispatch("updateList");
       }
     },
     components: {

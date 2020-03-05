@@ -83,11 +83,7 @@ export const ListsService = {
         'Content-Type': 'application/json',
       }
     };
-    console.log("URL  " + data)
-    console.log("List to update  " + data)
-    console.log("List config  " + config)
-    return;
-    // return Vue.axios.put(`lists/${slug}`, data, config);
+    return Vue.axios.put(`lists/${slug}`, data, config);
   },
 
 };
