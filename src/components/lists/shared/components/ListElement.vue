@@ -93,7 +93,7 @@
     computed: {
       ...mapGetters(["currentList", "isAdmin"]),
       checkDisabled () {
-        console.log("isAdmin: "+this.isAdmin)
+        // console.log("isAdmin: "+this.isAdmin)
         if (this.isAdmin) {
           return false
         } else {
@@ -102,9 +102,6 @@
           return dis
         }
       },
-      // checkUnderReview() {
-      //   return 'UNDER_REVIEW' === this.currentList.state
-      // }
     },
     methods: {
       setQuestionData(updatedQuestion) {
