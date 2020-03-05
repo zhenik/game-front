@@ -86,6 +86,12 @@ export const actions = {
       // console.log("Slug action    -> "+JSON.stringify(state.listSlug));
       return ListsService.update(state.listSlug, state.currentList)
     },
+    async deliverList(context) {
+      context.commit("setListState", 'UNDER_REVIEW');
+      // console.log("new state -> "+JSON.stringify(context.state))
+      return ListsService.update(context.state.listSlug, context.state.currentList)
+    },
+
     currentListResetState({commit}) {
       commit('setCurrentList', initialState.currentList);
       commit('setListSlug', initialState.listSlug);
@@ -97,7 +103,10 @@ export const actions = {
 export const mutations = {
     setLists(state, payload) {
       state.lists = payload
-      console.log("state -> "+JSON.stringify(state))
+      // console.log("state -> "+JSON.stringify(state))
+    },
+    setListState(state, listState) {
+      state.currentList.state = listState
     },
     setUsersEmails(state, payload) {
       state.usersEmails = payload
@@ -109,7 +118,7 @@ export const mutations = {
       state.currentList = payload
     },
     answerQuestion(state, updatedQuestion) {
-      console.log("Updated question -> "+JSON.stringify(updatedQuestion))
+      // console.log("Updated question -> "+JSON.stringify(updatedQuestion))
       state.currentList.questions.forEach((q, index) => {
         if (q.id === updatedQuestion.id) {
           state.currentList.questions[index] = updatedQuestion

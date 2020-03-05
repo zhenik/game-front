@@ -11,6 +11,7 @@
           <label class="btn btn-secondary"
                  :class="{ active:  'YES' === localQuestion.answer}">
             <input type="radio"
+                   :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="YES"
                    :name="'question'+localQuestion.id"
@@ -19,6 +20,7 @@
           <label class="btn btn-secondary"
                  :class="{ active:  'NO' === localQuestion.answer}">
             <input type="radio"
+                   :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="NO"
                    :name="'question'+localQuestion.id"
@@ -27,6 +29,7 @@
           <label class="btn btn-secondary"
                  :class="{ active:  'IRRELEVANT' === localQuestion.answer}">
             <input type="radio"
+                   :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="IRRELEVANT"
                    :name="'question'+localQuestion.id"
@@ -35,6 +38,7 @@
           <label class="btn btn-secondary"
                  :class="{ active:  'NONE' === localQuestion.answer}">
             <input type="radio"
+                   :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="NONE"
                    :name="'question'+localQuestion.id"
@@ -55,6 +59,7 @@
         <div class="card-text">
           <label>Comment</label>
           <textarea v-model="localQuestion.comment"
+                    :disabled="checkDisabled"
                     class="form-control"
                     rows="2"></textarea>
         </div>
@@ -65,6 +70,8 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
     props: {
       question: {
@@ -85,6 +92,19 @@
           this.$emit('update:question', this.localQuestion);
         }
       }
-    }
+    },
+    computed: {
+      ...mapGetters(["currentList", "isAdmin"]),
+      checkDisabled () {
+        console.log("isAdmin: "+this.isAdmin)
+        if (this.isAdmin) {
+          return false
+        } else {
+          const dis = 'WORK_IN_PROGRESS' !== this.currentList.state
+          // console.log("disabled: "+dis)
+          return dis
+        }
+      }
+    },
   }
 </script>
