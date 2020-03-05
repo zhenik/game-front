@@ -43,6 +43,24 @@
         </div>
       </span>
     </div>
+
+    <!--   collapse comment   -->
+    <p>
+      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="collapse" :data-target="'#question'+localQuestion.id" aria-expanded="false" aria-controls="collapseExample">
+        Comment
+      </button>
+    </p>
+    <div class="collapse" :id="'question'+localQuestion.id">
+      <div class="card card-body">
+        <div class="card-text">
+          <label>Comment</label>
+          <textarea v-model="localQuestion.comment"
+                    class="form-control"
+                    rows="2"></textarea>
+        </div>
+      </div>
+    </div>
+
   </div>
 </template>
 
