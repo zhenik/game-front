@@ -71,9 +71,19 @@ export const ListsService = {
       }
     };
     console.log("List prepared  " + data)
-    return Vue.axios.post("lists", data, config) // extract method to ApiService
+    return Vue.axios.post("lists", data, config) // todo: extract method to ApiService
   },
   get(slug) {
     return ApiService.get("lists", slug);
   },
+  update(slug, payload) {
+    const data = JSON.stringify(payload)
+    const config = {
+      headers: {
+        'Content-Type': 'application/json',
+      }
+    };
+    return Vue.axios.put(`lists/${slug}`, data, config);
+  },
+
 };
