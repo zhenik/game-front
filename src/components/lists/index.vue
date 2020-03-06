@@ -5,7 +5,10 @@
     <user-whatever v-else></user-whatever>
     <!--shared: user and admin see the same component, but different data-->
     <!--admin sees all available lists, user sees only lists that assigned to-->
-    <div class="list-group">
+    <div v-if="noLists">
+      No lists are here... yet.
+    </div>
+    <div v-else class="list-group">
       <list-raw v-for="listQ in lists" v-bind:listQuestions="listQ" v-bind:key="listQ.id"></list-raw>
     </div>
   </div>
@@ -18,7 +21,10 @@
   import UserWhatever from "./user/Whatever";
   export default {
     computed: {
-      ...mapGetters(["isAdmin", "lists"])
+      ...mapGetters(["isAdmin", "lists"]),
+      noLists() {
+        return (this.lists == null || this.lists === 'undefined' || this.lists.length === 0);
+      }
     },
     components: {
       listRaw: ListQuestionsRaw,
