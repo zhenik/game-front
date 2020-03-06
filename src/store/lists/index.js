@@ -12,7 +12,14 @@ const initialState = {
       assignedDate: null,
       delivered: null,
       deadline: null,
-      questions: [],
+      segments: [
+        {
+          id: '',
+          title:'',
+          description:'',
+          questions:[]
+        }
+      ],
       state: ''
     }
 };
