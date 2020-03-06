@@ -1,8 +1,9 @@
 <template>
   <div class="list-questions-raw">
-    <router-link :to="listLink" class="list-group-item list-group-item-action flex-column align-items-start"
-       @mouseout="isHovering = false" @mouseover="isHovering = true"
-       :class="{active: isHovering}"
+    <router-link :to="listLink"
+                 class="list-group-item list-group-item-action flex-column align-items-start"
+                 @mouseout="isHovering = false" @mouseover="isHovering = true"
+                 :class="{active: isHovering}"
     >
       <div>
         <div class="d-flex w-100 justify-content-between">
@@ -10,9 +11,18 @@
           <small>created: {{dateDelta}}</small>
         </div>
         <div class="d-flex w-100 justify-content-between">
+          <small>segments: {{listQuestions.segments.length}}</small>
+        </div>
+        <div class="d-flex w-100 justify-content-between">
+          <small>questions: {{questionsCount}}</small>
+        </div>
+
+        <div class="d-flex w-100 justify-content-between">
           <small>state: {{listQuestions.state}}</small>
         </div>
-        <small v-if="listQuestions.assignedToEmail !== null">assigned to: {{listQuestions.assignedToEmail}}</small>
+        <br/>
+        <small v-if="listQuestions.assignedToEmail !== null">assigned to:
+          {{listQuestions.assignedToEmail}}</small>
       </div>
     </router-link>
   </div>
@@ -20,7 +30,9 @@
 
 <script>
   export default {
-    props: ['listQuestions'],
+    props: {
+      listQuestions: { type: Object, required: true }
+    },
     data() {
       return {
         isHovering: false
@@ -37,6 +49,14 @@
         } else {
           return "today"
         }
+      },
+      // }===|==>----
+      questionsCount() {
+        let count = 0;
+        this.listQuestions.segments.forEach(segment => {
+          count += segment.questions.length
+        });
+        return count;
       },
       listLink() {
         return {
