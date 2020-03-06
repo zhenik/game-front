@@ -14,7 +14,7 @@
                    :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="YES"
-                   :name="'question'+localQuestion.id"
+                   :name="'s-'+this.segmentId+'-q-'+localQuestion.id"
                    > Yes
           </label>
           <label class="btn btn-secondary"
@@ -23,7 +23,7 @@
                    :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="NO"
-                   :name="'question'+localQuestion.id"
+                   :name="'s-'+this.segmentId+'-q-'+localQuestion.id"
                    > No
           </label>
           <label class="btn btn-secondary"
@@ -32,7 +32,7 @@
                    :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="IRRELEVANT"
-                   :name="'question'+localQuestion.id"
+                   :name="'s-'+this.segmentId+'-q-'+localQuestion.id"
                    > Irrelevant
           </label>
           <label class="btn btn-secondary"
@@ -41,7 +41,7 @@
                    :disabled="checkDisabled"
                    v-model="localQuestion.answer"
                    value="NONE"
-                   :name="'question'+localQuestion.id"
+                   :name="'s-'+this.segmentId+'-q-'+localQuestion.id"
             > None
           </label>
         </div>
@@ -50,11 +50,16 @@
 
     <!--   collapse comment   -->
     <p>
-      <button class="btn btn-secondary dropdown-toggle" type="button" data-toggle="collapse" :data-target="'#question'+localQuestion.id" aria-expanded="false" aria-controls="collapseExample">
+      <button class="btn btn-secondary dropdown-toggle"
+              type="button"
+              data-toggle="collapse"
+              :data-target="'#s-'+this.segmentId+'-q-'+localQuestion.id"
+              aria-expanded="false"
+              aria-controls="collapseExample">
         Comment
       </button>
     </p>
-    <div class="collapse" :id="'question'+localQuestion.id">
+    <div class="collapse" :id="'s-'+this.segmentId+'-q-'+localQuestion.id">
       <div class="card card-body">
         <div class="card-text">
           <label>Comment</label>
@@ -77,6 +82,10 @@
       question: {
         type: Object,
         required: true
+      },
+      segmentId: {
+        type: Number,
+        required: true
       }
     },
     data() {
@@ -88,7 +97,6 @@
       localQuestion: {
         deep: true,
         handler() {
-          // console.log("state: "+ JSON.stringify(this.localQuestion));
           this.$emit('update:question', this.localQuestion);
         }
       }
@@ -96,12 +104,10 @@
     computed: {
       ...mapGetters(["currentList", "isAdmin"]),
       checkDisabled () {
-        console.log("isAdmin: "+this.isAdmin)
         if (this.isAdmin) {
           return false
         } else {
           const dis = 'WORK_IN_PROGRESS' !== this.currentList.state
-          // console.log("disabled: "+dis)
           return dis
         }
       }

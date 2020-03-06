@@ -103,14 +103,13 @@ export const actions = {
       commit('setCurrentList', initialState.currentList);
       commit('setListSlug', initialState.listSlug);
     },
-    listEditQuestionAnswer({ commit }, updatedQuestion){
-      commit('answerQuestion', updatedQuestion)
+    segmentEditQuestionAnswer({ commit }, {listSegmentId, updatedQuestion}){
+      commit('answerQuestion', {listSegmentId, updatedQuestion})
     }
   }
 export const mutations = {
     setLists(state, payload) {
       state.lists = payload
-      // console.log("state -> "+JSON.stringify(state))
     },
     setListState(state, listState) {
       state.currentList.state = listState
@@ -124,15 +123,19 @@ export const mutations = {
     setCurrentList(state, payload) {
       state.currentList = payload
     },
-    answerQuestion(state, updatedQuestion) {
-      // console.log("Updated question -> "+JSON.stringify(updatedQuestion))
-      state.currentList.questions.forEach((q, index) => {
-        if (q.id === updatedQuestion.id) {
-          state.currentList.questions[index] = updatedQuestion
+    // }===|==>---- fucking crutch
+    answerQuestion(state, {listSegmentId, updatedQuestion}) {
+      state.currentList.segments.forEach((s, segmentIndex) => {
+        if (s.id === listSegmentId) {
+          s.questions.forEach((q, questionIndex) => {
+            if (q.id === updatedQuestion.id) {
+              state.currentList.segments[segmentIndex].questions[questionIndex] = updatedQuestion
+            }
+          })
         }
-      })
+      });
     }
-}
+};
 export const getters = {
     lists(state) {
       return state.lists
@@ -143,7 +146,7 @@ export const getters = {
     currentList(state) {
       return state.currentList;
     },
-  }
+};
 
 export default {
   state,
