@@ -5,12 +5,11 @@
     {{ currentList }}
 
     <div class="le-questions-container">
-      <question-raw
-          v-for="question in currentList.questions"
-          v-bind:question="question"
-          :key="question.id"
-          v-on:update:question="setQuestionData"
-      ></question-raw>
+      <list-element-segment
+          v-for="segment in currentList.segments"
+          v-bind:segment="segment"
+          :key="segment.id"
+      ></list-element-segment>
     </div>
 
 <!--  ADMIN group buttons  -->
@@ -68,7 +67,7 @@
 <script>
   import {mapGetters} from "vuex";
   import { store } from "@/store";
-  import QuestionRaw from './QuestionRaw'
+  import ListElementSegment from './ListElementSegment'
 
   export default {
     name: "ListElement",
@@ -93,20 +92,15 @@
     computed: {
       ...mapGetters(["currentList", "isAdmin"]),
       checkDisabled () {
-        // console.log("isAdmin: "+this.isAdmin)
         if (this.isAdmin) {
           return false
         } else {
           const dis = 'WORK_IN_PROGRESS' !== this.currentList.state
-          // console.log("disabled: "+dis)
           return dis
         }
       },
     },
     methods: {
-      setQuestionData(updatedQuestion) {
-        this.$store.dispatch("listEditQuestionAnswer", updatedQuestion);
-      },
       saveListUserReview() {
         this.$store.dispatch("updateList");
       },
@@ -115,7 +109,7 @@
       }
     },
     components: {
-      questionRaw: QuestionRaw
+      listElementSegment: ListElementSegment
     }
   }
 </script>
