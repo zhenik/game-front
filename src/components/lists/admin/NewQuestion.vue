@@ -1,23 +1,16 @@
 <template>
   <div class="col-12">
     <div class="card mt-2">
-      <h5 class="card-header">ID: {{localQuestion.id}}</h5>
+      <h5 class="card-header">ID: {{question.id}}</h5>
       <div class="card-body">
         <div class="card-text">
           <label>Question text</label>
-          <textarea v-model="localQuestion.text"
+          <textarea v-model="question.text"
                     class="form-control"
                     id="question-text"
-                    rows="2"></textarea>
+                    rows="1"></textarea>
         </div>
-        <div class="card-text">
-          <label>Comment</label>
-          <textarea v-model="localQuestion.comment"
-                    class="form-control"
-                    id="question-comment"
-                    rows="2"></textarea>
-        </div>
-        <button v-on:click="removeFormElement(localQuestion.id)" class="btn btn-danger">Remove</button>
+        <button v-on:click="removeFormElement(question.id)" class="btn btn-danger">Remove</button>
       </div>
     </div>
   </div>
@@ -31,23 +24,18 @@
         required: true
       }
     },
-    data() {
-      return {
-        localQuestion: {...this.question}
-      }
-    },
     watch: {
-      localQuestion: {
+      question: {
         deep: true,
         handler() {
-          console.log("question:handler "+ JSON.stringify(this.localQuestion))
-          this.$emit('update:question', this.localQuestion);
+          // console.log("question:handler "+ JSON.stringify(this.question))
+          this.$emit('update:question', this.question);
         }
       }
     },
     methods: {
       removeFormElement(id) {
-        console.log('child: sending message up to remove id', id);
+        // console.log('question:remove id', id);
         this.$emit('remove', id)
       },
     },

@@ -38,7 +38,7 @@
             v-for="segment in segments"
             v-bind:segment="segment"
             :key="segment.id"
-            @remove="removeQuestionElement"
+            @remove="removeSegmentElement"
             v-on:update:segment="setSegmentData"
         ></new-segment>
       </div>
@@ -102,7 +102,7 @@
           questions:  []
         });
       },
-      removeQuestionElement(id) {
+      removeSegmentElement(id) {
         console.log('removing form element', id);
         const index = this.segments.findIndex(f => f.id === id);
         this.segments.splice(index,1)
@@ -133,7 +133,7 @@
       this.$store.dispatch("fetchUsersWithRoleUser");
     },
     components: {
-      newSegment: NewSegment,
+      NewSegment,
     }
   }
 </script>
