@@ -5,7 +5,7 @@
         <!--new question-->
         <button type="button"
                 class="btn btn-info btn-filter"
-                v-on:click="addQuestionElement">Add question</button>
+                v-on:click="addSegmentElement">Add segment</button>
       </div>
       <div class="btn-group mr-2">
         <!--create list-->
@@ -34,13 +34,13 @@
       </div>
 
       <div class="list-group">
-        <question-component
-            v-for="question in questions"
-            v-bind:question="question"
-            :key="question.id"
+        <new-segment
+            v-for="segment in segments"
+            v-bind:segment="segment"
+            :key="segment.id"
             @remove="removeQuestionElement"
-            v-on:update:question="setQuestionData"
-        ></question-component>
+            v-on:update:segment="setSegmentData"
+        ></new-segment>
       </div>
     </div>
 
@@ -55,7 +55,7 @@
             </button>
           </div>
           <div class="modal-body">
-            Create list with {{questions.length}} questions ?
+            Create list with {{segments.length}} segments ?
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
@@ -75,16 +75,17 @@
 </template>
 
 <script>
-  import Question from './NewQuestion'
+  // import Question from './NewQuestion'
+  import NewSegment from './NewSegment'
   import { mapGetters } from 'vuex'
   export default {
     name: "NewList",
     data() {
       return {
-        questions:      [],
+        segments:       [],
         userAssignedTo: null,
         deadline:       null,
-        count:          0
+        segmentCount:   0
       }
     },
     computed: {
@@ -93,37 +94,38 @@
       }),
     },
     methods: {
-      addQuestionElement: function () {
-        this.questions.push({
-          id:       this.count++,
-          text:     null,
-          comment:  null
+      addSegmentElement: function () {
+        this.segments.push({
+          id:         this.segmentCount++,
+          title:      '',
+          description:'',
+          questions:  []
         });
       },
       removeQuestionElement(id) {
         console.log('removing form element', id);
-        const index = this.questions.findIndex(f => f.id === id);
-        this.questions.splice(index,1)
+        const index = this.segments.findIndex(f => f.id === id);
+        this.segments.splice(index,1)
       },
-      setQuestionData(updatedQuestion) {
-        console.log('parent:question '+ JSON.stringify(updatedQuestion))
-        this.questions.forEach((q, index) => {
-          if (q.id === updatedQuestion.id) {
-            this.questions[index] = updatedQuestion
+      setSegmentData(updatedSegment) {
+        console.log('parent:segment '+ JSON.stringify(updatedSegment))
+        this.segments.forEach((s, index) => {
+          if (s.id === updatedSegment.id) {
+            this.segments[index] = updatedSegment
           }
         })
       },
       saveList() {
-        const newList       = {
-          assignedToEmail:    this.userAssignedTo,
-          deadline:           this.deadline,
-          questions:          this.questions
-        };
-        console.log("new list "+ JSON.stringify(newList));
-
-        this.$store
-            .dispatch('createList', newList)
-            .then( () => this.$router.push('/lists'));
+        console.log("newList:saveList segments "+JSON.stringify(this.segments))
+        // const newList = {
+        //   assignedToEmail:    this.userAssignedTo,
+        //   deadline:           this.deadline,
+        //   questions:          this.questions
+        // };
+        // console.log("List " + JSON.stringify(newList))
+        // this.$store
+        //     .dispatch('createList', newList)
+        //     .then( () => this.$router.push('/lists'));
       }
     },
     beforeCreate() {
@@ -131,7 +133,7 @@
       this.$store.dispatch("fetchUsersWithRoleUser");
     },
     components: {
-      questionComponent: Question
+      newSegment: NewSegment,
     }
   }
 </script>

@@ -40,6 +40,7 @@
       localQuestion: {
         deep: true,
         handler() {
+          console.log("question:handler "+ JSON.stringify(this.localQuestion))
           this.$emit('update:question', this.localQuestion);
         }
       }
