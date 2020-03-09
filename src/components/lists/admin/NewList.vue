@@ -116,16 +116,16 @@
         })
       },
       saveList() {
-        console.log("newList:saveList segments "+JSON.stringify(this.segments))
-        // const newList = {
-        //   assignedToEmail:    this.userAssignedTo,
-        //   deadline:           this.deadline,
-        //   questions:          this.questions
-        // };
-        // console.log("List " + JSON.stringify(newList))
-        // this.$store
-        //     .dispatch('createList', newList)
-        //     .then( () => this.$router.push('/lists'));
+        // console.log("newList:saveList segments "+JSON.stringify(this.segments))
+        const newList = {
+          assignedToEmail:    this.userAssignedTo,
+          deadline:           this.deadline,
+          segments:           this.segments
+        };
+        console.log("List " + JSON.stringify(newList))
+        this.$store
+            .dispatch('createList', newList)
+            .then( () => this.$router.push('/lists'));
       }
     },
     beforeCreate() {
