@@ -32,7 +32,7 @@
       <button type="button"
               class="btn btn-primary btn-lg"
               data-toggle="modal"
-              data-target=".bd-example-modal-sm"
+              data-target="#list-update-modal"
               :disabled="checkDisabled"
               v-on:click="saveListUserReview"
       >Save</button>
@@ -40,21 +40,46 @@
       <button type="button"
               class="btn btn-warning btn-lg"
               data-toggle="modal"
-              data-target=".bd-example-modal-sm"
+              data-target="#list-deliver-modal"
               :disabled="checkDisabled"
-              v-on:click="deliverListUserReview"
       >Deliver</button>
     </div>
 
 
 
 
-    <!-- Small modal -->
+    <!-- modal: save list -->
     <div>
-      <div class="modal fade bd-example-modal-sm" tabindex="-1" role="dialog" aria-labelledby="mySmallModalLabel" aria-hidden="true">
+      <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm">
           <div class="modal-content">
             List updated
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- modal: deliver list -->
+    <div class="modal fade" id="list-deliver-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Delivery</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Deliver list ?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+                v-on:click="deliverListUserReview"
+            >Yes</button>
           </div>
         </div>
       </div>
