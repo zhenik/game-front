@@ -1,6 +1,6 @@
 <template>
   <div class="small">
-    <h3>Total feedback</h3>
+    <h3>#1 Total feedback</h3>
     <pie-chart :chart-data="this.datacollection" :options="this.options"></pie-chart>
 
   </div>

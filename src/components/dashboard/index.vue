@@ -5,6 +5,8 @@
     <div v-if="gamefication">
       <user-total-feedback :score="userTotalFeedback.score"></user-total-feedback>
       <user-last-and-best-delivery :userLastAndBestFeedback="userLastAndBestFeedback"></user-last-and-best-delivery>
+      <user-grouped-answers-count :userGroupedAnswersCount="userGroupedAnswersCount"></user-grouped-answers-count>
+
     </div>
 
   </div>
@@ -14,6 +16,7 @@
   import { mapGetters } from "vuex";
   import UserTotalFeedback from "./user-total-feedback/UserTotalFeedback";
   import UserLastAndBestDelivery from "./last-best-delivery/UserLastAndBestDelivery";
+  import UserGroupedAnswersCount from "./answers-grouped-count/UserGroupedAnswersCount";
 
   export default {
     // mocked data
@@ -29,7 +32,7 @@
         // #2 user last and best feedback
         userLastAndBestFeedback: {
           last: {
-            score: 66.0,
+            score: 77.0,
             questions: {
               right: 5,
               wrong: 4
@@ -47,10 +50,13 @@
         },
         // #3 user answers state grouped count
         userGroupedAnswersCount: {
-          IRRELEVANT: 1,
-          NO: 1,
-          YES: 1,
-          NONE: 1
+          group: {
+            IRRELEVANT: 2,
+            NO: 1,
+            YES: 3,
+            NONE: 1
+          },
+          totalQuestions: 7
         },
         // #4 top10 user total feedback
         top: [
@@ -73,7 +79,8 @@
     },
     components: {
       UserTotalFeedback,
-      UserLastAndBestDelivery
+      UserLastAndBestDelivery,
+      UserGroupedAnswersCount
     },
   }
 </script>
