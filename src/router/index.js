@@ -29,7 +29,7 @@ const router = new VueRouter({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      beforeEnter: AuthGuard
+      // beforeEnter: AuthGuard
     },
     {
       path: '/signin',
