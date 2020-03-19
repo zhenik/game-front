@@ -6,7 +6,7 @@
       <user-total-feedback :score="userTotalFeedback.score"></user-total-feedback>
       <user-last-and-best-delivery :userLastAndBestFeedback="userLastAndBestFeedback"></user-last-and-best-delivery>
       <user-grouped-answers-count :userGroupedAnswersCount="userGroupedAnswersCount"></user-grouped-answers-count>
-
+      <top-ten-users></top-ten-users>
     </div>
 
   </div>
@@ -17,6 +17,7 @@
   import UserTotalFeedback from "./user-total-feedback/UserTotalFeedback";
   import UserLastAndBestDelivery from "./last-best-delivery/UserLastAndBestDelivery";
   import UserGroupedAnswersCount from "./answers-grouped-count/UserGroupedAnswersCount";
+  import TopTenUsers from "./top/TopTenUsers";
 
   export default {
     // mocked data
@@ -80,7 +81,8 @@
     components: {
       UserTotalFeedback,
       UserLastAndBestDelivery,
-      UserGroupedAnswersCount
+      UserGroupedAnswersCount,
+      TopTenUsers
     },
   }
 </script>
