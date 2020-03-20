@@ -3,7 +3,7 @@
     <div class="signin-form">
       <form @submit.prevent="submit">
         <div class="input">
-          <label for="email">Mail</label>
+          <label for="email">User</label>
           <input
                   type="email"
                   id="email"
@@ -59,6 +59,9 @@ export default {
 </script>
 
 <style scoped>
+  #signin {
+    margin: 10px;
+  }
   .signin-form {
     width: 400px;
     margin: 30px auto;
