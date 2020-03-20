@@ -1,10 +1,5 @@
 <template>
   <div class="lists-with-questions">
-    <h2>This is lists</h2>
-    <admin-whatever v-if="isAdmin"></admin-whatever>
-    <user-whatever v-else></user-whatever>
-    <!--shared: user and admin see the same component, but different data-->
-    <!--admin sees all available lists, user sees only lists that assigned to-->
     <div v-if="noLists">
       No lists are here... yet.
     </div>
@@ -17,8 +12,6 @@
 <script>
   import { mapGetters } from "vuex";
   import ListQuestionsRaw from "./shared/components/ListRow";
-  import AdminWhatever from "./admin/AdminListsHeader";
-  import UserWhatever from "./user/Whatever";
   export default {
     computed: {
       ...mapGetters(["isAdmin", "lists"]),
@@ -28,8 +21,6 @@
     },
     components: {
       listRaw: ListQuestionsRaw,
-      adminWhatever: AdminWhatever,
-      userWhatever: UserWhatever
     },
     methods: {
       fetchData() {

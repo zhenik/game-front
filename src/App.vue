@@ -7,7 +7,6 @@
 
       <div id="content">
         <router-view></router-view>
-        Here is some context
       </div>
     </div>
 
@@ -15,9 +14,7 @@
 </template>
 
 <script>
-  // import SideBar from './components/navigation/SideBar.vue'
-  import SideBar from './components/navigation/SideBar2.vue'
-
+  import SideBar from './components/navigation/SideBar.vue'
   export default {
     name: 'app',
     components: {
@@ -39,5 +36,7 @@
   }
   .wrapper {
     display: flex;
+    width: 100%;
+    align-items: stretch;
   }
 </style>
