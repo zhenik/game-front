@@ -85,5 +85,13 @@ export const ListsService = {
     };
     return Vue.axios.put(`lists/${slug}`, data, config);
   },
+};
 
+export const AnalyticsService = {
+  getAnalytics(email) {
+    const params = {
+      email: email
+    };
+    return ApiService.query("/analytics", {params});
+  }
 };

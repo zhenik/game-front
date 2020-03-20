@@ -10,7 +10,7 @@
   import PieChart from './PieChart.js'
   export default {
     props: {
-      score: { type: Number, required: true }
+      feedback: { type: Number, required: true }
     },
     data() {
       return {
@@ -36,7 +36,7 @@
       fillData() {
         this.datacollection = {
           labels: ['Positive', 'Negative'], datasets: [{
-            backgroundColor: ['#41B883', '#DD1B16'], data: [this.score, 100 - this.score]
+            backgroundColor: ['#41B883', '#DD1B16'], data: [this.feedback, 100 - this.feedback]
           }]
         }
       }
