@@ -73,7 +73,7 @@ export default {
 
   .input label {
     display: block;
-    color: #4e4e4e;
+    /*color: #4e4e4e;*/
     margin-bottom: 6px;
   }
 
@@ -82,13 +82,13 @@ export default {
     width: 100%;
     padding: 6px 12px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #8d8d8d;
   }
 
   .input input:focus {
     outline: none;
-    border: 1px solid #521751;
-    background-color: #eee;
+    border: 1px solid #123495;
+    background-color: #ffffff;
   }
 
   .submit button {
@@ -101,7 +101,7 @@ export default {
 
   .submit button:hover,
   .submit button:active {
-    background-color: #521751;
+    background-color: #123495;
     color: white;
   }
 

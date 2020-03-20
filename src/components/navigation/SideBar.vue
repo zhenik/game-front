@@ -45,7 +45,7 @@
     flex-flow: row;
     justify-content: space-between;
     align-items: center;
-    background-color: #521751;
+    background-color: #123495;
     padding: 0 20px;
   }
 
