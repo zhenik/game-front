@@ -11,19 +11,21 @@
 </template>
 
 <script>
-  // userGroupedAnswersCount: {
-  //   group: {
-  //         IRRELEVANT: 2,
-  //         NO: 1,
-  //         YES: 3,
-  //         NONE: 1
-  //   },
-  //   totalQuestions: 7
-  // },
+  // "allListsFeedback": {
+  //   "questions": 7,
+  //   "score": 0,
+  //   "feedback": 75.0,
+  //   "group": {
+  //     "IRRELEVANT": 2,
+  //     "NO": 1,
+  //     "YES": 3,
+  //     "NONE": 1
+  //   }
+  // }
   import DoughnutChart from './DoughnutChart'
   export default {
     props: {
-      userGroupedAnswersCount: {type: Object, required: true},
+      allListsFeedback: {type: Object, required: true},
     },
     data() {
       return {
@@ -52,23 +54,23 @@
           datasets: [{
             backgroundColor: ['#41B883', '#DD1B16', '#ffb8a7', '#575f57'],
             data: [
-                this.userGroupedAnswersCount.group.YES,
-                this.userGroupedAnswersCount.group.NO,
-                this.userGroupedAnswersCount.group.IRRELEVANT,
-                this.userGroupedAnswersCount.group.NONE,
+                this.allListsFeedback.group.YES,
+                this.allListsFeedback.group.NO,
+                this.allListsFeedback.group.IRRELEVANT,
+                this.allListsFeedback.group.NONE,
             ]
           }]
         }
       },
       fillGroupAnswersPercents() {
-        this.group.none = this.calculatePercent(this.userGroupedAnswersCount.group.NONE)
-        this.group.yes = this.calculatePercent(this.userGroupedAnswersCount.group.YES)
-        this.group.no = this.calculatePercent(this.userGroupedAnswersCount.group.NO)
-        this.group.irrelevant = this.calculatePercent(this.userGroupedAnswersCount.group.IRRELEVANT)
+        this.group.none = this.calculatePercent(this.allListsFeedback.group.NONE)
+        this.group.yes = this.calculatePercent(this.allListsFeedback.group.YES)
+        this.group.no = this.calculatePercent(this.allListsFeedback.group.NO)
+        this.group.irrelevant = this.calculatePercent(this.allListsFeedback.group.IRRELEVANT)
       },
       calculatePercent(x) {
-        if (this.userGroupedAnswersCount.totalQuestions != 0) {
-          return ((x/this.userGroupedAnswersCount.totalQuestions)*100).toPrecision(4);
+        if (this.allListsFeedback.questions != 0) {
+          return ((x/this.allListsFeedback.questions)*100).toPrecision(4);
         } else {
           return 0
         }
