@@ -1,0 +1,80 @@
+import {AnalyticsService} from "../../api";
+
+const initialState = {
+  userAnalytics: {
+    twoListsFeedback: {
+      last: {
+        questions: 0,
+        score: 0,
+        feedback: 0.0,
+        group: {
+          NO: 0,
+          YES: 0,
+          IRRELEVANT: 0,
+          NONE: 0
+        }
+      },
+      best: {
+        questions: 0,
+        score: 0,
+        feedback: 0.0,
+        group: {
+          NO: 0,
+          YES: 0,
+          IRRELEVANT: 0,
+          NONE: 0
+        }
+      }
+    },
+    allListsFeedback: {
+      questions: 0,
+      score: 0,
+      feedback: 0.0,
+      group: {
+        IRRELEVANT: 2,
+        NO: 1,
+        YES: 3,
+        NONE: 1
+      }
+    }
+  }
+};
+
+export const state = { ...initialState };
+export const actions = {
+  async fetchUserAnalytics({commit, rootState}) {
+    const email = rootState.user.profile.email;
+    commit('setLoading', true);
+    commit('clearError');
+    AnalyticsService.getAnalytics(email)
+        .then(response => {
+          // console.log("data -> ", response.data)
+          commit('setLoading', false);
+          commit('setUserAnalytics', response.data)
+        })
+        .catch(error => {
+          commit('setLoading', false);
+          commit('setError', error);
+          console.log(error)
+          commit('setUserAnalytics', initialState.userAnalytics);
+        });
+    return null; // release
+  },
+};
+export const mutations = {
+  setUserAnalytics(state, payload) {
+    state.userAnalytics = payload
+  },
+};
+export const getters = {
+  userAnalytics(state) {
+    return state.userAnalytics
+  },
+};
+
+export default {
+  state,
+  getters,
+  actions,
+  mutations
+};
