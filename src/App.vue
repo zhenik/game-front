@@ -3,7 +3,7 @@
   <div id="app">
 
     <div class="wrapper">
-      <side-bar v-if="authenticated" />
+      <side-bar :gamefication="gamefication" v-if="authenticated" />
 
       <div id="content">
         <router-view></router-view>
@@ -20,6 +20,11 @@
     components: {
       SideBar
     },
+    data() {
+      return {
+        gamefication: true
+      }
+    },
     computed: {
       authenticated () {
         return this.$store.getters.authenticatedAndAuthorized
@@ -32,7 +37,7 @@
   body, html {
     margin: 0;
     color: #cccccc;
-    background-color: #1E1E1E;
+    background-color: #1e1e1e;
   }
   .wrapper {
     display: flex;
