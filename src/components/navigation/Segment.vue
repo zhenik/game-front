@@ -1,20 +1,17 @@
 <template>
   <div class="segment">
-<!--    <div class="progress-bar-title">{{this.segment.title}}</div>-->
-<!--    <div class="questions-delta">{{answeredQuestions()}}/{{this.segment.questions.length}}</div>-->
-    <div class="progress">
-      <div
-          class="progress-bar vv"
-          role="progressbar"
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-      >
-        <div class="progress-bar-title">{{this.segment.title}}</div>
-      </div>
-
-      <div class="questions-delta">{{answeredQuestions()}}/{{this.segment.questions.length}}</div>
-    </div>
+    <div class="progress-bar-title">{{truncatedTitle()}}</div>
+    <div class="questions-delta">{{answeredQuestions()}}/{{this.segment.questions.length}}</div>
+<!--    <div class="progress">-->
+<!--      <div-->
+<!--          class="progress-bar vv"-->
+<!--          role="progressbar"-->
+<!--          aria-valuenow="75"-->
+<!--          aria-valuemin="0"-->
+<!--          aria-valuemax="100"-->
+<!--      >-->
+<!--      </div>-->
+<!--    </div>-->
 
   </div>
 </template>
@@ -47,12 +44,38 @@
           }
         }
         return answered;
+      },
+      truncatedTitle() {
+        let title = this.segment.title;
+        let n = 20; // chars is ok
+        return (title.length > n) ? title.substr(0, n-1)+'...' : title
       }
     }
   }
 </script>
 
 <style scoped>
+  .segment {
+    height: 4em;
+    display: flex;
+    flex-wrap: nowrap;
+
+    margin-top: 15px;
+    background-color: DodgerBlue;
+  }
+
+  .progress-bar-title {
+    text-align: center;
+    justify-content: left;
+    line-height: 4em;
+    background-color: #ff1212;
+  }
+
+  .questions-delta {
+    /*text-align: center;*/
+    justify-content: right;
+    background-color: #3eff00;
+  }
 
   .progress {
     margin: 5px;
