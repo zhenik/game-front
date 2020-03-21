@@ -26,6 +26,7 @@
             v-for="segment in currentList.segments"
             v-bind:segment="segment"
             :key="segment.id"
+            :gamefication="gamefication"
         ></segment>
       </div>
       <p v-else>
@@ -110,8 +111,6 @@
   }
 
   .lists-component {
-    color: #1E1E1E;
-    height: 250px;
-    /*background-color: #3c3c3c;*/
+    background-color: #3c3c3c;
   }
 </style>
