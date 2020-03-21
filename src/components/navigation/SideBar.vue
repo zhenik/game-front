@@ -1,29 +1,34 @@
 <template>
   <nav id="sidebar">
-    <!--sidebar-header logo-->
+    <!--sidebar-logo-->
     <div class="sidebar-logo">
-      <router-link to="/">Welcome to OCN</router-link>
+      <p style="float: left; text-align: start;">prosjektNAME</p>
+      <p style="float: right; text-align: end;">prosjektNR</p>
+<!--      <router-link to="/">Welcome to OCN</router-link>-->
     </div>
 
-    <!--sidebar-header block-->
-    <div class="sidebar-header">
-      <h3>{{profile.role}}</h3>
-      <h4>{{profile.email}}</h4>
-      <h5>{{profile.name}}</h5>
+
+    <!--sidebar-user block-->
+    <div class="sidebar-user">
+      <img src="@/assets/dog.png" alt="Avatar">
+      <h4>{{profile.role.toLowerCase()}}</h4>
+      <p v-if="profile.role == 'USER'">Sjekkliste {{profile.name}}</p>
+      <p>{{profile.email}}</p>
     </div>
 
-    <!--deadline block-->
-    <div class="deadline">
-      <p>{Closest deadline}</p>
+    <!--user related side bar-->
+    <div v-if="profile.role == 'USER'">
+      <!--deadline block-->
+      <div class="deadline">
+        <p>{Closest deadline}</p>
+      </div>
+      <!--todo: lists component-->
+      <div class="lists-component">
+        <p>
+          LISTS COMPONENT
+        </p>
+      </div>
     </div>
-
-    <!--todo: lists component-->
-    <div class="lists-component">
-      <p>
-        LISTS COMPONENT
-      </p>
-    </div>
-
 
     <!--temporary navigation-->
     <nav class="router-nav-group">
@@ -52,6 +57,12 @@
   import {mapGetters} from "vuex";
 
   export default {
+    props: {
+      gamefication: {
+        type: Boolean,
+        required: true
+      },
+    },
     computed: {
       authenticated () {
         return this.$store.getters.authenticatedAndAuthorized
@@ -73,7 +84,7 @@
   #sidebar {
     min-width: 250px;
     max-width: 250px;
-    background: #353535;
+    background-color: #353535;
     color: white;
     transition: all 0.3s;
     min-height: 100vh;
@@ -82,17 +93,34 @@
     text-align: center;
     font-weight: bold;
     color: white;
+
+    width: 100%;
+    box-sizing: border-box;
+    position: relative;
+    margin: 10px auto 30px;
   }
   .sidebar-logo a {
     text-decoration: none;
     color: white;
   }
-  .sidebar-header {
+  .sidebar-logo p {
+    font-size: 0.6em;
+    color: #C9C9C9;
+    width: 50%;
+    opacity: 0.8;
+    /*margin: 0px 2px 1em;*/
+  }
+
+  .sidebar-user {
     width: 100%;
-    padding: 20px;
     text-align: center;
     margin: 0;
-    background: #5f5f5f;
+    background: #363636;
+  }
+  .sidebar-user img {
+    border-radius: 50%;
+    width: 25%;
+    margin: 20px auto 20px auto;
   }
   .deadline {
     text-align: center;
