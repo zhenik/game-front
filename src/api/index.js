@@ -85,6 +85,12 @@ export const ListsService = {
     };
     return Vue.axios.put(`lists/${slug}`, data, config);
   },
+  getLatestWIPList(email) {
+    const params = {
+      email: email
+    };
+    return ApiService.query("lists/latest", {params});
+  }
 };
 
 export const AnalyticsService = {

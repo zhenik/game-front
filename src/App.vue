@@ -4,7 +4,6 @@
 
     <div class="wrapper">
       <side-bar :gamefication="gamefication" v-if="authenticated" />
-
       <div id="content">
         <router-view></router-view>
       </div>
@@ -28,8 +27,8 @@
     computed: {
       authenticated () {
         return this.$store.getters.authenticatedAndAuthorized
-      }
-    }
+      },
+    },
   }
 </script>
 
