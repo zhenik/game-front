@@ -18,19 +18,14 @@
 
     <!--user related side bar-->
     <div v-if="profile.role == 'USER'">
-      <!--deadline block-->
-      <div class="deadline">
-        <p>{Closest deadline}</p>
-      </div>
-      <!--todo: lists component-->
-      <div class="lists-component">
-        <p>
-          LISTS COMPONENT
-        </p>
-      </div>
+      <!--user lists component, block with segments-->
+      <LastWIPList :gamefication="gamefication"></LastWIPList>
+    </div>
+    <div v-else>
+      <!--admin lists components-->
     </div>
 
-    <!--temporary navigation-->
+    <!--temporary navigation; todo: remove-->
     <nav class="router-nav-group">
       <ul v-if="authenticated">
         <li>
@@ -55,13 +50,16 @@
 
 <script>
   import {mapGetters} from "vuex";
-
+  import LastWIPList from "./LastWIPList";
   export default {
+    components: {
+      LastWIPList
+    },
     props: {
       gamefication: {
         type: Boolean,
         required: true
-      },
+      }
     },
     computed: {
       authenticated () {
@@ -121,17 +119,6 @@
     border-radius: 50%;
     width: 25%;
     margin: 20px auto 20px auto;
-  }
-  .deadline {
-    text-align: center;
-    font-weight: bold;
-    padding: 20px;
-    background: #ad8557;
-  }
-  .lists-component {
-    color: #1E1E1E;
-    height: 250px;
-    background-color: aqua;
   }
 
   ul {
