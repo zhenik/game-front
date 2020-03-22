@@ -1,6 +1,6 @@
 <template>
   <router-link
-      :to="segmentLink"
+      :to="segmentLink" :segment="segment"
   >
 <!--    to="/currentLists/{{this.segment.id}}"-->
     <div class="segment">
@@ -30,21 +30,14 @@
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
     name: 'Segment',
     props: {
-      gamefication: {
-        type: Boolean,
-        required: true
-      },
       segment: {
         type: Object,
         required: true
-      }
-    },
-    date() {
-      return {
-
       }
     },
     methods: {
@@ -60,12 +53,12 @@
       },
       answeredQuestionsPercent() {
         let aQ = (this.answeredQuestions()*100/this.segment.questions.length).toPrecision(2) + '%'
-        console.log("Answered " + aQ);
+        // console.log("Answered " + aQ);
         return aQ;
       },
       isSegmentComplete() {
         let isAnswered = this.answeredQuestions()===this.segment.questions.length;
-        console.log("isAnswered "+ isAnswered);
+        // console.log("isAnswered "+ isAnswered);
         return isAnswered ? 'progress-bar-completed' : 'progress-bar'
       },
       truncatedTitle() {
@@ -75,11 +68,13 @@
       }
     },
     computed: {
+      ...mapGetters(["gamefication"]),
       segmentLink() {
         return {
           name: "SegmentQuestions",
           params: {
-            slug: this.segment.id
+            slug: this.segment.id,
+            segment: this.segment
           }
         };
       }

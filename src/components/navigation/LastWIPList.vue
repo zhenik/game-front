@@ -5,7 +5,7 @@
     <button
         class="btn btn-secondary custom-btn-update"
         v-on:click="fetchLastWIPList"
-    >Update list</button>
+    >Refresh</button>
 
     <!--deadline block-->
     <div v-if="!checkIfNoList()" class="deadline">
@@ -26,7 +26,6 @@
             v-for="segment in currentList.segments"
             v-bind:segment="segment"
             :key="segment.id"
-            :gamefication="gamefication"
         ></segment>
       </div>
     </div>
@@ -35,22 +34,18 @@
 </template>
 
 <script>
-  import {mapGetters} from "vuex";
   import Segment from "./Segment.vue"
 
   export default {
     name: 'LastWIPList',
     props: {
-      gamefication: {
-        type: Boolean,
+      currentList: {
+        type: Object,
         required: true
-      },
+      }
     },
     components: {
       Segment
-    },
-    computed: {
-      ...mapGetters(["currentList"])
     },
     methods: {
       saveListUserReview() {
@@ -60,7 +55,6 @@
         this.$store.dispatch("deliverList");
       },
       fetchLastWIPList() {
-        console.log("fetchLatestWIPList")
         this.$store.dispatch("fetchLatestWIPList");
       },
       checkIfNoList() {

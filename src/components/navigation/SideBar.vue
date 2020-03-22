@@ -19,7 +19,7 @@
     <!--user related side bar-->
     <div v-if="profile.role == 'USER'">
       <!--user lists component, block with segments-->
-      <LastWIPList :gamefication="gamefication"></LastWIPList>
+      <LastWIPList :current-list="currentList"></LastWIPList>
     </div>
     <div v-else>
       <!--admin lists components-->
@@ -65,9 +65,7 @@
       authenticated () {
         return this.$store.getters.authenticatedAndAuthorized
       },
-      ...mapGetters({
-        profile: 'profile'
-      })
+      ...mapGetters(["currentList", "profile"])
     },
     methods: {
       onLogout () {
