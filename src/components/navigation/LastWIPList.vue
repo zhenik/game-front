@@ -110,4 +110,9 @@
   .lists-component {
     background-color: #3c3c3c;
   }
+
+  /*remove router-link decoration*/
+  a {
+    text-decoration: none;
+  }
 </style>

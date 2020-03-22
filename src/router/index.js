@@ -6,6 +6,7 @@ import Profile from '../components/profile/index'
 import Dashboard from '../components/dashboard/index'
 import Lists from '../components/lists/index'
 import ListElement from '../components/lists/shared/components/ListElement'
+import SegmentQuestions from '../components/content/SegmentQuestions'
 
 // admin routes
 import NewList from '../components/lists/admin/NewList'
@@ -15,6 +16,7 @@ Vue.use(VueRouter);
 
 const router = new VueRouter({
   mode: 'history', routes: [
+    /** old routing START */
     {
       path: '/',
       beforeEnter: AuthGuard
@@ -29,7 +31,7 @@ const router = new VueRouter({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      // beforeEnter: AuthGuard
+      beforeEnter: AuthGuard
     },
     {
       path: '/signin',
@@ -53,14 +55,17 @@ const router = new VueRouter({
       name: "NewList",
       path: "/new",
       component: NewList,
-      // beforeEnter: AuthGuard
-    }
-    // {
-    //   name: "List",
-    //   path: "/lists/:slug",
-    //   component: () => import("@/views/Article"),
-    //   props: true
-    // },
+      beforeEnter: AuthGuard
+    },
+    /** old routing FINISH */
+
+    /** new routing START */
+    {
+      name: "SegmentQuestions",
+      path: "/currentList/:slug",
+      component: SegmentQuestions,
+      props: true
+    },
     // {
     //   name: "article-edit",
     //   path: "/editor/:slug?",

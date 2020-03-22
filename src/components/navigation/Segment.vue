@@ -1,27 +1,32 @@
 <template>
-  <div class="segment">
-    <div class="progress-bar-title">
-      <p>{{truncatedTitle()}}</p>
-    </div>
-
-    <div v-if="gamefication" class="questions-delta">
-      <p>{{answeredQuestions()}}/{{this.segment.questions.length}}</p>
-    </div>
-
-    <div v-if="gamefication" class="progress">
-      <div
-          class="progress-bar"
-          :class="isSegmentComplete()"
-          :style="{width: answeredQuestionsPercent()}"
-          role="progressbar"
-          aria-valuenow="75"
-          aria-valuemin="0"
-          aria-valuemax="100"
-      >
+  <router-link
+      :to="segmentLink"
+  >
+<!--    to="/currentLists/{{this.segment.id}}"-->
+    <div class="segment">
+      <div class="progress-bar-title">
+        <p>{{truncatedTitle()}}</p>
       </div>
-    </div>
 
-  </div>
+      <div v-if="gamefication" class="questions-delta">
+        <p>{{answeredQuestions()}}/{{this.segment.questions.length}}</p>
+      </div>
+
+      <div v-if="gamefication" class="progress">
+        <div
+            class="progress-bar"
+            :class="isSegmentComplete()"
+            :style="{width: answeredQuestionsPercent()}"
+            role="progressbar"
+            aria-valuenow="75"
+            aria-valuemin="0"
+            aria-valuemax="100"
+        >
+        </div>
+      </div>
+
+    </div>
+  </router-link>
 </template>
 
 <script>
@@ -67,6 +72,16 @@
         let title = this.segment.title;
         let n = 20; // chars is ok
         return (title.length > n) ? title.substr(0, n-1)+'...' : title
+      }
+    },
+    computed: {
+      segmentLink() {
+        return {
+          name: "SegmentQuestions",
+          params: {
+            slug: this.segment.id
+          }
+        };
       }
     }
   }
