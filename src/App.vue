@@ -43,4 +43,9 @@
     width: 100%;
     align-items: stretch;
   }
+  #content {
+    width: 100%;
+    min-height: 100vh;
+    transition: all 0.3s;
+  }
 </style>
