@@ -1,17 +1,25 @@
 <template>
   <div class="segment">
-    <div class="progress-bar-title">{{truncatedTitle()}}</div>
-    <div class="questions-delta">{{answeredQuestions()}}/{{this.segment.questions.length}}</div>
-<!--    <div class="progress">-->
-<!--      <div-->
-<!--          class="progress-bar vv"-->
-<!--          role="progressbar"-->
-<!--          aria-valuenow="75"-->
-<!--          aria-valuemin="0"-->
-<!--          aria-valuemax="100"-->
-<!--      >-->
-<!--      </div>-->
-<!--    </div>-->
+    <div class="progress-bar-title">
+      <p>{{truncatedTitle()}}</p>
+    </div>
+
+    <div v-if="gamefication" class="questions-delta">
+      <p>{{answeredQuestions()}}/{{this.segment.questions.length}}</p>
+    </div>
+
+    <div v-if="gamefication" class="progress">
+      <div
+          class="progress-bar"
+          :class="isSegmentComplete()"
+          :style="{width: answeredQuestionsPercent()}"
+          role="progressbar"
+          aria-valuenow="75"
+          aria-valuemin="0"
+          aria-valuemax="100"
+      >
+      </div>
+    </div>
 
   </div>
 </template>
@@ -45,6 +53,16 @@
         }
         return answered;
       },
+      answeredQuestionsPercent() {
+        let aQ = (this.answeredQuestions()*100/this.segment.questions.length).toPrecision(2) + '%'
+        console.log("Answered " + aQ);
+        return aQ;
+      },
+      isSegmentComplete() {
+        let isAnswered = this.answeredQuestions()===this.segment.questions.length;
+        console.log("isAnswered "+ isAnswered);
+        return isAnswered ? 'progress-bar-completed' : 'progress-bar'
+      },
       truncatedTitle() {
         let title = this.segment.title;
         let n = 20; // chars is ok
@@ -55,32 +73,56 @@
 </script>
 
 <style scoped>
+
   .segment {
+    z-index: 2;
     height: 4em;
     display: flex;
     flex-wrap: nowrap;
+    position: relative;
+    margin: 15px 5px 0px 5px;
+    color: #dddddd;
+    border-radius: 5px;
+  }
 
-    margin-top: 15px;
-    background-color: DodgerBlue;
+  .segment:hover {
+    cursor: pointer;
+    color: #f7b406;
+    background-color: #272727;
+  }
+
+  /* segment active */
+  .active,
+  .active .progress {
+    cursor: pointer;
+    color: #f7b406;
+    background-color: black;
   }
 
   .progress-bar-title {
     text-align: center;
     justify-content: left;
     line-height: 4em;
-    background-color: #ff1212;
+    padding-left: 5px;
   }
 
   .questions-delta {
-    /*text-align: center;*/
     justify-content: right;
-    background-color: #3eff00;
+  }
+  .questions-delta p {
+    width: 100%;
+    margin: auto;
+    padding-right: 5px;
   }
 
   .progress {
-    margin: 5px;
-    height: 4em;
-    background-color: black;
+    position: absolute;
+    opacity: 0.5;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+    top: 0; left: 0; bottom: 0; right: 0;
+    background-color: #4b4b4b;
     box-shadow: none;
     border: none;
     cursor: pointer;
@@ -89,20 +131,19 @@
 
   .progress:hover {
     color: white;
-    background-color: #272727;
+    background-color: black;
   }
 
   .progress-bar {
-    background-color: rgba(10,61,194,.3);
+    background-color: rgba(10,61,194,.7);
     border: 1px solid #0a3dc2;
     color: inherit;
-    /*position: relative;*/
   }
-
-  .progress-bar-title {
-    padding-left: 5px;
-    text-align: left;
-    /*margin: 1em 0 0 1em;*/
+  .progress-bar-completed {
+    background-color: rgba(52, 184, 85, 1);
+    border: 1px solid #48fc6e;
+    border-radius: 5px;
+    color: inherit;
   }
 
   .questions-delta {
@@ -113,8 +154,5 @@
     align-items: center;
   }
 
-  .vv {
-    width: 15%;
-  }
-
 </style>
+

@@ -21,7 +21,7 @@
     </div>
     <div v-else>
       <!--segments block-->
-      <div v-if="gamefication">
+      <div>
         <segment
             v-for="segment in currentList.segments"
             v-bind:segment="segment"
@@ -29,9 +29,6 @@
             :gamefication="gamefication"
         ></segment>
       </div>
-      <p v-else>
-        LISTS COMPONENT GAME off
-      </p>
     </div>
 
   </div>
