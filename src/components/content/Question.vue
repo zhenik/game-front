@@ -12,6 +12,8 @@
         <!--Answers-->
         <div class="q-answers-container">
           <!--   button group   -->
+
+
           <span class="badge badge-pill">
             <div class="btn-group btn-group-toggle">
               <label class="btn btn-success btn-to-checkbox" :class="{ active:  'YES' === localQuestion.answer}">
@@ -40,8 +42,8 @@
                 ><i class="material-icons">remove</i>
               </label>
               <label v-if="this.localQuestion.answer!=='NONE'"
-                     class="btn btn-light btn-to-checkbox"
-                     :class="styleQuestion">
+                     class="btn btn-secondary btn-to-checkbox reset-btn"
+                     :class="{ active:  'NONE' === localQuestion.answer}">
               <input type="radio"
                      :disabled="checkDisabled"
                      v-model="localQuestion.answer"
@@ -52,7 +54,14 @@
             </div>
           </span>
 
+          <div v-if="this.localQuestion.answer!=='NONE'"
+               class="q-answer-text">
+            <small>
+              {{localQuestion.answer}}
+            </small>
+          </div>
         </div>
+
       </div>
       <!--Comment-->
       <div class="q-comment">
@@ -99,7 +108,10 @@
         // }
       },
       styleQuestion () {
-        // const active = 'active'
+        if (!this.gamefication) {
+          return "question-none"
+        }
+
         if (this.localQuestion.answer === "YES") {
           return 'question-yes'
         } else if (this.localQuestion.answer === "NO") {
@@ -120,122 +132,162 @@
 </script>
 
 <style scoped>
+/**
 
-  .btn {
-    color: white;
-  }
+  }===|==>---- My favorite crutch
+  override btn stylying
+*/
+.btn {
+  color: white;
+}
+.btn-success:hover {
+  background-color: rgba(38, 255, 111, 0.3) !important;
+}
+.btn-danger:hover {
+  background-color: rgba(250, 92, 32, 0.3) !important;
+}
+.btn-warning:hover {
+  background-color: rgba(255, 184, 0, 0.3) !important;
+}
 
-  .question-container {
-    display: flex;
-    flex-direction: column;
-    min-height: 6em;
-    margin: 0.6em;
-  }
+/* main container*/
+.question-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 6em;
+  margin: 0.6em;
+}
+.q-header {
+  display: flex;
+  margin: auto;
+  flex-grow: 2;
+}
+.q-answer-text {
+  text-align: center;
+  color: white;
+}
 
-  .q-header {
-    display: flex;
-    margin: auto;
-    flex-grow: 2;
-  }
+/*
+Comment
+*/
+.q-comment {
+  display: flex;
+  flex-grow: 1;
+}
+.q-comment textarea {
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 100%;
 
-  .q-comment {
-    display: flex;
-    flex-grow: 1;
-  }
+  border: none;
+  border-radius: 10px 10px 0 0;
+  font-size: 0.8em;
+  background: rgba(255, 255, 255, 0.3);
+}
+.q-comment textarea:hover {
+  background: rgba(255, 255, 255, 0.5);
+}
+.q-comment textarea:active {
+  background: rgba(255, 255, 255, 0.7);
+}
+.q-comment textarea::placeholder{
+  color: rgba(0, 0, 0, 0.4);
+}
+.q-text {
+  display: flex;
+  flex-grow: 8;
+  font-style: normal;
+  align-items: flex-end;
+  justify-content: start;
+  text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
+}
 
-  .q-comment textarea {
-    -webkit-box-sizing: border-box;
-    -moz-box-sizing: border-box;
-    box-sizing: border-box;
-    width: 100%;
+.q-text p {
+  margin-left: 0.6em;
+}
 
-    border: none;
-    border-radius: 10px 10px 0 0;
-    font-size: 0.8em;
-    background: rgba(255, 255, 255, 0.3);
-  }
+.q-answers-container {
+  flex-grow: 2;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
 
-  .q-text {
-    display: flex;
-    flex-grow: 8;
-    font-style: normal;
-    align-items: flex-end;
-    justify-content: start;
-    text-shadow: 2px 2px 2px rgba(111, 111, 111, 0.3);
-  }
+.q-answers-container span {
+  align-self: center;
+}
 
-  .q-text p {
-    margin-left: 0.6em;
-  }
+btn-group label {
+  margin: auto;
+}
 
-  .q-answers-container {
-    flex-grow: 2;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
+.btn-to-checkbox {
+  align-self: center;
+  margin: 0.5em;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 0;
+  padding: 4px;
+  line-height: 0;
+}
 
+.btn-to-checkbox.active {
+  box-shadow: none;
+  border: 1px solid;
+}
 
-  .q-answers-container span {
-    align-self: center;
-  }
+.btn-to-checkbox:not(.active) {
+  opacity: 0.7;
+  border: none;
+}
 
-  btn-group label {
-    margin: auto;
-  }
+.reset-btn {
+  align-self: center;
+  margin: 0.5em;
+  background-color: rgba(0, 0, 0, 0);
+  line-height: 0;
+  color: white;
+}
 
-  .btn-to-checkbox {
-    /*opacity: 0.7;*/
-    border: none;
-    align-self: center;
-    background-color: rgba(255, 255, 255, 0.2);
-    border-radius: 0;
-    padding: 4px;
-  }
-  .btn-to-checkbox {
-    align-self: center;
-    margin: 0.5em;
-    border-radius: 0;
-    padding: 4px;
-    line-height: 0;
-  }
+.btn:hover {
+  background-color: rgba(0, 0, 0, 0.5);
+}
 
-  .btn-to-checkbox.active{
-    box-shadow: none;
-  }
+.question-none {
+  color: rgba(255, 255, 255, 0.7);
+  background-color: rgba(111, 111, 111, 0.4)
+}
 
-  .btn-to-checkbox:not(.active) {
-    /*opacity: 0.7;*/
-    border: none;
-  }
+.question-yes {
+  color: #26FF6F;
+  border: 1px solid #26FF6F;
+  background-color: rgba(38, 255, 111, 0.3);
+}
+.question-yes .btn-success {
+  border: 1px solid #26FF6F !important;
+  background-color: #34b855 !important;
+}
 
-  .reset-btn {
-    align-self: center;
-    margin: 0.5em;
-    /*background-color: rgba(0, 0, 0, 0);*/
-    border-radius: 0;
-    border: none;
-    padding: 4px;
-    line-height: 0;
-  }
+.question-no {
+  color: #FA5C20;
+  border: 1px solid #FA5C20;
+  background-color: rgba(250, 92, 32, 0.3);
+}
 
-  .reset-btn:hover{
-    /*background-color: rgba(0, 0, 0, 0.5);*/
-  }
+.question-no .btn-danger {
+  border: 1px solid #FA5C20 !important;
+  background-color: #b54722 !important;
+}
 
-  .question-none {
-    color: rgba(255, 255, 255, 0.7);
-    background-color: rgba(111, 111, 111, 0.4)
-  }
+.question-irrelevant {
+  color: #FFB800;
+  border: 1px solid #FFB800 !important;
+  background-color: rgba(255, 184, 0, 0.4);
+}
+.question-irrelevant .btn-warning {
+  border: 1px solid #FFB800 !important;
+  background-color: #c38f15 !important;
+}
 
-  .question-irrelevant {
-  }
-
-  .question-yes {
-    /*color: #f7b406;*/
-  }
-
-  .question-no {
-  }
 
 </style>
