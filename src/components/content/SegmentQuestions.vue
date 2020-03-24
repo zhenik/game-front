@@ -63,7 +63,7 @@
 </script>
 
 <style scoped>
-  .segment-content{
+  .segment-content {
     margin-left: 1px;
   }
 
@@ -80,12 +80,12 @@
   }
 
   .questions-wrapper {
-    background-color: #521751; /*todo: remove color*/
+    /*background-color: #521751; !*todo: remove color*!*/
     flex-direction: column;
     align-items: center;
     justify-content: center;
-
-    /*justify-content: flex-start;*/
+    width: 90%;
+    margin: auto;
   }
 
 </style>
