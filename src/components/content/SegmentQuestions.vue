@@ -5,8 +5,11 @@
       <p>{{this.segment.title}}</p>
     </div>
 
-    <!--todo: style--> <p>{{this.segment.description}}</p>
+<!--    &lt;!&ndash;todo: style&ndash;&gt; <p>{{this.segment.description}}</p>-->
     <div class="questions-wrapper">
+<!--      <div class="segment-header">-->
+<!--        <p>{{this.segment.description}}</p>-->
+<!--      </div>-->
         <question
             v-for="question in this.segment.questions"
             v-bind:question="question"
