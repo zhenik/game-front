@@ -1,17 +1,26 @@
 <template>
   <div class="question-container">
-
+      {{this.question}}
+    <br>
+      {{this.localQuestion}}
     <div class="q-header">
       <div class="q-text">
         <p>Question text is here?</p>
       </div>
+
+      <!--Answers-->
       <div class="q-answers-container">
         answers
       </div>
     </div>
 
+    <!--Comment-->
     <div class="q-comment">
-        <textarea rows="1"></textarea>
+        <textarea v-model="localQuestion.comment"
+                  @change="onCommentInput"
+                  class="form-control"
+                  rows="1">
+        </textarea>
     </div>
 
   </div>
@@ -27,9 +36,24 @@
         required: true
       },
     },
+    data() {
+      return {
+        localQuestion: this.question
+      }
+    },
+    watch: {
+      question(value) {
+        this.localQuestion = value
+      }
+    },
     computed: {
       ...mapGetters(["gamefication"]),
     },
+    methods: {
+      onCommentInput() {
+        this.$emit('update:question', this.localQuestion)
+      }
+    }
   }
 </script>
 

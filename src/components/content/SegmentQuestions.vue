@@ -8,9 +8,10 @@
     <!--todo: style--> <p>{{this.segment.description}}</p>
     <div class="questions-wrapper">
         <question
-            v-for="question in segment.questions"
+            v-for="question in this.segment.questions"
             v-bind:question="question"
             :key="question.id"
+            v-on:update:question="questionDataChanged"
         ></question>
     </div>
 
@@ -43,9 +44,18 @@
       ...mapGetters(["gamefication"]),
     },
     mounted() {
-      console.log("segment "+ JSON.stringify(this.segment))
+      console.log("segment "+ JSON.stringify(this.slug))
     },
-
+    methods: {
+      questionDataChanged(updatedQuestion) {
+        let payload = {
+          listSegmentId: this.segment.id,
+          updatedQuestion: updatedQuestion
+        };
+        console.log("Data is updated " + JSON.stringify(payload))
+        // this.$store.dispatch("segmentEditQuestionAnswer", payload);
+      }
+    },
     components: {
       Question
     }
