@@ -27,7 +27,7 @@
     <hr>
 
 <!--    v-on:click="saveListUserReview"-->
-    <div class="list-actions">
+    <div v-if="!checkIfNoList()" class="list-actions">
       <button type="button"
           class="btn btn-warning btn-lg"
           data-toggle="modal"
@@ -148,6 +148,11 @@
       },
       deliverListUserReview() {
         this.$store.dispatch("deliverList");
+      },
+      checkIfNoList() {
+        if (this.currentList == null) return true;
+        let id = this.currentList.id;
+        return (id === '')
       }
     }
   }

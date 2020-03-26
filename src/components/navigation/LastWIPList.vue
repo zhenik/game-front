@@ -54,7 +54,11 @@
         this.$store.dispatch("updateList");
       },
       deliverListUserReview() {
-        this.$store.dispatch("deliverList");
+        this.$store.dispatch("deliverList").then(()=> {
+          this.$store.dispatch("currentListResetState");
+          this.$router.push('/');
+        });
+        //todo: fix dispatch
       },
       fetchLastWIPList() {
         this.$store.dispatch("fetchLatestWIPList"); // last wip list
