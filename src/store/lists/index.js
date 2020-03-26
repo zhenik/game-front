@@ -94,8 +94,10 @@ export const actions = {
 
       ListsService.getLatestWIPList(email)
           .then(response => {
+            const listSlug = response.data.id
             commit('setLoading', false);
             commit('setCurrentList', response.data);
+            commit('setListSlug', listSlug);
           })
           .catch(error => {
             commit('setLoading', false);

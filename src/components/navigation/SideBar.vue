@@ -4,7 +4,6 @@
     <div class="sidebar-logo">
       <p style="float: left; text-align: start;">prosjektNAME</p>
       <p style="float: right; text-align: end;">prosjektNR</p>
-<!--      <router-link to="/">Welcome to OCN</router-link>-->
     </div>
 
 
@@ -38,6 +37,7 @@
           class="btn btn-primary btn-lg"
           data-toggle="modal"
           data-target="#list-update-modal"
+          v-on:click="saveListUserReview"
       >Lagre</button>
 
     </div>
@@ -64,26 +64,6 @@
         Logg ut</button>
     </div>
 
-    <!--temporary navigation; todo: remove-->
-<!--    <nav class="router-nav-group">-->
-<!--      <ul v-if="authenticated">-->
-<!--        <li>-->
-<!--          <router-link to="/lists">Lists</router-link>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <router-link to="/profile">Profile</router-link>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <router-link to="/dashboard">Dashboard</router-link>-->
-<!--        </li>-->
-<!--        <li>-->
-<!--          <button @click="onLogout" class="logout">Logout</button>-->
-<!--        </li>-->
-<!--      </ul>-->
-<!--    </nav>-->
-
-
-
     <!-- modal: save list -->
 <!--    <div>-->
       <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
@@ -105,15 +85,20 @@
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
-          <div class="modal-body">
+          <div v-if="allQuestionsAnswered" class="modal-body">
             Vil du levere?
+          </div>
+          <div v-else>
+            Ikke alle spørsmål blir besvart!
           </div>
           <div class="modal-footer">
             <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
             <button
+                v-if="allQuestionsAnswered"
                 type="button"
                 class="btn btn-primary"
                 data-dismiss="modal"
+                v-on:click="deliverListUserReview"
             >Yes</button>
           </div>
         </div>
@@ -137,15 +122,32 @@
       }
     },
     computed: {
+      ...mapGetters(["currentList", "profile"]),
+      allQuestionsAnswered () {
+        let answeredAll = true;
+        this.currentList.segments.forEach(s => {
+          s.questions.forEach(q => {
+            if (q.answer === 'NONE') {
+              answeredAll=false
+            }
+          })
+        });
+        return answeredAll;
+      },
       authenticated () {
         return this.$store.getters.authenticatedAndAuthorized
       },
-      ...mapGetters(["currentList", "profile"])
     },
     methods: {
       onLogout () {
         this.$store.dispatch('logout')
         this.$router.push('/signin')
+      },
+      saveListUserReview() {
+        this.$store.dispatch("updateList");
+      },
+      deliverListUserReview() {
+        this.$store.dispatch("deliverList");
       }
     }
   }
