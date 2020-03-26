@@ -27,12 +27,30 @@
 
     <hr>
 
+<!--    v-on:click="saveListUserReview"-->
+    <div class="list-actions">
+      <button type="button"
+          class="btn btn-warning btn-lg"
+          data-toggle="modal"
+          data-target="#list-deliver-modal"
+      >Lever</button>
+      <button type="button"
+          class="btn btn-primary btn-lg"
+          data-toggle="modal"
+          data-target="#list-update-modal"
+      >Lagre</button>
+
+    </div>
+
+    <hr>
+
     <div class="additional-nav additional-navigation-1">
       <router-link to="/dashboard">
         <i aria-hidden="true" class="material-icons">trending_up</i>
         Dashboard
       </router-link>
     </div>
+
 
     <hr>
 
@@ -65,6 +83,42 @@
 <!--    </nav>-->
 
 
+
+    <!-- modal: save list -->
+<!--    <div>-->
+      <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-sm modal-dialog-centered">
+          <div class="modal-content">
+            Listet lagret
+          </div>
+        </div>
+      </div>
+<!--    </div>-->
+
+    <!-- modal: deliver list -->
+    <div class="modal fade" id="list-deliver-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+      <div class="modal-dialog modal-dialog-centered" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLongTitle">Levering</h5>
+            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
+          </div>
+          <div class="modal-body">
+            Vil du levere?
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
+            <button
+                type="button"
+                class="btn btn-primary"
+                data-dismiss="modal"
+            >Yes</button>
+          </div>
+        </div>
+      </div>
+    </div>
 
   </nav>
 </template>
@@ -233,6 +287,36 @@
     color: white;
     background-color: #363636;
 
+  }
+
+  .list-actions {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-evenly;
+  }
+
+  .list-actions .btn-primary {
+    background-color: #363636;
+  }
+
+  .list-actions .btn-warning {
+    background-color: #ffc107;
+  }
+
+  .modal-content {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 4px;
+    padding: 1em;
+    width: 100%;
+  }
+
+  .modal {
+    text-align: center;
+  }
+
+  .modal-body {
+    text-align: left;
   }
 
 </style>

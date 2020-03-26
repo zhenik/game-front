@@ -3,9 +3,11 @@
 
 
     <button
-        class="btn btn-secondary custom-btn-update"
+        class="btn btn-success custom-btn-update"
         v-on:click="fetchLastWIPList"
-    >Refresh</button>
+    >
+      <i aria-hidden="true" class="material-icons">refresh</i>
+      Refresh</button>
 
     <!--deadline block-->
     <div v-if="!checkIfNoList()" class="deadline">
@@ -109,4 +111,23 @@
   a {
     text-decoration: none;
   }
+
+  .lists-component button {
+    color: inherit;
+    border-radius: 4px;
+    text-align: center;
+    /*background: rgba(10,61,194,.8);*/
+    text-decoration: none;
+    font-size: 1rem;
+    padding: 8px 8px;
+    display: block;
+  }
+
+
+  .lists-component button i {
+    vertical-align: middle;
+    margin: auto 1em auto auto;
+    line-height: inherit;
+  }
+
 </style>
