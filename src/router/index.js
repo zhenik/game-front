@@ -4,12 +4,12 @@ import VueRouter from 'vue-router'
 import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
 import Dashboard from '../components/dashboard/index'
-import Lists from '../components/lists/index'
-import ListElement from '../components/lists/shared/components/ListElement'
+// import Lists from '../components/lists/index'
+// import ListElement from '../components/lists/shared/components/ListElement'
 import SegmentQuestions from '../components/content/SegmentQuestions'
 
 // admin routes
-import NewList from '../components/lists/admin/NewList'
+// import NewList from '../components/lists/admin/NewList'
 import AuthGuard from './auth-guard'
 
 Vue.use(VueRouter);
@@ -38,25 +38,25 @@ const router = new VueRouter({
       name: 'SignIn',
       component: SignInPage
     },
-    {
-      name: 'Lists',
-      path: '/lists',
-      component: Lists,
-      beforeEnter: AuthGuard
-    },
-    {
-      name: "ListElement",
-      path: "/lists/:slug",
-      component: ListElement,
-      props: true,
-      // beforeEnter: AuthGuard
-    },
-    {
-      name: "NewList",
-      path: "/new",
-      component: NewList,
-      beforeEnter: AuthGuard
-    },
+    // {
+    //   name: 'Lists',
+    //   path: '/lists',
+    //   component: Lists,
+    //   beforeEnter: AuthGuard
+    // },
+    // {
+    //   name: "ListElement",
+    //   path: "/lists/:slug",
+    //   component: ListElement,
+    //   props: true,
+    //   // beforeEnter: AuthGuard
+    // },
+    // {
+    //   name: "NewList",
+    //   path: "/new",
+    //   component: NewList,
+    //   beforeEnter: AuthGuard
+    // },
     /** old routing FINISH */
 
     /** new routing START */
@@ -64,7 +64,8 @@ const router = new VueRouter({
       name: "SegmentQuestions",
       path: "/currentList/:slug",
       component: SegmentQuestions,
-      props: true
+      props: true,
+      beforeEnter: AuthGuard
     },
     // {
     //   name: "article-edit",

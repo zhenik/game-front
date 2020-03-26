@@ -43,7 +43,7 @@ export default {
   watch: {
     // }===|==>---- only when user authenticated and then authorized
     auth(yes) {
-      if (yes) this.$router.push('/profile');
+      if (yes) this.$router.push('/');
     }
   },
   methods: {
