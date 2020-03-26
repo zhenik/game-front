@@ -57,7 +57,8 @@
         this.$store.dispatch("deliverList");
       },
       fetchLastWIPList() {
-        this.$store.dispatch("fetchLatestWIPList");
+        this.$store.dispatch("fetchLatestWIPList"); // last wip list
+        this.$store.dispatch('fetchUserAnalytics'); // analytics
       },
       checkIfNoList() {
         if (this.currentList == null) return true;

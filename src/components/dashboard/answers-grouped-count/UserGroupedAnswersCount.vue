@@ -1,10 +1,10 @@
 <template>
-  <div class="small">
-    <h3>#3 Alle sjekkpunkter</h3>
-    <h4> YES {{ this.group.yes }}%</h4>
-    <h4> NO {{ this.group.no }}%</h4>
-    <h4> IRRELEVANT {{ this.group.irrelevant }}%</h4>
-    <h4> NONE {{ this.group.none }}%</h4>
+  <div class="analytics-chart analytics-pie">
+<!--    <h3>#3 Alle sjekkpunkter</h3>-->
+<!--    <h4> YES {{ this.group.yes }}%</h4>-->
+<!--    <h4> NO {{ this.group.no }}%</h4>-->
+<!--    <h4> IRRELEVANT {{ this.group.irrelevant }}%</h4>-->
+<!--    <h4> NONE {{ this.group.none }}%</h4>-->
 
     <doughnut-chart :chart-data="this.datacollection" :options="this.options"></doughnut-chart>
   </div>

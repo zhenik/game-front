@@ -1,6 +1,6 @@
 <template>
-  <div class="small">
-    <h3>#1 Total feedback</h3>
+  <div class="analytics-chart analytics-pie">
+<!--    <h3>#1 Total feedback</h3>-->
     <pie-chart :chart-data="this.datacollection" :options="this.options"></pie-chart>
 
   </div>
@@ -51,8 +51,4 @@
 </script>
 
 <style>
-  .small {
-    max-width: 600px;
-    margin:  100px auto;
-  }
 </style>
