@@ -99,5 +99,8 @@ export const AnalyticsService = {
       email: email
     };
     return ApiService.query("/analytics", {params});
+  },
+  getTopTen() {
+    return ApiService.get("/analytics/top")
   }
 };

@@ -6,32 +6,40 @@
         <i aria-hidden="true" class="material-icons" v-on:click="fetchNewTop()">refresh</i>
       </div>
       <ul class="list-group">
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Chan
-          <span class="badge badge-primary badge-pill">98%</span>
+        <li v-for="(topUser, index) in topTenUsersAnalytics"
+            :key="index"
+            class="list-group-item d-flex justify-content-between align-items-center">
+          {{topUser.email}}
+          <span class="badge badge-primary badge-pill">{{topUser.percent.toPrecision(2)}} %</span>
         </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Oda
-          <span class="badge badge-primary badge-pill">95%</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Dog
-          <span class="badge badge-primary badge-pill">74%</span>
-        </li>
-        <li class="list-group-item d-flex justify-content-between align-items-center">
-          Girl
-          <span class="badge badge-primary badge-pill">57%</span>
-        </li>
+<!--        <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--          Oda-->
+<!--          <span class="badge badge-primary badge-pill">95%</span>-->
+<!--        </li>-->
+<!--        <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--          Dog-->
+<!--          <span class="badge badge-primary badge-pill">74%</span>-->
+<!--        </li>-->
+<!--        <li class="list-group-item d-flex justify-content-between align-items-center">-->
+<!--          Girl-->
+<!--          <span class="badge badge-primary badge-pill">57%</span>-->
+<!--        </li>-->
       </ul>
     </div>
   </div>
 </template>
 
 <script>
+  import {mapGetters} from "vuex";
+
   export default {
+    computed: {
+      ...mapGetters(["topTenUsersAnalytics"]),
+    },
     methods: {
       fetchNewTop() {
         console.log("Fetch new data")
+        this.$store.dispatch('fetchTopTenUsersAnalytics')
       }
     }
   }

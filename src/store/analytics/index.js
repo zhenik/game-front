@@ -1,6 +1,7 @@
 import {AnalyticsService} from "../../api";
 
 const initialState = {
+  topTenUsers:[],
   userAnalytics: {
     twoListsFeedback: {
       last: {
@@ -60,16 +61,41 @@ export const actions = {
         });
     return null; // release
   },
+  async fetchTopTenUsersAnalytics({commit}) {
+    // const email = rootState.user.profile.email;
+    AnalyticsService.getTopTen()
+        .then(response => {
+          console.log("data -> ", response.data);
+          commit('setLoading', false);
+          commit('setTopTenUsersAnalytics', response.data)
+        })
+        .catch(error => {
+          commit('setLoading', false);
+          commit('setError', error);
+          console.log(error)
+          commit('setTopTenUsersAnalytics', initialState.topTenUsers);
+        });
+    commit('setLoading', true);
+    commit('clearError');
+    return null;
+  },
+
 };
 export const mutations = {
   setUserAnalytics(state, payload) {
-    state.userAnalytics = payload
+    state.userAnalytics = payload;
   },
+  setTopTenUsersAnalytics(state, payload) {
+    state.topTenUsers = payload;
+  }
 };
 export const getters = {
   userAnalytics(state) {
     return state.userAnalytics
   },
+  topTenUsersAnalytics(state) {
+    return state.topTenUsers
+  }
 };
 
 export default {
