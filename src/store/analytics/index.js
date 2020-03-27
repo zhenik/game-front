@@ -65,7 +65,7 @@ export const actions = {
     // const email = rootState.user.profile.email;
     AnalyticsService.getTopTen()
         .then(response => {
-          console.log("data -> ", response.data);
+          // console.log("data -> ", response.data);
           commit('setLoading', false);
           commit('setTopTenUsersAnalytics', response.data)
         })
