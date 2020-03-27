@@ -1,7 +1,8 @@
 export default {
   state: {
     loading: false,
-    error: null
+    error: null,
+    gamefication: true // hardcoded for now
   },
   mutations: {
     setLoading (state, payload) {
@@ -28,6 +29,9 @@ export default {
     },
     error (state) {
       return state.error
+    },
+    gamefication(state) {
+      return state.gamefication
     }
   }
 }

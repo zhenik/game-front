@@ -3,7 +3,7 @@
     <div class="signin-form">
       <form @submit.prevent="submit">
         <div class="input">
-          <label for="email">Mail</label>
+          <label for="email">User</label>
           <input
                   type="email"
                   id="email"
@@ -43,7 +43,7 @@ export default {
   watch: {
     // }===|==>---- only when user authenticated and then authorized
     auth(yes) {
-      if (yes) this.$router.push('/profile');
+      if (yes) this.$router.push('/');
     }
   },
   methods: {
@@ -59,6 +59,9 @@ export default {
 </script>
 
 <style scoped>
+  #signin {
+    margin: 10px;
+  }
   .signin-form {
     width: 400px;
     margin: 30px auto;
@@ -73,7 +76,7 @@ export default {
 
   .input label {
     display: block;
-    color: #4e4e4e;
+    /*color: #4e4e4e;*/
     margin-bottom: 6px;
   }
 
@@ -82,13 +85,13 @@ export default {
     width: 100%;
     padding: 6px 12px;
     box-sizing: border-box;
-    border: 1px solid #ccc;
+    border: 1px solid #8d8d8d;
   }
 
   .input input:focus {
     outline: none;
-    border: 1px solid #521751;
-    background-color: #eee;
+    border: 1px solid #123495;
+    background-color: #ffffff;
   }
 
   .submit button {
@@ -101,7 +104,7 @@ export default {
 
   .submit button:hover,
   .submit button:active {
-    background-color: #521751;
+    background-color: #123495;
     color: white;
   }
 

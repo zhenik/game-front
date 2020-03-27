@@ -1,8 +1,8 @@
 <template>
-  <div class="small">
-    <h3>#2 Forrige liste</h3>
-      <h4> Best delivered list :) {{ twoListsFeedback.best.score }}%</h4>
-      <h4> Last delivered list :) {{ twoListsFeedback.last.score }}%</h4>
+  <div class="analytics-chart analytics-pie">
+<!--      <h3>#2 Forrige liste</h3>-->
+<!--      <h4> Best delivered list :) {{ twoListsFeedback.best.feedback }}%</h4>-->
+<!--      <h4> Last delivered list :) {{ twoListsFeedback.last.feedback }}%</h4>-->
     <horizontal-bar-chart :chart-data="this.datacollection" :options="this.options"></horizontal-bar-chart>
   </div>
 </template>

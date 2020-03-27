@@ -87,6 +87,27 @@ export const actions = {
       });
       return null; // release
     },
+    async fetchLatestWIPList({commit, rootState}) {
+      const email = rootState.user.profile.email;
+      commit('setLoading', true);
+      commit('clearError');
+
+      ListsService.getLatestWIPList(email)
+          .then(response => {
+            const listSlug = response.data.id
+            commit('setLoading', false);
+            commit('setCurrentList', response.data);
+            commit('setListSlug', listSlug);
+          })
+          .catch(error => {
+            commit('setLoading', false);
+            commit('setError', error);
+            console.log(error);
+            commit('setCurrentList', initialState.currentList);
+            commit('setListSlug', initialState.listSlug);
+          });
+      return null; // release
+    },
     // todo: async ?
     async updateList({ state }) {
       // console.log("Payload action -> "+JSON.stringify(state.currentList));
