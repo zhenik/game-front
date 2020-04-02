@@ -199,7 +199,7 @@ Comment
   flex-grow: 8;
   font-style: normal;
   align-items: flex-end;
-  justify-content: start;
+  justify-content: flex-start;
   text-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3);
 }
 
