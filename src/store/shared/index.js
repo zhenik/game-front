@@ -2,7 +2,7 @@ export default {
   state: {
     loading: false,
     error: null,
-    gamefication: true // hardcoded for now
+    gamefication: process.env.VUE_APP_GAMEFICATION,
   },
   mutations: {
     setLoading (state, payload) {
@@ -31,6 +31,7 @@ export default {
       return state.error
     },
     gamefication(state) {
+      console.log("gamefication "+state.gamefication)
       return state.gamefication
     }
   }
