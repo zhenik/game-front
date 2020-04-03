@@ -1,0 +1,48 @@
+version: "3.4"
+services:
+  mongo:
+    image: mongo:4.2
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: example
+      MONGO_INITDB_DATABASE: app
+    volumes:
+      # todo - "${PWD}/db/init.js:/docker-entrypoint-initdb.d/init.mongo.js:ro"
+      - "mongo-data:/data/db"
+    ports:
+      - 27017:27017
+    networks:
+      - backend
+
+  gameapi:
+    image: zhenik/ocn-backend:1.0
+    command: [
+      "./application",
+      "-Dquarkus.http.host=0.0.0.0",
+      "-Dquarkus.mongodb.connection-string=mongodb://root:example@mongo:27017",
+      "-Dquarkus.mongodb.database=app"
+    ]
+    ports:
+      - 8080:8080
+    networks:
+      - backend
+    depends_on:
+      - mongo
+
+  frontend:
+    build: .
+    image: zhenik/ocn-frontend:1.0
+    env_file:
+      - app.env
+    ports:
+      - 3000:80
+    networks:
+      - backend
+      - frontend
+
+volumes:
+  mongo-data:
+    name: "mongo-data"
+networks:
+  backend:
+  frontend:
