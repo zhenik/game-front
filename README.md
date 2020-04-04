@@ -25,3 +25,11 @@ vue serve ./src/components/lists/index.vue
 ```
 Component view is available on `http://localhost:8081`
 
+## cmds
+```bash
+# locate process on port
+lsof -i:3000
+
+# kill process on port
+kill $(lsof -t -i:8080)
+```
