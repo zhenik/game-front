@@ -14,6 +14,7 @@
           <input
                   type="password"
                   id="password"
+                  autocomplete="on"
                   v-model="password">
         </div>
         <div class="submit">
