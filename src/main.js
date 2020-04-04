@@ -1,8 +1,9 @@
-import Vue from 'vue'
-import App from './App.vue'
-import * as firebase from 'firebase'
-import router from './router/index'
-import { store } from './store'
+import Vue from 'vue';
+import App from './App.vue';
+import firebase from 'firebase/app';
+import 'firebase/auth';
+import router from './router/index';
+import { store } from './store';
 import ApiService from "./api/index";
 
 Vue.config.productionTip = false;
