@@ -31,7 +31,7 @@ export default {
       return state.error
     },
     gamefication(state) {
-      console.log("gamefication "+state.gamefication)
+      // console.log("gamefication "+state.gamefication)
       return state.gamefication
     }
   }

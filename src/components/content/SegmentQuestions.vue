@@ -47,7 +47,7 @@
       ...mapGetters(["gamefication"]),
     },
     mounted() {
-      console.log("segment "+ JSON.stringify(this.slug))
+      // console.log("segment "+ JSON.stringify(this.slug))
     },
     methods: {
       questionDataChanged(updatedQuestion) {
