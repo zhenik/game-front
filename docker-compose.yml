@@ -13,6 +13,8 @@ services:
       - 27017:27017
 
   backend:
+    container_name: backend
+    hostname: backend
     image: zhenik/ocn-backend:1.0
     command: [
       "./application",
@@ -32,18 +34,23 @@ services:
       - mongo
 
   frontend:
+    container_name: frontend
     build:
       context: .
       dockerfile: Dockerfile.official
     image: zhenik/ocn-frontend:1.0
-#    environment:
-#      - VUE_APP_API_URL=http://localhost:8080
-#    env_file:
-#      - app.env
     volumes:
-      - "./nginx.conf:/etc/nginx/nginx.conf"
+      - "./nginx.old.conf:/etc/nginx/nginx.conf"
     ports:
       - 3000:80
+
+#  frontend:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile.official2
+#    image: zhenik/ocn-frontend:1.0
+#    ports:
+#      - 3000:8080
 
 volumes:
   mongo-data:
