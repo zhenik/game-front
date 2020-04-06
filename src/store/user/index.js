@@ -49,8 +49,8 @@ export const actions = {
         .then(email => {
           UsersService.getUser(email)
               .then(response => {
-                // console.log("LOG email "+ JSON.stringify(email))
-                // console.log("LOG "+ JSON.stringify(response.data))
+                console.log("LOG email "+ JSON.stringify(email))
+                console.log("LOG "+ JSON.stringify(response.data))
                 commit('setLoading', false);
                 commit('setProfile', response.data)
                 return email;
