@@ -15,7 +15,7 @@ services:
   backend-ocn:
     container_name: backend
     hostname: backend
-    image: zhenik/ocn-backend:1.0
+    image: zhenik/ocn-backend:1.01
     command: [
       "./application",
       "-Dquarkus.http.host=0.0.0.0",
