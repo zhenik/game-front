@@ -7,6 +7,7 @@ const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
+    console.log("API_URL -> "+API_URL)
   },
   query(resource, params) {
     return Vue.axios.get(resource, params).catch(error => {
@@ -45,6 +46,7 @@ export default ApiService;
 
 export const UsersService = {
   getUser(email) {
+    console.log("Axios base url -> "+Vue.axios.defaults.baseURL);
     return ApiService.get("users", `${email}`);
   },
   // only role=USER
