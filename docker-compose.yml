@@ -12,7 +12,7 @@ services:
     ports:
       - 27017:27017
 
-  backend:
+  backend-ocn:
     container_name: backend
     hostname: backend
     image: zhenik/ocn-backend:1.0
@@ -25,32 +25,29 @@ services:
       "-Dquarkus.http.cors.methods=GET,PUT,POST",
       "-Dquarkus.http.proxy-address-forwarding=true",
       "-Dquarkus.http.allow-forwarded=true",
-      "-Dquarkus.http.cors.access-control-max-age=24H"
-      #"-Dquarkus.http.cors.origins=http://localhost:3000,http://localhost,http://54.171.115.231:3000,http://54.171.115.231"
+      "-Dquarkus.http.cors.access-control-max-age=24H",
+      "-Dquarkus.http.cors.origins=http://localhost:3000,http://localhost,http://54.171.115.231:3000,http://54.171.115.231"
     ]
     ports:
-      - 8080:8080
+      - 8888:8080
     depends_on:
       - mongo
 
-  frontend:
+  frontend-ocn:
     container_name: frontend
     build:
       context: .
       dockerfile: Dockerfile.official
     image: zhenik/ocn-frontend:1.0
     volumes:
-      - "./nginx.old.conf:/etc/nginx/nginx.conf"
+      - "./default.conf:/etc/nginx/conf.d/default.conf"
     ports:
-      - 3000:80
-
-#  frontend:
-#    build:
-#      context: .
-#      dockerfile: Dockerfile.official2
-#    image: zhenik/ocn-frontend:1.0
-#    ports:
-#      - 3000:8080
+      - 3080:80
+      - 3000:3000
+      - 3001:3001 # crutch currently
+    depends_on:
+      - backend-ocn
+      - mongo
 
 volumes:
   mongo-data:
