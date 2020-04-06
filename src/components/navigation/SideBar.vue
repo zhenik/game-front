@@ -140,7 +140,8 @@
     },
     methods: {
       onLogout () {
-        this.$store.dispatch('logout')
+        this.$store.dispatch('logout');
+        this.$store.dispatch('currentListResetState');
         this.$router.push('/signin')
       },
       saveListUserReview() {
