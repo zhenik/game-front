@@ -23,7 +23,7 @@ services:
       "-Dquarkus.http.proxy-address-forwarding=true",
       "-Dquarkus.http.allow-forwarded=true",
       "-Dquarkus.http.cors.access-control-max-age=24H",
-      "-Dquarkus.http.cors.origins=http://0.0.0.0:3000"
+      "-Dquarkus.http.cors.origins=http://0.0.0.0:3000,http://localhost:3000"
 #      "-Dquarkus.http.cors.origins=http://localhost:3000,http://localhost,http://54.171.115.231:3000,http://54.171.115.231"
     ]
     ports:
@@ -39,4 +39,4 @@ services:
     ports:
       - 3080:80
       - 3000:3000
-      - 3001:3001
+      - 3001:3001 # crutch currently
