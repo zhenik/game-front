@@ -19,14 +19,15 @@ services:
     command: [
       "./application",
       "-Dquarkus.http.host=0.0.0.0",
+      "-Dquarkus.http.root-path=/api/v1/",
       "-Dquarkus.mongodb.connection-string=mongodb://rootUser:passRootUser@mongo:27017",
       "-Dquarkus.mongodb.database=app",
       "-Dquarkus.http.cors=true",
       "-Dquarkus.http.cors.methods=GET,PUT,POST",
-      "-Dquarkus.http.proxy-address-forwarding=true",
-      "-Dquarkus.http.allow-forwarded=true",
+#      "-Dquarkus.http.proxy-address-forwarding=true",
+#      "-Dquarkus.http.allow-forwarded=true",
       "-Dquarkus.http.cors.access-control-max-age=24H",
-      "-Dquarkus.http.cors.origins=http://localhost:3000,http://localhost,http://54.171.115.231:3000,http://54.171.115.231"
+      "-Dquarkus.http.cors.origins=http://localhost:3000,http://localhost:4000"
     ]
     ports:
       - 8888:8080
@@ -42,12 +43,10 @@ services:
     volumes:
       - "./default.conf:/etc/nginx/conf.d/default.conf"
     ports:
-      - 3080:80
       - 3000:3000
-      - 3001:3001 # crutch currently
     depends_on:
-      - backend-ocn
       - mongo
+      - backend-ocn
 
 volumes:
   mongo-data:
