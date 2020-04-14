@@ -24,8 +24,6 @@ services:
       "-Dquarkus.mongodb.database=app",
       "-Dquarkus.http.cors=true",
       "-Dquarkus.http.cors.methods=GET,PUT,POST",
-#      "-Dquarkus.http.proxy-address-forwarding=true",
-#      "-Dquarkus.http.allow-forwarded=true",
       "-Dquarkus.http.cors.access-control-max-age=24H",
       "-Dquarkus.http.cors.origins=http://localhost:3000,http://localhost:4000"
     ]
