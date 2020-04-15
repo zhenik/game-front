@@ -2,12 +2,28 @@ import Vue from "vue";
 import axios from "axios";
 import { API_URL } from "./config";
 import VueAxios from "vue-axios";
+import {store} from '../store/index'
 
 const ApiService = {
   init() {
     Vue.use(VueAxios, axios);
     Vue.axios.defaults.baseURL = API_URL;
     console.log("API_URL -> "+API_URL)
+
+    Vue.axios.interceptors.request.use(
+        (config) => {
+          let token = store.getters["authToken"]
+          if (token) {
+            config.headers['Token'] = `${ token }`;
+          }
+          return config;
+        },
+        (error) => {
+          console.log("Interceptors exception");
+          return Promise.reject(error)
+        }
+    )
+
   },
   query(resource, params) {
     return Vue.axios.get(resource, params).catch(error => {
