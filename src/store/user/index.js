@@ -81,14 +81,17 @@ export const actions = {
 export const getters = {
   user(state) {
     return state.user
-  }, profile(state) {
+  },
+  profile(state) {
     // console.log("state.profile "+JSON.stringify(state.profile));
     return state.profile
-  }, authenticatedAndAuthorized(state) {
+  },
+  authenticatedAndAuthorized(state) {
     const authenticated = (state.user !== null && state.user !== undefined);
     const authorized = (state.profile !== null && state.profile !== undefined);
     return (authenticated && authorized);
-  }, isAdmin(state) {
+  },
+  isAdmin(state) {
     if (state.profile !== null && state.profile !== undefined) {
       if (state.profile.role === 'ADMIN') {
         return true
@@ -98,6 +101,16 @@ export const getters = {
     } else {
       return false
     }
+  },
+  authToken(state) {
+    if (state.user!== null) {
+      if (state.user.token !== null) {
+        const t = state.user.token.i
+        console.log("Token store "+ t)
+        return t;
+      }
+    }
+    return null;
   }
 }
 
