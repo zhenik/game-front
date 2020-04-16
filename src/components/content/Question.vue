@@ -6,7 +6,7 @@
     <div :class="styleQuestion">
       <div class="q-header">
         <div class="q-text">
-          <p>Question text is here?</p>
+          <p>{{localQuestion.text}}</p>
         </div>
 
         <!--Answers-->
