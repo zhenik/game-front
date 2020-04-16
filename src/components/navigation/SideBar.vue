@@ -14,47 +14,52 @@
       <p>{{profile.email}}</p>
     </div>
 
-    <!--user related side bar-->
+    <!--user side bar block-->
     <div v-if="profile.role == 'USER'">
-      <!--user lists component, block with segments-->
+      <!--Refresh button, deadline and segments-->
       <UserListSideBlock :current-list="currentList"></UserListSideBlock>
+
+      <hr>
+      <!--Lever and Lagre buttons-->
+      <div v-if="!checkIfNoList()" class="list-actions">
+        <button type="button"
+            class="btn btn-warning btn-lg"
+            data-toggle="modal"
+            data-target="#list-deliver-modal"
+        >Lever</button>
+        <button type="button"
+            class="btn btn-primary btn-lg"
+            data-toggle="modal"
+            data-target="#list-update-modal"
+            v-on:click="saveListUserReview"
+        >Lagre</button>
+      </div>
+
+      <hr>
+
+      <!--Dashboard button-->
+      <div class="additional-nav additional-navigation-1">
+        <router-link to="/dashboard">
+          <i aria-hidden="true" class="material-icons">trending_up</i>
+          Dashboard
+        </router-link>
+      </div>
     </div>
 
-    <hr v-if="profile.role == 'USER'">
-
-    <div v-if="profile.role == 'USER' && !checkIfNoList()" class="list-actions">
-      <button type="button"
-          class="btn btn-warning btn-lg"
-          data-toggle="modal"
-          data-target="#list-deliver-modal"
-      >Lever</button>
-      <button type="button"
-          class="btn btn-primary btn-lg"
-          data-toggle="modal"
-          data-target="#list-update-modal"
-          v-on:click="saveListUserReview"
-      >Lagre</button>
-    </div>
-
-    <hr v-if="profile.role == 'USER'">
-
-    <div v-if="profile.role == 'USER'" class="additional-nav additional-navigation-1">
-      <router-link to="/dashboard">
-        <i aria-hidden="true" class="material-icons">trending_up</i>
-        Dashboard
-      </router-link>
-    </div>
-
+    <!--admin side bar block-->
     <div v-if="profile.role == 'ADMIN'" class="additional-nav additional-navigation-1">
+
+      <hr>
+
       <router-link to="/lists">
         <i aria-hidden="true" class="material-icons">assignment</i>
         Lists
       </router-link>
     </div>
 
-
     <hr>
 
+    <!--common for all side bar block-->
     <div class="additional-nav additional-navigation-2">
       <router-link to="/">
         <i aria-hidden="true" class="material-icons">contact_support</i>
@@ -66,7 +71,6 @@
     </div>
 
     <!-- modal: save list -->
-<!--    <div>-->
       <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
           <div class="modal-content">
@@ -74,7 +78,6 @@
           </div>
         </div>
       </div>
-<!--    </div>-->
 
     <!-- modal: deliver list -->
     <div class="modal fade" id="list-deliver-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">

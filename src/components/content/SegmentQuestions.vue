@@ -1,5 +1,5 @@
 <template>
-  <div class="segment-content">
+  <div class="segment-container">
 
     <div class="segment-header">
       <p>{{this.segment.title}}</p>
@@ -66,7 +66,7 @@
 </script>
 
 <style scoped>
-  .segment-content {
+  .segment-container {
     margin-left: 1px;
   }
 

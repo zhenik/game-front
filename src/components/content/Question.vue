@@ -1,8 +1,6 @@
 <template>
   <div class="question-container">
-<!--      {{this.question}}-->
-<!--    <br>-->
-<!--      {{this.localQuestion}}-->
+
     <div :class="styleQuestion">
       <div class="q-header">
         <div class="q-text">
