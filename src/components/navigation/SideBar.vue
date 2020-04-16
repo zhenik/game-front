@@ -6,28 +6,23 @@
       <p style="float: right; text-align: end;">prosjektNR</p>
     </div>
 
-
-    <!--sidebar-user block-->
-    <div class="sidebar-user">
+    <!--sidebar-profile block-->
+    <div class="sidebar-profile">
       <img src="@/assets/dog.png" alt="Avatar">
       <h4>{{profile.role.toLowerCase()}}</h4>
-      <p v-if="profile.role == 'USER'">Sjekkliste {{profile.name}}</p>
+      <p>Sjekkliste {{profile.name}}</p>
       <p>{{profile.email}}</p>
     </div>
 
     <!--user related side bar-->
     <div v-if="profile.role == 'USER'">
       <!--user lists component, block with segments-->
-      <LastWIPList :current-list="currentList"></LastWIPList>
-    </div>
-    <div v-else>
-      <!--admin lists components-->
+      <UserListSideBlock :current-list="currentList"></UserListSideBlock>
     </div>
 
-    <hr>
+    <hr v-if="profile.role == 'USER'">
 
-<!--    v-on:click="saveListUserReview"-->
-    <div v-if="!checkIfNoList()" class="list-actions">
+    <div v-if="profile.role == 'USER' && !checkIfNoList()" class="list-actions">
       <button type="button"
           class="btn btn-warning btn-lg"
           data-toggle="modal"
@@ -39,15 +34,21 @@
           data-target="#list-update-modal"
           v-on:click="saveListUserReview"
       >Lagre</button>
-
     </div>
 
-    <hr>
+    <hr v-if="profile.role == 'USER'">
 
-    <div class="additional-nav additional-navigation-1">
+    <div v-if="profile.role == 'USER'" class="additional-nav additional-navigation-1">
       <router-link to="/dashboard">
         <i aria-hidden="true" class="material-icons">trending_up</i>
         Dashboard
+      </router-link>
+    </div>
+
+    <div v-if="profile.role == 'ADMIN'" class="additional-nav additional-navigation-1">
+      <router-link to="/lists">
+        <i aria-hidden="true" class="material-icons">assignment</i>
+        Lists
       </router-link>
     </div>
 
@@ -110,10 +111,10 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import LastWIPList from "./LastWIPList";
+  import UserListSideBlock from "./UserListSideBlock";
   export default {
     components: {
-      LastWIPList
+      UserListSideBlock
     },
     props: {
       gamefication: {
@@ -192,19 +193,19 @@
     opacity: 0.8;
   }
 
-  .sidebar-user {
+  .sidebar-profile {
     width: 100%;
     text-align: center;
     margin: 0;
     background: #363636;
   }
 
-  .sidebar-user img {
+  .sidebar-profile img {
     border-radius: 50%;
     width: 25%;
     margin: 20px auto 20px auto;
   }
-  .sidebar-user p {
+  .sidebar-profile p {
     margin-bottom: 0px;
     padding-bottom: 10px;
   }
