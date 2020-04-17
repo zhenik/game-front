@@ -5,6 +5,7 @@ import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
 import Dashboard from '../components/dashboard/index'
 import ListsCatalog from '../components/content/admin/ListsCatalog'
+import List from '../components/content/admin/List'
 import SegmentQuestions from '../components/content/SegmentQuestions'
 import AuthGuardUser from './auth-guard-user'
 import AuthGuardAdmin from './auth-guard-admin'
@@ -36,12 +37,6 @@ const router = new VueRouter({
       component: SignInPage
     },
     // {
-    //   name: 'Lists',
-    //   path: '/lists',
-    //   component: Lists,
-    //   beforeEnter: AuthGuard
-    // },
-    // {
     //   name: "ListElement",
     //   path: "/lists/:slug",
     //   component: ListElement,
@@ -70,7 +65,12 @@ const router = new VueRouter({
       component: ListsCatalog,
       beforeEnter: AuthGuardAdmin
     },
-    // {
+    {
+      name: "List",
+      path: "/lists/:slug",
+      component: List,
+      props: true,
+    }
     //   name: "article-edit",
     //   path: "/editor/:slug?",
     //   props: true,

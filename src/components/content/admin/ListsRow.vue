@@ -2,16 +2,21 @@
   <div class="list-row-container">
     <router-link :to="listLink"
                  class="list-group-item list-group-item-action flex-column align-items-start"
-                 @mouseout="isHovering = false" @mouseover="isHovering = true"
-                 :class="{active: isHovering}"
+                 @mouseout.native="isHovering = false" @mouseover.native="isHovering = true"
+                 :class="[{active: isHovering}, styleRow]"
     >
 
-      <div :class="styleRow">
+      <div>
         <div class="list-row-header">
-          Header list row
+          <p v-if="list.assignedToEmail !== null">assigned to: {{list.assignedToEmail}} </p>
+          <p v-else>List not assigned </p>
+          <hr>
+          <small>state: {{list.state}} </small>
+
         </div>
         <div class="list-row-description">
-          Description list row
+          <small>segments: {{list.segments.length}} </small>
+          <small>questions: {{questionsCount}} </small>
         </div>
       </div>
 
@@ -58,7 +63,7 @@
         } else if(this.list.state === "DELIVERED") {
           return "list-row-d"
         } else {
-          return "list-row-nu"
+          return "list-row-na"
         }
       },
       // }===|==>----
@@ -71,7 +76,7 @@
       },
       listLink() {
         return {
-          name: "ListElement",
+          name: "List",
           params: {
             slug: this.list.id
           }
@@ -82,11 +87,31 @@
 </script>
 
 <style scoped>
+  .active {
+    /*background-color: rgba(0, 0, 0, 0.1);*/
+    background-color: rgba(0, 0, 0, 0.9);
+  }
 
   .list-row-container {
     display: flex;
     flex-direction: column;
     min-height: 5em;
+    margin-top: 0.5em;
+    margin-bottom: 0.5em;
+  }
+
+  .list-row-header {
+
+  }
+
+  .list-row-wip {
+    background-color: rgba(164, 132, 91, 0.95);
+  }
+  .list-row-ur {
+    background-color: seagreen;
+  }
+  .list-row-d {
+    background-color: #6f8ffd;
   }
 
 </style>
