@@ -66,7 +66,5 @@
   .analytics-chart {
     background-color: #3D3D3D;
     margin: 1em;
-      /*max-width: 400px;*/
-    /*margin:  100px auto;*/
   }
 </style>

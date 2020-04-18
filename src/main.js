@@ -37,7 +37,7 @@ firebase.initializeApp(config);
 // });
 
 Vue.use(VueGtag, {
-  config: { id: "UA-163563458-1" } // C3 Gamified
+  config: { id: process.env.VUE_APP_GA_TAG_C3GAMIFIED } // C3 Gamified
 }, router);
 
 new Vue({
