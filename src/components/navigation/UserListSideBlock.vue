@@ -39,7 +39,7 @@
   import Segment from "./Segment.vue"
 
   export default {
-    name: 'LastWIPList',
+    name: 'UserListSideBlock',
     props: {
       currentList: {
         type: Object,
