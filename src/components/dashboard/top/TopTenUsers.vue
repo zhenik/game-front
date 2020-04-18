@@ -14,10 +14,6 @@
           <h6>{{topUser.email}}</h6>
           <span class="user-score">{{topUser.percent.toPrecision(2)}} %</span>
         </li>
-       <li class="d-flex justify-content-between align-items-center top-user-list-element">
-          <h6>Oda</h6>
-         <span class="user-score">95%</span>
-       </li>
         <!--      <li class="list-group-item d-flex justify-content-between align-items-center">-->
 <!--          Dog-->
 <!--          <span class="badge badge-primary badge-pill">74%</span>-->
