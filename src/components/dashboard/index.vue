@@ -1,14 +1,6 @@
 <template>
   <div class="container-fluid">
-<!--    <h2>This is dashboard</h2>-->
-
-    <!--debugging purposes-->
-<!--    <button type="button"-->
-<!--            class="btn btn-primary btn-lg"-->
-<!--            v-on:click="show"-->
-<!--    >Update</button>-->
-
-    <div v-if="true" class="dashboard-row row no-gutters">
+    <div v-if="gamefication && doesUserHasAnalytics"  class="dashboard-row row no-gutters">
       <user-total-feedback :feedback="userAnalytics.allListsFeedback.feedback"
                            class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-total-feedback>
       <user-last-and-best-delivery :twoListsFeedback="userAnalytics.twoListsFeedback"
@@ -17,7 +9,9 @@
                                   class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-grouped-answers-count>
       <top-ten-users class="dashboard-element col-xs-12 col-sm-6 col-lg-4" ></top-ten-users>
     </div>
-
+    <div v-else>
+      No analytics, until you deliver list.
+    </div>
 
   </div>
 </template>
@@ -36,7 +30,7 @@
       next();
     },
     computed: {
-      ...mapGetters(["isAdmin", "userAnalytics"]),
+      ...mapGetters(["isAdmin", "userAnalytics", "doesUserHasAnalytics", "gamefication"]),
     },
     components: {
       UserTotalFeedback,
@@ -51,6 +45,7 @@
       },
       show() {
         console.log("index: ", JSON.stringify(this.userAnalytics));
+        console.log("does user has analytics: ", JSON.stringify(this.doesUserHasAnalytics));
       }
     },
   }
