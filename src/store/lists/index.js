@@ -170,6 +170,9 @@ export const getters = {
     currentList(state) {
       return state.currentList;
     },
+    isCurrentListPresent(state) {
+      return state.currentList.id !== '';
+    }
 };
 
 export default {
