@@ -13,6 +13,7 @@
         <question
             v-for="question in this.segment.questions"
             v-bind:question="question"
+            v-bind:segmentId="segment.id"
             :key="question.id"
             v-on:update:question="questionDataChanged"
         ></question>
