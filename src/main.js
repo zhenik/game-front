@@ -5,6 +5,7 @@ import 'firebase/auth';
 import router from './router/index';
 import { store } from './store';
 import ApiService from "./api/index";
+import VueGtag from "vue-gtag";
 
 Vue.config.productionTip = false;
 
@@ -34,6 +35,10 @@ firebase.initializeApp(config);
 //   if (u == null) this.isLoggedIn = false;
 //   else this.isLoggedIn = true;
 // });
+
+Vue.use(VueGtag, {
+  config: { id: "UA-163563458-1" } // C3 Gamified
+}, router);
 
 new Vue({
   // el: '#app',
