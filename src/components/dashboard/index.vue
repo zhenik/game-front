@@ -1,5 +1,5 @@
 <template>
-  <div class="dashboard">
+  <div class="container-fluid">
 <!--    <h2>This is dashboard</h2>-->
 
     <!--debugging purposes-->
@@ -8,11 +8,14 @@
 <!--            v-on:click="show"-->
 <!--    >Update</button>-->
 
-    <div v-if="true" class="analytics-container">
-      <user-total-feedback :feedback="userAnalytics.allListsFeedback.feedback"></user-total-feedback>
-      <user-last-and-best-delivery :twoListsFeedback="userAnalytics.twoListsFeedback"></user-last-and-best-delivery>
-      <user-grouped-answers-count :allListsFeedback="userAnalytics.allListsFeedback"></user-grouped-answers-count>
-      <top-ten-users class="top-ten-list"></top-ten-users>
+    <div v-if="true" class="dashboard-row row no-gutters">
+      <user-total-feedback :feedback="userAnalytics.allListsFeedback.feedback"
+                           class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-total-feedback>
+      <user-last-and-best-delivery :twoListsFeedback="userAnalytics.twoListsFeedback"
+                                   class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-last-and-best-delivery>
+      <user-grouped-answers-count :allListsFeedback="userAnalytics.allListsFeedback"
+                                  class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-grouped-answers-count>
+      <top-ten-users class="dashboard-element col-xs-12 col-sm-6 col-lg-4" ></top-ten-users>
     </div>
 
 
@@ -54,10 +57,6 @@
 </script>
 
 <style scoped>
-  .dashboard {
-
-  }
-
   .analytics-container {
     display: flex;
     flex-direction: row;
@@ -65,15 +64,9 @@
     justify-content: space-evenly;
   }
   .analytics-chart {
-    max-width: 400px;
+    background-color: #3D3D3D;
+    margin: 1em;
+      /*max-width: 400px;*/
     /*margin:  100px auto;*/
   }
-
-  .analytics-pie {
-
-  }
-
-  .top-ten-list {
-  }
-
 </style>

@@ -1,9 +1,15 @@
 <template>
-  <div class="analytics-chart analytics-pie">
+  <div class="mdc-card analytics-chart analytics-pie">
 <!--      <h3>#2 Forrige liste</h3>-->
 <!--      <h4> Best delivered list :) {{ twoListsFeedback.best.feedback }}%</h4>-->
 <!--      <h4> Last delivered list :) {{ twoListsFeedback.last.feedback }}%</h4>-->
+      <div class="dashboard-header d-flex flex-row w-100 align-items-center">
+          <i class="material-icons">compare_arrows</i>
+          <h3>Forrige liste</h3>
+      </div>
+      <div class="dashboard-content">
     <horizontal-bar-chart :chart-data="this.datacollection" :options="this.options"></horizontal-bar-chart>
+      </div>
   </div>
 </template>
 
@@ -42,10 +48,10 @@
     data() {
       return {
         datacollection: {
-          labels: ['Best delivered list', 'Last devlivered list'],
+          labels: ['Forrige liste', 'Beste liste'],
           datasets: [{
-            label: 'Forrige lista',
-            backgroundColor: ['#28f825', '#f80000'],
+            label: 'Forrige liste',
+            backgroundColor: ['#26FF6F', 'rgba(38, 255, 111, 0.3);'],
             // data: [{x: 20, y:'Positive'}, {x: 7, y:'Negative'}],
             data: [100, 66, 0],
             order: 1
@@ -60,9 +66,9 @@
     methods: {
       fillData() {
         this.datacollection = {
-          labels: ['Best delivered list', 'Last devlivered list'], datasets: [{
-            label: 'Forrige lista',
-            backgroundColor: ['#28f825', '#f80000'], // data: [{x: 20, y:'Positive'}, {x: 7, y:'Negative'}],
+          labels: ['Forrige liste', 'Beste liste'], datasets: [{
+            label: 'Positiv feedback',
+            backgroundColor: ['#26FF6F', 'rgba(38, 255, 111, 0.3)'], // data: [{x: 20, y:'Positive'}, {x: 7, y:'Negative'}],
             data: [this.twoListsFeedback.best.feedback, this.twoListsFeedback.last.feedback, 0],
             order: 1
           }]
@@ -77,3 +83,24 @@
     },
   }
 </script>
+
+<style scoped>
+    .dashboard-header {
+        background-color: rgba(111, 111, 111, 0.4);
+    }
+    .dashboard-content {
+        padding: 1em;
+        margin: 1em;
+    }
+    h3 {
+        font-size: 1em;
+        padding: 0.5em;
+        color: #C9C9C9;
+        font-weight: 300;
+        margin-bottom: 0;
+    }
+    i {
+        padding: 0.5em;
+        color: #C9C9C9;
+    }
+</style>
