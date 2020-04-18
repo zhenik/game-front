@@ -1,12 +1,17 @@
 <template>
-  <div class="analytics-chart analytics-pie">
+  <div class="mdc-card analytics-chart analytics-pie">
 <!--    <h3>#3 Alle sjekkpunkter</h3>-->
 <!--    <h4> YES {{ this.group.yes }}%</h4>-->
 <!--    <h4> NO {{ this.group.no }}%</h4>-->
 <!--    <h4> IRRELEVANT {{ this.group.irrelevant }}%</h4>-->
 <!--    <h4> NONE {{ this.group.none }}%</h4>-->
-
+      <div class="dashboard-header d-flex flex-row w-100 align-items-center">
+          <i class="material-icons">donut_large</i>
+          <h3>Alle sjekkpunkter</h3>
+      </div>
+      <div class="dashboard-content">
     <doughnut-chart :chart-data="this.datacollection" :options="this.options"></doughnut-chart>
+      </div>
   </div>
 </template>
 
@@ -30,9 +35,9 @@
     data() {
       return {
         datacollection: {
-          labels: ['YES', 'NO', 'IRRELEVANT', 'NONE'],
+          labels: ['OK', 'IKKE OK', 'IRRELEVANT', 'NONE'],
           datasets: [{
-            backgroundColor: ['#41B883', '#DD1B16', '#ffb8a7', '#575f57'],
+            backgroundColor: ['#26FF6F', '#FA5C20', '#FFB800', '#575f57'],
             data: [40, 20, 80, 10]
           }]
         },
@@ -50,9 +55,9 @@
     methods: {
       fillData() {
         this.datacollection = {
-          labels: ['YES', 'NO', 'IRRELEVANT', 'NONE'],
+          labels: ['OK', 'IKKE OK', 'IRRELEVANT', 'NONE'],
           datasets: [{
-            backgroundColor: ['#41B883', '#DD1B16', '#ffb8a7', '#575f57'],
+            backgroundColor: ['#26FF6F', '#FA5C20', '#FFB800', '#575f57'],
             data: [
                 this.allListsFeedback.group.YES,
                 this.allListsFeedback.group.NO,
@@ -86,6 +91,23 @@
   }
 </script>
 
-<style>
-
+<style scoped>
+    .dashboard-header {
+        background-color: rgba(111, 111, 111, 0.4);
+    }
+    .dashboard-content {
+        padding: 1em;
+        margin: 1em;
+    }
+    h3 {
+        font-size: 1em;
+        padding: 0.5em;
+        color: #C9C9C9;
+        font-weight: 300;
+        margin-bottom: 0;
+    }
+    i {
+        padding: 0.5em;
+        color: #C9C9C9;
+    }
 </style>
