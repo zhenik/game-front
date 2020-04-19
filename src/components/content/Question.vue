@@ -41,9 +41,8 @@
                        :name="'q-'+localQuestion.id"
                 ><i class="material-icons">remove</i>
               </label>
-              <label v-if="this.localQuestion.answer!=='NONE'"
-                     class="btn btn-secondary btn-to-checkbox reset-btn"
-                     :class="{ active:  'NONE' === localQuestion.answer}">
+              <label class="btn btn-secondary btn-to-checkbox reset-btn"
+                     :class="[{ active:  'NONE' === localQuestion.answer}, {'hide-btn': this.localQuestion.answer=='NONE'}]">
               <input type="radio"
                      :disabled="checkDisabled"
                      v-model="localQuestion.answer"
@@ -57,14 +56,15 @@
           <div v-if="this.localQuestion.answer!=='NONE'"
                class="q-answer-text">
             <small>
-              {{localQuestion.answer}}
+              {{helperText}}
             </small>
           </div>
         </div>
 
       </div>
       <!--Comment-->
-      <div class="q-comment">
+      <div class="q-comment"
+              :class="{'highlight': localQuestion.comment !== null}">
           <textarea v-model="localQuestion.comment"
                     placeholder="Kommentar"
                     @change="onCommentInput"
@@ -122,6 +122,15 @@
           return "question-none"
         }
       },
+      helperText () {
+        if (this.localQuestion.answer === "YES"){
+          return "OK"
+        }else if (this.localQuestion.answer === "NO"){
+          return "IKKE OK"
+        }else if (this.localQuestion.answer === "IRRELEVANT"){
+          return "IRRELEVANT"
+        }else return null;
+      }
     },
     methods: {
       onCommentInput() {
@@ -179,11 +188,10 @@ Comment
   -moz-box-sizing: border-box;
   box-sizing: border-box;
   width: 100%;
-
   border: none;
   border-radius: 10px 10px 0 0;
   font-size: 0.8em;
-  background: rgba(255, 255, 255, 0.3);
+  background: rgba(255, 255, 255, 0.25);
 }
 .q-comment textarea:hover {
   background: rgba(255, 255, 255, 0.5);
@@ -191,8 +199,11 @@ Comment
 .q-comment textarea:active {
   background: rgba(255, 255, 255, 0.7);
 }
-.q-comment textarea::placeholder{
+.q-comment textarea::placeholder {
   color: rgba(0, 0, 0, 0.4);
+}
+.highlight textarea {
+  background: rgba(255, 255, 255, 0.8);
 }
 .q-text {
   display: flex;
@@ -216,10 +227,6 @@ Comment
 
 .q-answers-container span {
   align-self: center;
-}
-
-btn-group label {
-  margin: auto;
 }
 
 .btn-to-checkbox {
@@ -247,6 +254,10 @@ btn-group label {
   background-color: rgba(0, 0, 0, 0);
   line-height: 0;
   color: white;
+}
+
+.hide-btn {
+  visibility: hidden;
 }
 
 .btn:hover {
@@ -288,6 +299,4 @@ btn-group label {
   border: 1px solid #FFB800 !important;
   background-color: #c38f15 !important;
 }
-
-
 </style>
