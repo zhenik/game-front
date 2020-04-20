@@ -3,7 +3,7 @@
   <div id="app">
 
     <div class="wrapper">
-      <side-bar :gamefication="gamefication" v-if="authenticated" />
+      <side-bar v-if="authenticated" />
       <div id="content">
         <router-view></router-view>
       </div>
@@ -18,11 +18,6 @@
     name: 'app',
     components: {
       SideBar
-    },
-    data() {
-      return {
-        gamefication: true
-      }
     },
     computed: {
       authenticated () {
