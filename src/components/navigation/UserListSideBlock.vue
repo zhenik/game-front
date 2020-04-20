@@ -3,6 +3,7 @@
 
 
     <button
+        v-if="!isCurrentListPresent"
         class="btn btn-success custom-btn-update"
         v-on:click="fetchLastWIPList"
     >
@@ -37,9 +38,10 @@
 
 <script>
   import Segment from "./Segment.vue"
+  import {mapGetters} from "vuex";
 
   export default {
-    name: 'LastWIPList',
+    name: 'UserListSideBlock',
     props: {
       currentList: {
         type: Object,
@@ -48,6 +50,9 @@
     },
     components: {
       Segment
+    },
+    computed: {
+      ...mapGetters(["isCurrentListPresent"]),
     },
     methods: {
       saveListUserReview() {

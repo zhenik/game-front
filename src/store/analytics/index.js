@@ -32,10 +32,10 @@ const initialState = {
       score: 0,
       feedback: 0.0,
       group: {
-        IRRELEVANT: 2,
-        NO: 1,
-        YES: 3,
-        NONE: 1
+        IRRELEVANT: 0,
+        NO: 0,
+        YES: 0,
+        NONE: 0
       }
     }
   }
@@ -95,6 +95,9 @@ export const getters = {
   },
   topTenUsersAnalytics(state) {
     return state.topTenUsers
+  },
+  doesUserHasAnalytics(state) {
+    return state.userAnalytics.twoListsFeedback.last.questions !== 0
   }
 };
 

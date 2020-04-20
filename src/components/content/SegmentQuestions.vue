@@ -1,5 +1,5 @@
 <template>
-  <div class="segment-content">
+  <div class="segment-container">
 
     <div class="segment-header">
       <p>{{this.segment.title}}</p>
@@ -13,6 +13,7 @@
         <question
             v-for="question in this.segment.questions"
             v-bind:question="question"
+            v-bind:segmentId="segment.id"
             :key="question.id"
             v-on:update:question="questionDataChanged"
         ></question>
@@ -66,7 +67,7 @@
 </script>
 
 <style scoped>
-  .segment-content {
+  .segment-container {
     margin-left: 1px;
   }
 

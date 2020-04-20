@@ -4,13 +4,11 @@ import VueRouter from 'vue-router'
 import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
 import Dashboard from '../components/dashboard/index'
-// import Lists from '../components/lists/index'
-// import ListElement from '../components/lists/shared/components/ListElement'
+import ListsCatalog from '../components/content/admin/ListsCatalog'
+import List from '../components/content/admin/List'
 import SegmentQuestions from '../components/content/SegmentQuestions'
-
-// admin routes
-// import NewList from '../components/lists/admin/NewList'
-import AuthGuard from './auth-guard'
+import AuthGuardUser from './auth-guard-user'
+import AuthGuardAdmin from './auth-guard-admin'
 
 Vue.use(VueRouter);
 
@@ -19,31 +17,25 @@ const router = new VueRouter({
     /** old routing START */
     {
       path: '/',
-      beforeEnter: AuthGuard
+      beforeEnter: AuthGuardUser
     },
     {
       path: '/profile',
       name: 'Profile',
       component: Profile,
-      beforeEnter: AuthGuard
+      beforeEnter: AuthGuardUser
     },
     {
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
-      beforeEnter: AuthGuard
+      beforeEnter: AuthGuardUser
     },
     {
       path: '/signin',
       name: 'SignIn',
       component: SignInPage
     },
-    // {
-    //   name: 'Lists',
-    //   path: '/lists',
-    //   component: Lists,
-    //   beforeEnter: AuthGuard
-    // },
     // {
     //   name: "ListElement",
     //   path: "/lists/:slug",
@@ -65,9 +57,20 @@ const router = new VueRouter({
       path: "/currentList/:slug",
       component: SegmentQuestions,
       props: true,
-      beforeEnter: AuthGuard
+      beforeEnter: AuthGuardUser
     },
-    // {
+    {
+      name: 'Lists',
+      path: '/lists',
+      component: ListsCatalog,
+      beforeEnter: AuthGuardAdmin
+    },
+    {
+      name: "List",
+      path: "/lists/:slug",
+      component: List,
+      props: true,
+    }
     //   name: "article-edit",
     //   path: "/editor/:slug?",
     //   props: true,

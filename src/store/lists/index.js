@@ -119,7 +119,10 @@ export const actions = {
       // console.log("new state -> "+JSON.stringify(context.state))
       return ListsService.update(context.state.listSlug, context.state.currentList)
     },
-
+    async finishReview(context){
+      context.commit("setListState", 'DELIVERED');
+      return ListsService.update(context.state.listSlug, context.state.currentList)
+    },
     currentListResetState({commit}) {
       commit('setCurrentList', initialState.currentList);
       commit('setListSlug', initialState.listSlug);
@@ -167,6 +170,9 @@ export const getters = {
     currentList(state) {
       return state.currentList;
     },
+    isCurrentListPresent(state) {
+      return state.currentList.id !== '';
+    }
 };
 
 export default {

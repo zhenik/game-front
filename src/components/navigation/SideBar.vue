@@ -6,54 +6,60 @@
       <p style="float: right; text-align: end;">prosjektNR</p>
     </div>
 
-
-    <!--sidebar-user block-->
-    <div class="sidebar-user">
+    <!--sidebar-profile block-->
+    <div class="sidebar-profile">
       <img src="@/assets/dog.png" alt="Avatar">
       <h4>{{profile.role.toLowerCase()}}</h4>
-      <p v-if="profile.role == 'USER'">Sjekkliste {{profile.name}}</p>
+      <p>Sjekkliste {{profile.name}}</p>
       <p>{{profile.email}}</p>
     </div>
 
-    <!--user related side bar-->
+    <!--user side bar block-->
     <div v-if="profile.role == 'USER'">
-      <!--user lists component, block with segments-->
-      <LastWIPList :current-list="currentList"></LastWIPList>
+      <!--Refresh button, deadline and segments-->
+      <UserListSideBlock :current-list="currentList"></UserListSideBlock>
+
+      <hr>
+      <!--Lever and Lagre buttons-->
+      <div v-if="!checkIfNoList()" class="list-actions">
+        <button type="button"
+            class="btn btn-warning btn-lg"
+            data-toggle="modal"
+            data-target="#list-deliver-modal"
+        >Lever</button>
+        <button type="button"
+            class="btn btn-primary btn-lg"
+            data-toggle="modal"
+            data-target="#list-update-modal"
+            v-on:click="saveListUserReview"
+        >Lagre</button>
+      </div>
+
+      <hr>
+
+      <!--Dashboard button-->
+      <div class="additional-nav additional-navigation-1">
+        <router-link to="/dashboard">
+          <i aria-hidden="true" class="material-icons">trending_up</i>
+          Dashboard
+        </router-link>
+      </div>
     </div>
-    <div v-else>
-      <!--admin lists components-->
-    </div>
 
-    <hr>
+    <!--admin side bar block-->
+    <div v-if="profile.role == 'ADMIN'" class="additional-nav additional-navigation-1">
 
-<!--    v-on:click="saveListUserReview"-->
-    <div v-if="!checkIfNoList()" class="list-actions">
-      <button type="button"
-          class="btn btn-warning btn-lg"
-          data-toggle="modal"
-          data-target="#list-deliver-modal"
-      >Lever</button>
-      <button type="button"
-          class="btn btn-primary btn-lg"
-          data-toggle="modal"
-          data-target="#list-update-modal"
-          v-on:click="saveListUserReview"
-      >Lagre</button>
+      <hr>
 
-    </div>
-
-    <hr>
-
-    <div class="additional-nav additional-navigation-1">
-      <router-link to="/dashboard">
-        <i aria-hidden="true" class="material-icons">trending_up</i>
-        Dashboard
+      <router-link to="/lists">
+        <i aria-hidden="true" class="material-icons">assignment</i>
+        Lists
       </router-link>
     </div>
 
-
     <hr>
 
+    <!--common for all side bar block-->
     <div class="additional-nav additional-navigation-2">
       <router-link to="/">
         <i aria-hidden="true" class="material-icons">contact_support</i>
@@ -65,7 +71,6 @@
     </div>
 
     <!-- modal: save list -->
-<!--    <div>-->
       <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
           <div class="modal-content">
@@ -73,7 +78,6 @@
           </div>
         </div>
       </div>
-<!--    </div>-->
 
     <!-- modal: deliver list -->
     <div class="modal fade" id="list-deliver-modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -110,10 +114,10 @@
 
 <script>
   import {mapGetters} from "vuex";
-  import LastWIPList from "./LastWIPList";
+  import UserListSideBlock from "./UserListSideBlock";
   export default {
     components: {
-      LastWIPList
+      UserListSideBlock
     },
     props: {
       gamefication: {
@@ -148,7 +152,9 @@
         this.$store.dispatch("updateList");
       },
       deliverListUserReview() {
-        this.$store.dispatch("deliverList");
+        this.$store.dispatch("deliverList")
+            .then(() => this.$store.dispatch("currentListResetState"))
+            .then(() => this.$router.push('/'));
       },
       checkIfNoList() {
         if (this.currentList == null) return true;
@@ -192,19 +198,19 @@
     opacity: 0.8;
   }
 
-  .sidebar-user {
+  .sidebar-profile {
     width: 100%;
     text-align: center;
     margin: 0;
     background: #363636;
   }
 
-  .sidebar-user img {
+  .sidebar-profile img {
     border-radius: 50%;
     width: 25%;
     margin: 20px auto 20px auto;
   }
-  .sidebar-user p {
+  .sidebar-profile p {
     margin-bottom: 0px;
     padding-bottom: 10px;
   }

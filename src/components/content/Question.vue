@@ -1,8 +1,6 @@
 <template>
   <div class="question-container">
-<!--      {{this.question}}-->
-<!--    <br>-->
-<!--      {{this.localQuestion}}-->
+
     <div :class="styleQuestion">
       <div class="q-header">
         <div class="q-text">
@@ -12,8 +10,6 @@
         <!--Answers-->
         <div class="q-answers-container">
           <!--   button group   -->
-
-
           <span class="badge badge-pill">
             <div class="btn-group btn-group-toggle">
               <label class="btn btn-success btn-to-checkbox" :class="{ active:  'YES' === localQuestion.answer}">
@@ -24,7 +20,6 @@
                        :name="'q-'+localQuestion.id"
                 ><i class="material-icons">done</i>
               </label>
-
               <label class="btn btn-danger btn-to-checkbox" :class="{ active:  'NO' === localQuestion.answer}">
                 <input type="radio"
                        :disabled="checkDisabled"
@@ -53,7 +48,8 @@
             </div>
           </span>
 
-          <div v-if="this.localQuestion.answer!=='NONE'"
+          <!-- show answer if its not NONE or show answer to admin anyway-->
+          <div v-if="this.localQuestion.answer!=='NONE' || isAdmin"
                class="q-answer-text">
             <small>
               {{helperText}}
@@ -72,6 +68,25 @@
                     rows="1">
           </textarea>
       </div>
+
+      <!--Admin block appear only if user is admin and list has state UNDER_REVIEW-->
+      <!--info: be aware, tag `:name` should be unique per each radio, to support unique state-->
+      <div v-if="isAdmin && currentList.state === 'UNDER_REVIEW'">
+        <label class="btn btn-to-checkbox">
+          <input type="radio"
+                 v-model="localQuestion.score"
+                 :value=1
+                 :name="'approve-s-'+segmentId +'-q-'+ question.id"
+          ><i class="material-icons">event_available</i>
+        </label>
+        <label class="btn btn-to-checkbox">
+          <input type="radio"
+                 v-model="localQuestion.score"
+                 :value=0
+                 :name="'not-approve-s-'+segmentId +'-q-'+ question.id"
+          ><i class="material-icons">event_busy</i>
+        </label>
+      </div>
     </div>
   </div>
 </template>
@@ -85,6 +100,10 @@
         type: Object,
         required: true
       },
+      segmentId: {
+        type: Number,
+        required: true
+      }
     },
     data() {
       return {
@@ -97,15 +116,14 @@
       }
     },
     computed: {
-      ...mapGetters(["gamefication"]),
+      ...mapGetters(["gamefication", "isAdmin", "currentList"]),
       checkDisabled () {
-        return false
-        // if (this.isAdmin) {
-        //   return false
-        // } else {
-        //   const dis = 'WORK_IN_PROGRESS' !== this.currentList.state
-        //   return dis
-        // }
+        if (this.isAdmin) {
+          return true
+        } else {
+          const dis = 'WORK_IN_PROGRESS' !== this.currentList.state
+          return dis
+        }
       },
       styleQuestion () {
         if (!this.gamefication) {
