@@ -17,9 +17,10 @@
     <!--user side bar block-->
     <div v-if="profile.role == 'USER'">
       <!--Refresh button, deadline and segments-->
+      <hr v-if="!checkIfNoList()">
       <UserListSideBlock :current-list="currentList"></UserListSideBlock>
 
-      <hr>
+      <hr v-if="!checkIfNoList()">
       <!--Lever and Lagre buttons-->
       <div v-if="!checkIfNoList()" class="list-actions">
         <button type="button"
@@ -35,10 +36,10 @@
         >Lagre</button>
       </div>
 
-      <hr>
+      <hr v-if="gamefication">
 
       <!--Dashboard button-->
-      <div class="additional-nav additional-navigation-1">
+      <div v-if="gamefication" class="additional-nav additional-navigation-1">
         <router-link to="/dashboard">
           <i aria-hidden="true" class="material-icons">trending_up</i>
           Dashboard
@@ -119,14 +120,8 @@
     components: {
       UserListSideBlock
     },
-    props: {
-      gamefication: {
-        type: Boolean,
-        required: true
-      }
-    },
     computed: {
-      ...mapGetters(["currentList", "profile"]),
+      ...mapGetters(["currentList", "profile", "gamefication"]),
       allQuestionsAnswered () {
         let answeredAll = true;
         this.currentList.segments.forEach(s => {
