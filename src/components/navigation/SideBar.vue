@@ -2,24 +2,30 @@
   <nav id="sidebar">
     <!--sidebar-logo-->
     <div class="sidebar-logo">
-      <p style="float: left; text-align: start;">prosjektNAME</p>
-      <p style="float: right; text-align: end;">prosjektNR</p>
+      <p style="float: left; text-align: start;">Fellow</p>
+      <p style="float: right; text-align: end; opacity: 0;">13100307</p>
     </div>
 
     <!--sidebar-profile block-->
     <div class="sidebar-profile">
       <img src="@/assets/dog.png" alt="Avatar">
-      <h4>{{profile.role.toLowerCase()}}</h4>
-      <p>Sjekkliste {{profile.name}}</p>
-      <p>{{profile.email}}</p>
+      <h4 v-if="profile.role === 'ADMIN'">{{profile.role.toLowerCase()}}</h4>
+      <p>{{profile.name}}</p>
+      <p class="profile-email">{{profile.email}}</p>
+      <!--Dashboard button-->
+      <div class="dashboard-btn">
+        <router-link to="/dashboard">
+          <!--<i aria-hidden="true" class="material-icons dashboard-icon">trending_up</i>-->
+          <p>Resultater</p>
+        </router-link>
+      </div>
     </div>
 
     <!--user side bar block-->
     <div v-if="profile.role == 'USER'">
       <!--Refresh button, deadline and segments-->
       <UserListSideBlock :current-list="currentList"></UserListSideBlock>
-
-      <hr>
+      <br>
       <!--Lever and Lagre buttons-->
       <div v-if="!checkIfNoList()" class="list-actions">
         <button type="button"
@@ -33,16 +39,6 @@
             data-target="#list-update-modal"
             v-on:click="saveListUserReview"
         >Lagre</button>
-      </div>
-
-      <hr>
-
-      <!--Dashboard button-->
-      <div class="additional-nav additional-navigation-1">
-        <router-link to="/dashboard">
-          <i aria-hidden="true" class="material-icons">trending_up</i>
-          Dashboard
-        </router-link>
       </div>
     </div>
 
@@ -60,7 +56,7 @@
     <hr>
 
     <!--common for all side bar block-->
-    <div class="additional-nav additional-navigation-2">
+    <div class="additional-nav">
       <router-link to="/">
         <i aria-hidden="true" class="material-icons">contact_support</i>
         Info
@@ -74,7 +70,7 @@
       <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
           <div class="modal-content">
-            Listet lagret
+            Liste lagret.
           </div>
         </div>
       </div>
@@ -86,24 +82,24 @@
           <div class="modal-header">
             <h5 class="modal-title" id="exampleModalLongTitle">Levering</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-              <span aria-hidden="true">&times;</span>
+              <span aria-hidden="true" :style="{'color': '#ffffff'}">&times;</span>
             </button>
           </div>
           <div v-if="allQuestionsAnswered" class="modal-body">
             Vil du levere?
           </div>
           <div v-else>
-            Ikke alle spørsmål blir besvart!
+            Du må sjekke av alle punkter før du kan levere!
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tilbake</button>
             <button
                 v-if="allQuestionsAnswered"
                 type="button"
                 class="btn btn-primary"
                 data-dismiss="modal"
                 v-on:click="deliverListUserReview"
-            >Yes</button>
+            >Lever</button>
           </div>
         </div>
       </div>
@@ -203,6 +199,7 @@
     text-align: center;
     margin: 0;
     background: #363636;
+    padding-bottom: 10px;
   }
 
   .sidebar-profile img {
@@ -211,8 +208,47 @@
     margin: 20px auto 20px auto;
   }
   .sidebar-profile p {
-    margin-bottom: 0px;
+    margin-bottom: 0;
     padding-bottom: 10px;
+  }
+  .profile-email {
+    font-size: 0.8em;
+    font-style: italic;
+    opacity: 0.6;
+  }
+
+  .dashboard-btn {
+    width: 50%;
+    margin: 0.5em auto;
+    background-color: rgba(255, 0, 92, 0.2);
+    box-sizing: border-box;
+    padding: 0.2em;
+    transition: all 200ms;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 4px;
+    box-shadow: 0 5.5px 5px rgba(0, 0, 0, 0.24), 0 9px 18px rgba(0, 0, 0, 0.18);
+  }
+
+  .dashboard-btn:hover {
+    background-color: rgba(255, 0, 92, 0.4);
+    border: 1px solid rgba(255, 0, 92, 1);
+    cursor: pointer;
+  }
+
+  .dashboard-btn a {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 1);
+    font-weight: 300;
+    text-align: center;
+    font-size: 0.9em;
+  }
+
+  .dashboard-btn p {
+    padding: 5px;
+  }
+
+  .dashboard-btn:hover p {
+    color: rgba(255, 255, 255, 1);
   }
 
   ul {
@@ -248,65 +284,61 @@
 
   .additional-nav {
     display: flex;
-    flex-direction: column;
-    border-radius: 3px;
-    text-align: left;
+    flex-direction: row;
+    width: 100%;
+    text-align: center;
     color: white;
   }
 
+  .additional-nav * {
+    width: 40%;
+  }
 
   .additional-nav a {
     color: inherit;
-    border-radius: inherit;
     text-align: inherit;
-
-    /*background-color: red;*/
     text-decoration: none;
-    font-size: 1rem;
-    margin: 8px;
-    padding: 0 12px;
   }
 
   .additional-nav i {
-    vertical-align: middle;
-    margin: auto 1em auto auto;
-
-    width: 24px;
-    height: 1.5em;
     flex-shrink: 0;
     align-items: center;
     justify-content: center;
     line-height: inherit;
+    font-weight: 300;
+    font-size: 0.9em;
   }
 
   .additional-nav button {
     color: inherit;
     border-radius: inherit;
     text-align: inherit;
-
     text-decoration: none;
-    font-size: 1rem;
-    margin: 8px;
-    padding: 0 8px;
     display: block;
+    font-weight: 400;
+    font-size: 0.8em;
   }
 
-
   .additional-nav button i {
-    margin: auto 1em auto 5px;
+    margin: auto;
+    text-align: center;
+    display: inline;
   }
 
   .additional-nav a:hover,
   .additional-nav button:hover {
     color: white;
     background-color: #363636;
-
   }
 
   .list-actions {
     display: flex;
     flex-direction: row;
     justify-content: space-evenly;
+  }
+
+  .list-actions * {
+    font-size: 0.9em;
   }
 
   .list-actions .btn-primary {
@@ -332,5 +364,4 @@
   .modal-body {
     text-align: left;
   }
-
 </style>

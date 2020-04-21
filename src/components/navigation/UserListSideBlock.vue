@@ -8,19 +8,19 @@
         v-on:click="fetchLastWIPList"
     >
       <i aria-hidden="true" class="material-icons">refresh</i>
-      Refresh</button>
+      Hent liste</button>
 
     <!--deadline block-->
     <div v-if="!checkIfNoList()" class="deadline">
       <h2>{{deadlineDelta()}}</h2>
       <div class="deadline-countdown">
         <h5>dager til innleveringsfrist</h5>
-        <h6>{{this.currentList.deadline}}</h6>
+        <h6>({{timeStampConverter(this.currentList.deadline)}})</h6>
       </div>
     </div>
 
     <div v-if="checkIfNoList()">
-      Sorry there is no list assigned to you
+      <p class="sidebar-message">Du har ingen lister akkurat nå, sjekk igjen senere.</p>
     </div>
     <div v-else>
       <!--segments block-->
@@ -79,12 +79,35 @@
         const now = new Date().getTime();
         const days = Math.round((deadline - now) / (1000*60*60*24));
         return days;
-      }
+      },
+      timeStampConverter(dateIn){
+        const d = new Date(dateIn);
+        const months = ['Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Des'];
+        const year = d.getFullYear();
+        const month = months[d.getMonth()];
+        const date = d.getDate();
+        const hour = d.getHours();
+        const min = d.getMinutes();
+
+        let minChecked = '';
+        if(min < 10){
+          minChecked = '0' + min;
+        }else minChecked = min;
+
+        const time = date + ' ' + month + ' ' + year + ', ' + hour + ':' + minChecked;
+        return time;
+      },
     }
   }
 </script>
 
 <style scoped>
+  .sidebar-message {
+    font-size: 0.8em;
+    font-style: italic;
+    opacity: 0.6;
+    text-align: center;
+  }
   .custom-btn-update {
     width: 100%;
   }
@@ -94,13 +117,12 @@
     margin: 20px;
     align-items: center;
   }
-
   .deadline h2 {
     color: #f7b406;
     float: left;
     margin-right: 10px;
+    font-weight: 400;
   }
-
   .deadline-countdown {
     display: block;
     float: right;
@@ -108,9 +130,13 @@
   }
   .deadline-countdown h5 {
     font-size: 0.8em;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 400;
   }
   .deadline-countdown h6 {
     font-size: 0.6em;
+    color: rgba(255, 255, 255, 0.7);
+    font-style: italic;
   }
 
   .lists-component {
@@ -133,11 +159,9 @@
     display: block;
   }
 
-
   .lists-component button i {
     vertical-align: middle;
     margin: auto 1em auto auto;
     line-height: inherit;
   }
-
 </style>

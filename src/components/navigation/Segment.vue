@@ -5,11 +5,15 @@
 <!--    to="/currentLists/{{this.segment.id}}"-->
     <div class="segment">
       <div class="progress-bar-title">
-        <p>{{truncatedTitle()}}</p>
+        <p>{{segment.title}}</p>
       </div>
 
       <div v-if="gamefication" class="questions-delta">
-        <p>{{answeredQuestions()}}/{{this.segment.questions.length}}</p>
+        <p :style="[answeredQuestions()===segment.questions.length ? {'color' : '#FFB800'} : {'color': '#C9C9C9'}]">
+          <span :style="{'color' : '#FFB800'}">{{answeredQuestions()}}</span>/{{this.segment.questions.length}}</p>
+        <i :style="[answeredQuestions()===segment.questions.length ? {'color' : '#FFB800'} : {'color': '#C9C9C9'}]"
+                class="progressbar-icon material-icons">done
+        </i>
       </div>
 
       <div v-if="gamefication" class="progress">
@@ -90,15 +94,17 @@
     display: flex;
     flex-wrap: nowrap;
     position: relative;
-    margin: 15px 5px 0px 5px;
-    color: #dddddd;
-    border-radius: 5px;
+    color: #6F6F6F;
   }
 
   .segment:hover {
     cursor: pointer;
     color: #f7b406;
     background-color: #272727;
+  }
+
+  .segment:hover p {
+    color: rgba(255, 255, 255, 1);
   }
 
   /* segment active */
@@ -111,18 +117,34 @@
 
   .progress-bar-title {
     text-align: center;
+    margin: auto;
     justify-content: left;
-    line-height: 4em;
     padding-left: 5px;
+    z-index: 1;
+    line-height: 1em;
+    width: 70%;
+  }
+
+  .progress-bar-title p {
+    color: rgba(255, 255, 255, 0.7);
+    font-weight: 300;
+    word-break: break-all;
+    font-size: 0.9em;
+    text-align: left;
+    margin: 0;
   }
 
   .questions-delta {
     justify-content: right;
+    z-index: 1;
+    font-weight: 300;
+    font-size: 0.8em;
   }
+
   .questions-delta p {
     width: 100%;
     margin: auto;
-    padding-right: 5px;
+    padding-right: 7px;
   }
 
   .progress {
@@ -131,12 +153,11 @@
     height: 100%;
     width: 100%;
     margin: auto;
-    top: 0; left: 0; bottom: 0; right: 0;
     background-color: #4b4b4b;
     box-shadow: none;
-    border: none;
     cursor: pointer;
     color: #8d8d8d;
+    border-radius: 0;
   }
 
   .progress:hover {
@@ -145,14 +166,13 @@
   }
 
   .progress-bar {
-    background-color: rgba(10,61,194,.7);
-    border: 1px solid #0a3dc2;
+    background-color: rgba(10, 61, 194, 0.6);
+    border: 1px solid #0A3DC2;
     color: inherit;
   }
   .progress-bar-completed {
-    background-color: rgba(52, 184, 85, 1);
-    border: 1px solid #48fc6e;
-    border-radius: 5px;
+    background-color: rgba(38, 255, 111, 0.8);
+    border: 1px solid #26FF6F;
     color: inherit;
   }
 
@@ -163,6 +183,5 @@
     justify-content: center;
     align-items: center;
   }
-
 </style>
 
