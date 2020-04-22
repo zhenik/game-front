@@ -32,17 +32,30 @@ services:
     depends_on:
       - mongo
 
-  frontend-ocn:
-    container_name: frontend
+  frontend-ocn-game-on:
     build:
       context: .
       dockerfile: Dockerfile.official
-    image: zhenik/ocn-frontend:1.1
+      target: prod-gamefied
+    image: zhenik/ocn-frontend:1.2-on
     volumes:
-#      - "./default.conf:/etc/nginx/conf.d/default.conf"
       - "./default-with-auth.conf:/etc/nginx/conf.d/default.conf"
     ports:
       - 3000:3000
+    depends_on:
+      - mongo
+      - backend-ocn
+
+  frontend-ocn-game-off:
+    build:
+      context: .
+      dockerfile: Dockerfile.official
+      target: prod-non-gamefied
+    image: zhenik/ocn-frontend:1.2-off
+    volumes:
+      - "./default-with-auth.conf:/etc/nginx/conf.d/default.conf"
+    ports:
+      - 4001:3000
     depends_on:
       - mongo
       - backend-ocn
@@ -52,7 +65,7 @@ services:
     build:
       context: auth-guard
       dockerfile: Dockerfile
-    image: zhenik/auth-guard:1.0
+    image: zhenik/auth-guard:1.1
     volumes:
       - "./auth-guard/project-credentials.json:/usr/src/app/project-credentials.json"
 #    ports:

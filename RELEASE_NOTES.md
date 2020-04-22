@@ -1,3 +1,8 @@
+### 1.2
+* hide `refresh` button if current list present
+* update list styling
+* init non-gamefied version
+* multistage build 
 ### 1.1 
 * Add admin review functionality
 * Check for new users fetching analytics (no analytics for new users)

@@ -10,7 +10,8 @@ You should have:
 
 `!NB for frontend development`   
 
-Credentials must lie down in `/src/.env.development`. There is example in `example-env`.
+* Credentials must lie down in `<project-root>/.env`. There is example in `example-env`.
+* Application specific variables must lie down in `<project-root>/.env.development`. There is example in `example-env-development`.
 
 `!!!!` It is **IMPORTANT** do not commit credentials.   
 

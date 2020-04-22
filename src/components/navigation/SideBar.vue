@@ -14,7 +14,7 @@
       <p>{{profile.name}}</p>
       <p class="profile-email">{{profile.email}}</p>
       <!--Dashboard button-->
-      <div v-if="gamefication" class="dashboard-btn">
+      <div v-if="gamefication && profile.role == 'USER'" class="dashboard-btn">
         <router-link to="/dashboard">
           <!--<i aria-hidden="true" class="material-icons dashboard-icon">trending_up</i>-->
           <p>Resultater</p>
@@ -25,6 +25,7 @@
     <!--user side bar block-->
     <div v-if="profile.role == 'USER'">
       <!--Refresh button, deadline and segments-->
+      <hr v-if="!checkIfNoList()">
       <UserListSideBlock :current-list="currentList"></UserListSideBlock>
       <br>
       <!--Lever and Lagre buttons-->
@@ -41,16 +42,13 @@
             v-on:click="saveListUserReview"
         >Lagre</button>
       </div>
+      <hr v-if="gamefication">
     </div>
 
     <!--admin side bar block-->
-    <div v-if="profile.role == 'ADMIN'" class="additional-nav additional-navigation-1">
-
-      <hr>
-
+    <div v-if="profile.role == 'ADMIN'" class="dashboard-btn">
       <router-link to="/lists">
-        <i aria-hidden="true" class="material-icons">assignment</i>
-        Lists
+        <p>Lister</p>
       </router-link>
     </div>
 
@@ -116,14 +114,8 @@
     components: {
       UserListSideBlock
     },
-    props: {
-      gamefication: {
-        type: Boolean,
-        required: true
-      }
-    },
     computed: {
-      ...mapGetters(["currentList", "profile"]),
+      ...mapGetters(["currentList", "profile", "gamefication"]),
       allQuestionsAnswered () {
         let answeredAll = true;
         this.currentList.segments.forEach(s => {
@@ -234,6 +226,11 @@
     border-radius: 4px;
     box-shadow: 0 5.5px 5px rgba(0, 0, 0, 0.24), 0 9px 18px rgba(0, 0, 0, 0.18);
   }
+
+  .dashboard-btn p {
+    margin: auto;
+  }
+
 
   .dashboard-btn:hover {
     background-color: rgba(255, 0, 92, 0.4);
