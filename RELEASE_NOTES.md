@@ -1,3 +1,5 @@
+### 1.21
+* update menu styling USER & ADMIN
 ### 1.2
 * hide `refresh` button if current list present
 * update list styling

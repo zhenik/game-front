@@ -19,6 +19,7 @@ rm:
 	docker-compose rm frontend-ocn-game-on
 rmi:
 	docker rmi $$(docker images -a -q)
+b: b-off b-on
 b-off:
 	docker-compose build frontend-ocn-game-off
 b-on:
