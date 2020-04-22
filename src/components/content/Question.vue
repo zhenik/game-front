@@ -177,6 +177,11 @@
   background-color: rgba(255, 184, 0, 0.3) !important;
 }
 
+.btn-group, .btn-group-toggle, .badge, .badge-pill {
+  margin: 0;
+  padding: 0;
+}
+
 /* main container*/
 .question-container {
   display: flex;
@@ -225,7 +230,7 @@ Comment
 }
 .q-text {
   display: flex;
-  flex-grow: 8;
+  width: 70%;
   font-style: normal;
   align-items: flex-end;
   justify-content: flex-start;
