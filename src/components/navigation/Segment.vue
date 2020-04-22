@@ -64,11 +64,6 @@
         let isAnswered = this.answeredQuestions()===this.segment.questions.length;
         // console.log("isAnswered "+ isAnswered);
         return isAnswered ? 'progress-bar-completed' : 'progress-bar'
-      },
-      truncatedTitle() {
-        let title = this.segment.title;
-        let n = 20; // chars is ok
-        return (title.length > n) ? title.substr(0, n-1)+'...' : title
       }
     },
     computed: {
@@ -87,7 +82,6 @@
 </script>
 
 <style scoped>
-
   .segment {
     z-index: 2;
     height: 4em;
@@ -126,7 +120,7 @@
   .progress-bar-title p {
     opacity: 0.8;
     font-weight: 300;
-    word-break: break-all;
+    word-break: normal;
     font-size: 0.9em;
     text-align: left;
     margin: 0;
