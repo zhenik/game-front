@@ -72,11 +72,16 @@
   }
 
   .segment-header {
+    top: 0;
+    width: 100%;
     color: #fff;
     background-color: #3d3d3d;
     height: 4em;
     display: flex;
     align-items: center;
+    position: fixed;
+    z-index: 2;
+    box-shadow: 0px 4px 4px rgba(0, 0, 0, 0.25);
   }
   .segment-header p {
     font-size: large;
@@ -90,6 +95,7 @@
     justify-content: center;
     width: 90%;
     margin: auto;
+    margin-top: 7em;
   }
 
 </style>
