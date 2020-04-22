@@ -5,7 +5,7 @@
 <!--    to="/currentLists/{{this.segment.id}}"-->
     <div class="segment">
       <div class="progress-bar-title">
-        <p>{{segment.title}}</p>
+        <p :style="[answeredQuestions()===segment.questions.length ? {'color' : '#FFB800'} : {'color': '#C9C9C9'}]">{{segment.title}}</p>
       </div>
 
       <div v-if="gamefication" class="questions-delta">
@@ -94,25 +94,22 @@
     display: flex;
     flex-wrap: nowrap;
     position: relative;
-    color: #6F6F6F;
+    background-color: rgba(111, 111, 111, 0.4);
   }
 
-  .segment:hover {
-    cursor: pointer;
-    color: #f7b406;
-    background-color: #272727;
+  .router-link-active > .segment > .progress-bar-title p, .router-link-active > .segment > .questions-delta p {
+    opacity: 1!important;
+    font-weight: 500;
+    margin-left: 5px;
+  }
+
+  .router-link-active > .segment  {
+    box-shadow: inset 4px 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: rgba(0, 0, 0, 0.4);
   }
 
   .segment:hover p {
-    color: rgba(255, 255, 255, 1);
-  }
-
-  /* segment active */
-  .active,
-  .active .progress {
-    cursor: pointer;
-    color: #f7b406;
-    background-color: black;
+    opacity: 1;
   }
 
   .progress-bar-title {
@@ -123,10 +120,11 @@
     z-index: 1;
     line-height: 1em;
     width: 70%;
+    pointer-events: none;
   }
 
   .progress-bar-title p {
-    color: rgba(255, 255, 255, 0.7);
+    opacity: 0.8;
     font-weight: 300;
     word-break: break-all;
     font-size: 0.9em;

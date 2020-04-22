@@ -8,12 +8,13 @@
 
     <!--sidebar-profile block-->
     <div class="sidebar-profile">
-      <img src="@/assets/dog.png" alt="Avatar">
+      <img v-if="gamefication" src="@/assets/dog1.png" alt="Avatar">
+      <div v-else class="no-gamification-img"></div>
       <h4 v-if="profile.role === 'ADMIN'">{{profile.role.toLowerCase()}}</h4>
       <p>{{profile.name}}</p>
       <p class="profile-email">{{profile.email}}</p>
       <!--Dashboard button-->
-      <div class="dashboard-btn">
+      <div v-if="gamefication" class="dashboard-btn">
         <router-link to="/dashboard">
           <!--<i aria-hidden="true" class="material-icons dashboard-icon">trending_up</i>-->
           <p>Resultater</p>
@@ -58,19 +59,19 @@
     <!--common for all side bar block-->
     <div class="additional-nav">
       <router-link to="/">
-        <i aria-hidden="true" class="material-icons">contact_support</i>
-        Info
+        <i aria-hidden="true" class="material-icons additional-nav-i">contact_support</i>
+        <span class="additional-nav-text">Info</span>
       </router-link>
       <button @click="onLogout" class="logout">
-        <i aria-hidden="true" class="material-icons">exit_to_app</i>
-        Logg ut</button>
+        <i aria-hidden="true" class="material-icons additional-nav-i">exit_to_app</i>
+        <span class="additional-nav-text">Logg ut</span></button>
     </div>
 
     <!-- modal: save list -->
       <div class="modal fade bd-example-modal-sm" id="list-update-modal" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-sm modal-dialog-centered">
           <div class="modal-content">
-            Liste lagret.
+            Liste lagret. Du kan komme tilbake og fortsette på den senere.
           </div>
         </div>
       </div>
@@ -86,13 +87,13 @@
             </button>
           </div>
           <div v-if="allQuestionsAnswered" class="modal-body">
-            Vil du levere?
+            Vil du levere lista? Du kan ikke gjøre endringer etterpå.
           </div>
           <div v-else>
             Du må sjekke av alle punkter før du kan levere!
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Tilbake</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
             <button
                 v-if="allQuestionsAnswered"
                 type="button"
@@ -198,7 +199,7 @@
     width: 100%;
     text-align: center;
     margin: 0;
-    background: #363636;
+    background: rgba(0, 0, 0, 0.13);
     padding-bottom: 10px;
   }
 
@@ -206,6 +207,11 @@
     border-radius: 50%;
     width: 25%;
     margin: 20px auto 20px auto;
+    background-color: #000000;
+  }
+  .no-gamification-img{
+    height: 30px;
+    background-color: transparent;
   }
   .sidebar-profile p {
     margin-bottom: 0;
@@ -264,15 +270,6 @@
     text-decoration: none;
     color: white;
   }
-  /*reset button padding*/
-  li button {
-    padding: 0;
-  }
-  li a:hover,
-  li a:active,
-  li a.router-link-active {
-    color: #fa923f;
-  }
 
   .logout {
     background-color: transparent;
@@ -284,51 +281,32 @@
 
   .additional-nav {
     display: flex;
-    flex-direction: row;
     width: 100%;
-    text-align: center;
-    color: white;
   }
 
   .additional-nav * {
-    width: 40%;
-  }
-
-  .additional-nav a {
-    color: inherit;
-    text-align: inherit;
-    text-decoration: none;
-  }
-
-  .additional-nav i {
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    line-height: inherit;
-    font-weight: 300;
-    font-size: 0.9em;
-  }
-
-  .additional-nav button {
-    color: inherit;
-    border-radius: inherit;
-    text-align: inherit;
-    text-decoration: none;
-    display: block;
-    font-weight: 400;
-    font-size: 0.8em;
-  }
-
-  .additional-nav button i {
+    padding: 0;
+    flex-direction: column;
     margin: auto;
+  }
+
+  .additional-nav a, .additional-nav button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.6);
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 10px;
+  }
+
+  .additional-nav-i {
+    width: 100%;
     text-align: center;
     display: inline;
+    font-size: 1.2em;
   }
 
-  .additional-nav a:hover,
-  .additional-nav button:hover {
-    color: white;
-    background-color: #363636;
+  .additional-nav *:hover {
+    color: rgba(255, 255, 255, 1);
   }
 
   .list-actions {
@@ -353,7 +331,7 @@
     color: white;
     background-color: rgba(0, 0, 0, 0.95);
     border-radius: 4px;
-    padding: 1em;
+    padding: 2em;
     width: 100%;
   }
 

@@ -20,7 +20,7 @@
     </div>
 
     <div v-if="checkIfNoList()">
-      <p class="sidebar-message">Du har ingen lister akkurat nå, sjekk igjen senere.</p>
+      <p class="sidebar-message">Klikk på knappen for å sjekke om du har noen lister. Hvis ikke, sjekk igjen senere.</p>
     </div>
     <div v-else>
       <!--segments block-->
@@ -107,9 +107,12 @@
     font-style: italic;
     opacity: 0.6;
     text-align: center;
+    margin: 1em;
   }
   .custom-btn-update {
-    width: 100%;
+    width: 60%;
+    margin: auto;
+    margin-top: 1em;
   }
   .deadline {
     display: flex;
