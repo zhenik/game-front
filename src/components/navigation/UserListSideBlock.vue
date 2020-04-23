@@ -152,14 +152,21 @@
   }
 
   .lists-component button {
-    color: inherit;
-    border-radius: 4px;
     text-align: center;
-    /*background: rgba(10,61,194,.8);*/
+    background-color: rgba(10, 61, 194, 0.5);
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 3px;
+    border: none;
     text-decoration: none;
     font-size: 1rem;
     padding: 8px 8px;
     display: block;
+  }
+
+  .lists-component button:hover,
+  .lists-component button:active {
+    background-color: rgba(10, 61, 194, 0.8);
+    color: rgba(255, 255, 255, 1);
   }
 
   .lists-component button i {

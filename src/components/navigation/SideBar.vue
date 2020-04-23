@@ -11,7 +11,7 @@
       <img v-if="gamefication" src="@/assets/dog1.png" alt="Avatar">
       <div v-else class="no-gamification-img"></div>
       <h4 v-if="profile.role === 'ADMIN'">{{profile.role.toLowerCase()}}</h4>
-      <p>{{profile.name}}</p>
+      <p>Sjekkliste for {{profile.name}}</p>
       <p class="profile-email">{{profile.email}}</p>
       <!--Dashboard button-->
       <div v-if="gamefication && profile.role == 'USER'" class="dashboard-btn">
@@ -25,7 +25,6 @@
     <!--user side bar block-->
     <div v-if="profile.role == 'USER'">
       <!--Refresh button, deadline and segments-->
-      <hr v-if="!checkIfNoList()">
       <UserListSideBlock :current-list="currentList"></UserListSideBlock>
       <br>
       <!--Lever and Lagre buttons-->
@@ -42,7 +41,6 @@
             v-on:click="saveListUserReview"
         >Lagre</button>
       </div>
-      <hr v-if="gamefication">
     </div>
 
     <!--admin side bar block-->
