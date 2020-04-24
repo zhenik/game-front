@@ -1,3 +1,7 @@
+### 1.22
+* update segment styling USER
+* update dashboard user styling USER 
+* add top10 user page with 1 chart 
 ### 1.21
 * update menu styling USER & ADMIN
 ### 1.2

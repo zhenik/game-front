@@ -37,7 +37,7 @@ services:
       context: .
       dockerfile: Dockerfile.official
       target: prod-gamefied
-    image: zhenik/ocn-frontend:1.21-on
+    image: zhenik/ocn-frontend:1.22-on
     volumes:
       - "./default-with-auth.conf:/etc/nginx/conf.d/default.conf"
     ports:
@@ -51,7 +51,7 @@ services:
       context: .
       dockerfile: Dockerfile.official
       target: prod-non-gamefied
-    image: zhenik/ocn-frontend:1.21-off
+    image: zhenik/ocn-frontend:1.22-off
     volumes:
       - "./default-with-auth.conf:/etc/nginx/conf.d/default.conf"
     ports:
