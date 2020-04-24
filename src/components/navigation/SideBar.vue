@@ -13,13 +13,22 @@
       <h4 v-if="profile.role === 'ADMIN'">{{profile.role.toLowerCase()}}</h4>
       <p>Sjekkliste for {{profile.name}}</p>
       <p class="profile-email">{{profile.email}}</p>
-      <!--Dashboard button-->
-      <div v-if="gamefication && profile.role == 'USER'" class="dashboard-btn">
-        <router-link to="/dashboard">
-          <!--<i aria-hidden="true" class="material-icons dashboard-icon">trending_up</i>-->
-          <p>Resultater</p>
-        </router-link>
+
+      <div v-if="gamefication && profile.role == 'USER'" class="gamification-actions">
+        <!--Dashboard button-->
+        <div  class="gamification-btn dashboard-btn">
+          <router-link to="/dashboard">
+            <p>Resultater</p>
+          </router-link>
+        </div>
+        <!--Top list button-->
+        <div class="gamification-btn toplist-btn">
+          <router-link to="#">
+            <p>Toppliste</p>
+          </router-link>
+        </div>
       </div>
+
     </div>
 
     <!--user side bar block-->
@@ -213,8 +222,13 @@
     opacity: 0.6;
   }
 
-  .dashboard-btn {
-    width: 50%;
+  .gamification-actions {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .gamification-btn {
+    width: 40%;
     margin: 0.5em auto;
     background-color: rgba(255, 0, 92, 0.2);
     box-sizing: border-box;
@@ -225,31 +239,27 @@
     box-shadow: 0 5.5px 5px rgba(0, 0, 0, 0.24), 0 9px 18px rgba(0, 0, 0, 0.18);
   }
 
-  .dashboard-btn p {
+  .gamification-btn p {
     margin: auto;
+    padding: 5px;
   }
 
-
-  .dashboard-btn:hover {
+  .gamification-btn:hover {
     background-color: rgba(255, 0, 92, 0.4);
     border: 1px solid rgba(255, 0, 92, 1);
     cursor: pointer;
   }
 
-  .dashboard-btn a {
+  .dashboard-btn:hover p {
+    color: rgba(255, 255, 255, 1);
+  }
+
+  .gamification-btn a {
     text-decoration: none;
     color: rgba(255, 255, 255, 1);
     font-weight: 300;
     text-align: center;
     font-size: 0.9em;
-  }
-
-  .dashboard-btn p {
-    padding: 5px;
-  }
-
-  .dashboard-btn:hover p {
-    color: rgba(255, 255, 255, 1);
   }
 
   ul {
