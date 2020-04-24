@@ -3,10 +3,31 @@
 <!--    <h3>#1 Total feedback</h3>-->
       <div class="dashboard-header d-flex flex-row w-100 align-items-center">
           <i class="material-icons">panorama_fish_eye</i>
-          <h3>Total feedback</h3>
+          <h3>Totale resultater</h3>
+          <button type="button"
+                  data-toggle="modal"
+                  data-target="#data-info-total">
+              <i class="material-icons">
+                  help
+              </i>
+          </button>
       </div>
       <div class="dashboard-content">
     <pie-chart :chart-data="this.datacollection" :options="this.options"></pie-chart>
+      </div>
+      <div class="result-percentage">
+          <h4>{{Math.round(this.feedback)}}% godkjente punkter totalt</h4>
+          <i class="material-icons">
+              sentiment_satisfied_alt
+          </i>
+      </div>
+      <!--Modal info-->
+      <div class="modal fade bd-example-modal-sm" id="data-info-total" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
+          <div class="modal-dialog modal-sm modal-dialog-centered">
+              <div class="modal-content">
+                  Total prosentandel godkjente og ikke godkjente sjekkpunkter på alle lister du har levert.
+              </div>
+          </div>
       </div>
   </div>
 </template>
@@ -20,7 +41,7 @@
     data() {
       return {
         datacollection: {
-          labels: ['Positiv', 'Negativ'],
+          labels: ['Godkjent', 'Ikke godkjent'],
           datasets: [
             {
               backgroundColor: [
@@ -33,15 +54,18 @@
         },
         options: {
           responsive: true,
-          maintainAspectRatio: false
+          maintainAspectRatio: false,
+            legend: {
+                display: false,
+            },
         }
       }
     },
     methods: {
       fillData() {
         this.datacollection = {
-          labels: ['Positiv', 'Negativ'], datasets: [{
-            backgroundColor: ['#26FF6F', '#FA5C20'], data: [this.feedback, 100 - this.feedback]
+          labels: ['Godkjent', 'Ikke godkjent'], datasets: [{borderColor: 'rgba(0, 0, 0, 0)',
+            backgroundColor: ['#26FF6F', '#FA5C20'], data: [Math.round(this.feedback), 100 - Math.round(this.feedback)]
           }]
         }
       }
@@ -58,10 +82,34 @@
 <style scoped>
     .dashboard-header {
         background-color: rgba(111, 111, 111, 0.4);
+        display: flex;
+    }
+    .dashboard-header button {
+        background-color: rgba(0, 0, 0, 0);
+        border: 0;
+        outline: 0;
+        margin-left: auto;
+    }
+    .dashboard-header button:hover i {
+        color: rgba(255, 255, 255, 1);
     }
     .dashboard-content {
         padding: 1em;
         margin: 1em;
+        margin-top: -1em;
+    }
+    .result-percentage {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: -2em;
+    }
+    .result-percentage i {
+        color: #26FF6F;
+    }
+    h4 {
+        text-align: center;
+        font-size: 1em;
     }
     h3 {
         font-size: 1em;
@@ -73,5 +121,9 @@
     i {
         padding: 0.5em;
         color: #C9C9C9;
+    }
+    .modal-content {
+        background-color: rgba(0, 0, 0, 1);
+        padding: 2em;
     }
 </style>
