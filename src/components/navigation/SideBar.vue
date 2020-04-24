@@ -140,9 +140,14 @@
     },
     methods: {
       onLogout () {
-        this.$store.dispatch('logout');
-        this.$store.dispatch('currentListResetState');
-        this.$router.push('/signin')
+        const r = confirm("Vil du logge ut? Husk å lagre lista først hvis du ikke har levert den!");
+        if (r == true) {
+          this.$store.dispatch('logout');
+          this.$store.dispatch('currentListResetState');
+          this.$router.push('/signin');
+        } else {
+          return null;
+        }
       },
       saveListUserReview() {
         this.$store.dispatch("updateList");
