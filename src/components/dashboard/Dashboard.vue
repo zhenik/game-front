@@ -11,7 +11,6 @@
                                    class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-last-and-best-delivery>
       <user-grouped-answers-count :allListsFeedback="userAnalytics.allListsFeedback"
                                   class="dashboard-element col-xs-12 col-sm-6 col-lg-4"></user-grouped-answers-count>
-      <top-ten-users class="dashboard-element col-xs-12 col-sm-6 col-lg-4" ></top-ten-users>
     </div>
 
     <div v-else>
@@ -27,7 +26,6 @@
   import UserTotalFeedback from "./user-total-feedback/UserTotalFeedback";
   import UserLastAndBestDelivery from "./user-last-best-delivery/UserLastAndBestDelivery";
   import UserGroupedAnswersCount from "./answers-grouped-count/UserGroupedAnswersCount";
-  import TopTenUsers from "./top/TopTenUsers";
   import { store } from "@/store";
 
   export default {
@@ -42,7 +40,6 @@
       UserTotalFeedback,
       UserLastAndBestDelivery,
       UserGroupedAnswersCount,
-      TopTenUsers
     },
     methods: {
       fetchUserAnalytics() {

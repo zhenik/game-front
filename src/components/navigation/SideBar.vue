@@ -23,7 +23,7 @@
         </div>
         <!--Top list button-->
         <div class="gamification-btn toplist-btn">
-          <router-link to="#">
+          <router-link to="/top10">
             <p>Toppliste</p>
           </router-link>
         </div>
