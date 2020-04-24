@@ -1,24 +1,28 @@
 <template>
   <div id="signin">
+    <h2>fellow</h2>
     <div class="signin-form">
       <form @submit.prevent="submit">
         <div class="input">
-          <label for="email">User</label>
+          <label for="email">Brukernavn</label>
           <input
+                  placeholder="e-post"
                   type="email"
                   id="email"
                   v-model="email">
         </div>
         <div class="input">
-          <label for="password">Password</label>
+          <label for="password">Passord</label>
           <input
+                  placeholder="passord"
                   type="password"
                   id="password"
                   autocomplete="on"
                   v-model="password">
         </div>
         <div class="submit">
-          <button type="submit">Submit</button>
+          <button type="submit">Logg inn</button>
+          <a class="col-12 text-center" href="mailto:c3masterprosjekt@gmail.com?subject=Glemt%20innlogging&body=Hei,%20jeg%20trenger%20hjelp%20med%20innlogging.%20Hilsen%20<skriv%20ditt%20navn>.">Glemt passord/brukernavn?</a>
         </div>
       </form>
     </div>
@@ -63,12 +67,22 @@ export default {
   #signin {
     margin: 10px;
   }
+
+  #signin > h2 {
+    font-style: italic;
+    color: #FFB800;
+    font-weight: bolder;
+    text-transform: uppercase;
+    margin-top: 1.5em;
+    text-align: center;
+  }
   .signin-form {
     width: 400px;
     margin: 30px auto;
-    border: 1px solid #eee;
     padding: 20px;
-    box-shadow: 0 2px 3px #ccc;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    background-color: #3D3D3D;
+    border-radius: 3px;
   }
 
   .input {
@@ -77,16 +91,19 @@ export default {
 
   .input label {
     display: block;
-    /*color: #4e4e4e;*/
+    color: #c1c1c1;
     margin-bottom: 6px;
   }
 
   .input input {
-    font: inherit;
     width: 100%;
-    padding: 6px 12px;
-    box-sizing: border-box;
-    border: 1px solid #8d8d8d;
+    background: rgba(255, 255, 255, 0.3);
+    color: rgba(0, 0, 0, 0.7);
+    border: none;
+    outline: none;
+    padding: 10px;
+    font-size: 0.8em;
+    margin-bottom: 1em;
   }
 
   .input input:focus {
@@ -95,18 +112,43 @@ export default {
     background-color: #ffffff;
   }
 
+  .input input:hover {
+    background: rgba(255, 255, 255, 0.5);
+  }
+  .input input:active {
+    background: rgba(255, 255, 255, 0.7);
+  }
+  ::placeholder {
+    color: white;
+    opacity: 0.6;
+  }
+  :-ms-input-placeholder {
+    color: white;
+    opacity: 0.6;
+  }
+
+  .submit {
+    margin-top: 1.7em;
+    display: flex;
+    flex-direction: column;
+  }
+
   .submit button {
-    border: 1px solid #521751;
-    color: #521751;
+    margin: auto;
+    border-radius: 3px;
+    border: none;
+    background-color: rgba(10, 61, 194, 0.5);
     padding: 10px 20px;
     font: inherit;
     cursor: pointer;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
+    color: rgba(255, 255, 255, 0.7);
   }
 
   .submit button:hover,
   .submit button:active {
-    background-color: #123495;
-    color: white;
+    background-color: rgba(10, 61, 194, 0.8);
+    color: rgba(255, 255, 255, 1);
   }
 
   .submit button[disabled],
@@ -116,5 +158,15 @@ export default {
     background-color: transparent;
     color: #ccc;
     cursor: not-allowed;
+  }
+
+  .submit a {
+    opacity: 0.7;
+    font-style: italic;
+    font-size: 0.8em;
+    margin-top: 1em;
+  }
+  .submit a:hover {
+    opacity: 1;
   }
 </style>

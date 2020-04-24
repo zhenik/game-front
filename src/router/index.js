@@ -3,7 +3,8 @@ import VueRouter from 'vue-router'
 
 import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
-import Dashboard from '../components/dashboard/index'
+import Dashboard from '../components/dashboard/Dashboard'
+import Top10 from '../components/dashboard/Top10'
 import ListsCatalog from '../components/content/admin/ListsCatalog'
 import List from '../components/content/admin/List'
 import SegmentQuestions from '../components/content/SegmentQuestions'
@@ -29,6 +30,12 @@ const router = new VueRouter({
       path: '/dashboard',
       name: 'Dashboard',
       component: Dashboard,
+      beforeEnter: AuthGuardUser
+    },
+    {
+      path: '/top10',
+      name: 'Top10',
+      component: Top10,
       beforeEnter: AuthGuardUser
     },
     {
