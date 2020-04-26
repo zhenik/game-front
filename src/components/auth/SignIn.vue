@@ -22,7 +22,9 @@
         </div>
         <div class="submit">
           <button type="submit">Logg inn</button>
-          <a class="col-12 text-center" href="mailto:c3masterprosjekt@gmail.com?subject=Glemt%20innlogging&body=Hei,%20jeg%20trenger%20hjelp%20med%20innlogging.%20Hilsen%20<skriv%20ditt%20navn>.">Glemt passord/brukernavn?</a>
+          <a class="col-12 text-center"
+             @click="track('clicked forgot credentials')"
+             href="mailto:c3masterprosjekt@gmail.com?subject=Glemt%20innlogging&body=Hei,%20jeg%20trenger%20hjelp%20med%20innlogging.%20Hilsen%20<skriv%20ditt%20navn>.">Glemt passord/brukernavn?</a>
         </div>
       </form>
     </div>
@@ -58,6 +60,13 @@ export default {
         password: this.password
       };
       this.$store.dispatch('signUserIn', payload);
+    },
+    track(value) {
+      this.$gtag.event(
+              'sign in', {
+                'event_category': 'credentials',
+                'value': value
+              })
     }
   }
 }

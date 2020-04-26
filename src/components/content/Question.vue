@@ -18,6 +18,7 @@
                        v-model="localQuestion.answer"
                        value="YES"
                        :name="'q-'+localQuestion.id"
+                       @click="track('YES')"
                 ><i class="material-icons">done</i>
               </label>
               <label class="btn btn-danger btn-to-checkbox" :class="{ active:  'NO' === localQuestion.answer}">
@@ -26,6 +27,7 @@
                        v-model="localQuestion.answer"
                        value="NO"
                        :name="'q-'+localQuestion.id"
+                       @click="track('NO')"
                 ><i class="material-icons">close</i>
               </label>
               <label class="btn btn-warning btn-to-checkbox" :class="{ active: 'IRRELEVANT' === localQuestion.answer}">
@@ -34,6 +36,7 @@
                        v-model="localQuestion.answer"
                        value="IRRELEVANT"
                        :name="'q-'+localQuestion.id"
+                       @click="track('IRRELEVANT')"
                 ><i class="material-icons">remove</i>
               </label>
               <label class="btn btn-secondary btn-to-checkbox reset-btn"
@@ -43,6 +46,7 @@
                      v-model="localQuestion.answer"
                      value="NONE"
                      :name="'-q-'+localQuestion.id"
+                     @click="track('reset')"
               ><i class="material-icons">replay</i>
             </label>
             </div>
@@ -63,7 +67,7 @@
               :class="{'highlight': localQuestion.comment !== null}">
           <textarea v-model="localQuestion.comment"
                     placeholder="Kommentar"
-                    @change="onCommentInput"
+                    @change="[onCommentInput(), track('comment')]"
                     class="form-control"
                     rows="1">
           </textarea>
@@ -153,6 +157,13 @@
     methods: {
       onCommentInput() {
         this.$emit('update:question', this.localQuestion)
+      },
+      track(value) {
+        this.$gtag.event(
+                'list', {
+                  'event_category': 'question input',
+                  'value': value
+                })
       }
     }
   }

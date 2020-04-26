@@ -47,7 +47,7 @@
             class="btn btn-primary btn-lg"
             data-toggle="modal"
             data-target="#list-update-modal"
-            v-on:click="saveListUserReview"
+            v-on:click="[saveListUserReview(), track('clicked save')]"
         >Lagre</button>
       </div>
     </div>
@@ -63,7 +63,7 @@
 
     <!--common for all side bar block-->
     <div class="additional-nav">
-      <router-link to="/">
+      <router-link to="/" @click.native="track('clicked info button')">
         <i aria-hidden="true" class="material-icons additional-nav-i">contact_support</i>
         <span class="additional-nav-text">Info</span>
       </router-link>
@@ -161,6 +161,13 @@
         if (this.currentList == null) return true;
         let id = this.currentList.id;
         return (id === '')
+      },
+      track(value) {
+        this.$gtag.event(
+                'menu action', {
+                  'event_category': 'menu',
+                  'value': value
+                })
       }
     }
   }
