@@ -19,7 +19,7 @@ const ApiService = {
           return config;
         },
         (error) => {
-          console.log("Interceptors exception");
+          // console.log("Interceptors exception");
           return Promise.reject(error)
         }
     )
@@ -62,7 +62,7 @@ export default ApiService;
 
 export const UsersService = {
   getUser(email) {
-    console.log("Axios base url -> "+Vue.axios.defaults.baseURL);
+    // console.log("Axios base url -> "+Vue.axios.defaults.baseURL);
     return ApiService.get("users", `${email}`);
   },
   // only role=USER
@@ -88,7 +88,7 @@ export const ListsService = {
         'Content-Type': 'application/json',
       }
     };
-    console.log("List prepared  " + data)
+    // console.log("List prepared  " + data)
     return Vue.axios.post("lists", data, config) // todo: extract method to ApiService
   },
   get(slug) {
