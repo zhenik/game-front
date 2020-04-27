@@ -63,7 +63,7 @@
 
     <!--common for all side bar block-->
     <div class="additional-nav">
-      <router-link to="/" @click.native="track('clicked info button')">
+      <router-link to="/info" @click.native="track('clicked info button')">
         <i aria-hidden="true" class="material-icons additional-nav-i">contact_support</i>
         <span class="additional-nav-text">Info</span>
       </router-link>
