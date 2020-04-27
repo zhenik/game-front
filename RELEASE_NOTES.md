@@ -1,3 +1,8 @@
+### 1.23
+* update styling USER
+* add info page
+* tracking tags
+
 ### 1.22
 * update segment styling USER
 * update dashboard user styling USER 
