@@ -22,9 +22,9 @@
               <small>Nyligste resultat:</small>
               <h4>{{Math.round(this.twoListsFeedback.last.feedback)}} %</h4>
           </div>
-          <i class="material-icons">
-            sentiment_satisfied_alt
-          </i>
+          <h4 class="vs">
+            VS
+          </h4>
           <div class="result-comparison-right">
               <small>Beste resultat:</small>
               <h4>{{Math.round(this.twoListsFeedback.best.feedback)}} %</h4>
@@ -79,7 +79,7 @@
           labels: ['Nyligste', 'Beste'],
           datasets: [{
             label: 'Nyligste',
-            backgroundColor: ['#26FF6F', 'rgba(38, 255, 111, 0.3);'],
+            backgroundColor: ['#FF005C', 'rgba(38, 255, 111, 0.3);'],
             // data: [{x: 20, y:'Positive'}, {x: 7, y:'Negative'}],
             data: [100, 66, 0],
             order: 1
@@ -111,7 +111,7 @@
       fillData() {
         this.datacollection = {
           labels: ['Nyligste', 'Beste'], datasets: [{
-            backgroundColor: ['#26FF6F', 'rgba(38, 255, 111, 0.3)'], // data: [{x: 20, y:'Positive'}, {x: 7, y:'Negative'}],
+            backgroundColor: ['#FF005C', 'rgba(255, 0, 92, 0.3)'], // data: [{x: 20, y:'Positive'}, {x: 7, y:'Negative'}],
             data: [Math.round(this.twoListsFeedback.best.feedback), Math.round(this.twoListsFeedback.last.feedback), 0],
             order: 1
           }]
@@ -157,10 +157,11 @@
         flex-grow: 2;
         text-align: left;
     }
-    .result-comparison i {
+    .result-comparison .vs {
         flex-grow: 1;
         text-align: center;
-        color: #26FF6F;
+        color: #FF005C;
+        align-self: center;
     }
     .result-comparison-left {
         flex-grow: 2;

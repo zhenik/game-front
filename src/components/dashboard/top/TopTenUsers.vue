@@ -79,7 +79,6 @@
     border-radius: 50%;
     background-color: #1e1e1e;
   }
-
   .dashboard-header {
       background-color: rgba(111, 111, 111, 0.4);
       display: flex;
@@ -108,34 +107,38 @@
       padding: 8px 8px;
       display: block;
   }
-
-  .dashboard-header{
+  .dashboard-header {
     background-color: rgba(111, 111, 111, 0.4);
   }
-
-  .dashboard-content{
+  .dashboard-content {
     padding: 1em;
     margin: 1em;
   }
-  h3{
+  h3 {
     font-size: 1em;
     padding: 0.5em;
     color: #C9C9C9;
     font-weight: 300;
     margin-bottom: 0;
   }
-  ul{
+  ul {
     padding: 0;
   }
-  .top-user-list-element{
+  .top-user-list-element {
     border-bottom: 1px solid rgba(111, 111, 111, 0.4);;
     margin-bottom: 1em;
   }
-  h6, .user-score{
+  h6 {
     color: #C9C9C9;
     font-weight: 300;
   }
-  i{
+  .user-score {
+      color: #FF005C;
+      align-self: center;
+      font-weight: 500;
+      font-size: 1.2em;
+  }
+  i {
     padding: 0.5em;
     color: #C9C9C9;
   }
