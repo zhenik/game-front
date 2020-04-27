@@ -1,6 +1,7 @@
 <template>
   <div>
     <div class="segment-header">
+      <span class="material-icons ml-2">pie_chart</span>
       <p>Resultater</p>
     </div>
   <div class="container-fluid">

@@ -1,12 +1,13 @@
 <template>
   <div>
     <div class="segment-header">
-      <p>Top10</p>
+      <i class="material-icons ml-2">filter_list</i>
+      <p>Toppliste</p>
     </div>
     <div class="container-fluid">
       <div v-if="gamefication"  class="dashboard-row row no-gutters">
 
-        <top-ten-users class="dashboard-element col-xs-12 col-sm-6 col-lg-4" ></top-ten-users>
+        <top-ten-users class="dashboard-element col-6" ></top-ten-users>
       </div>
 
     </div>

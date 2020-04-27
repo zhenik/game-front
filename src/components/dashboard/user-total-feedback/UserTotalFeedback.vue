@@ -16,10 +16,7 @@
     <pie-chart :chart-data="this.datacollection" :options="this.options"></pie-chart>
       </div>
       <div class="result-percentage">
-          <h4>{{Math.round(this.feedback)}}% godkjente punkter totalt</h4>
-          <i class="material-icons">
-              sentiment_satisfied_alt
-          </i>
+          <h4><span :style="{'color': '#FF005C'}">{{Math.round(this.feedback)}}%</span> godkjente punkter totalt</h4>
       </div>
       <!--Modal info-->
       <div class="modal fade bd-example-modal-sm" id="data-info-total" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
@@ -45,8 +42,8 @@
           datasets: [
             {
               backgroundColor: [
-                  '#41B883',
-                  '#DD1B16'
+                  '#FF005C',
+                  'rgba(10, 61, 194, 0.3)'
               ],
               data: [0, 0]
             }
@@ -65,7 +62,7 @@
       fillData() {
         this.datacollection = {
           labels: ['Godkjent', 'Ikke godkjent'], datasets: [{borderColor: 'rgba(0, 0, 0, 0)',
-            backgroundColor: ['#26FF6F', '#FA5C20'], data: [Math.round(this.feedback), 100 - Math.round(this.feedback)]
+            backgroundColor: ['#FF005C', 'rgba(10, 61, 194, 0.3)'], data: [Math.round(this.feedback), 100 - Math.round(this.feedback)]
           }]
         }
       }
@@ -103,9 +100,6 @@
         flex-direction: column;
         align-items: center;
         margin-top: -2em;
-    }
-    .result-percentage i {
-        color: #26FF6F;
     }
     h4 {
         text-align: center;

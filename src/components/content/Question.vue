@@ -142,9 +142,9 @@
       },
       helperText () {
         if (this.localQuestion.answer === "YES"){
-          return "OK"
+          return "UTFØRT"
         }else if (this.localQuestion.answer === "NO"){
-          return "IKKE OK"
+          return "IKKE UTFØRT"
         }else if (this.localQuestion.answer === "IRRELEVANT"){
           return "IRRELEVANT"
         }else return null;

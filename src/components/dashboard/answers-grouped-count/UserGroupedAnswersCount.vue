@@ -24,7 +24,7 @@
       <div class="modal fade bd-example-modal-sm" id="data-info-grouped" tabindex="-1" role="dialog" aria-labelledby="listUpdateModalLabel" aria-hidden="true">
           <div class="modal-dialog modal-sm modal-dialog-centered">
               <div class="modal-content">
-                  Alle sjekkpunkter fra alle lister du har levert, fordelt på "ok", "ikke ok" og "irrelevant".
+                  Alle sjekkpunkter fra alle lister du har levert, fordelt på "gjort", "ikke gjort" og "irrelevant".
               </div>
           </div>
       </div>
@@ -51,7 +51,7 @@
     data() {
       return {
         datacollection: {
-          labels: ['Ok', 'Ikke ok', 'Irrelevant'],
+          labels: ['Utført', 'Ikke utført', 'Irrelevant'],
           datasets: [{
             backgroundColor: ['#26FF6F', '#FA5C20', '#FFB800'],
             data: [40, 20, 80, 10]
@@ -77,7 +77,7 @@
     methods: {
       fillData() {
         this.datacollection = {
-          labels: ['Ok', 'Ikke ok', 'Irrelevant'],
+          labels: ['Utført', 'Ikke utført', 'Irrelevant'],
           datasets: [{
             backgroundColor: ['#26FF6F', '#FA5C20', '#FFB800'],
             borderColor: 'rgba(0, 0, 0, 0)',
