@@ -3,6 +3,7 @@ import VueRouter from 'vue-router'
 
 import SignInPage from '../components/auth/SignIn'
 import Profile from '../components/profile/index'
+import InfoPage from '../components/info/info'
 import Dashboard from '../components/dashboard/Dashboard'
 import Top10 from '../components/dashboard/Top10'
 import ListsCatalog from '../components/content/admin/ListsCatalog'
@@ -36,6 +37,12 @@ const router = new VueRouter({
       path: '/top10',
       name: 'Top10',
       component: Top10,
+      beforeEnter: AuthGuardUser
+    },
+    {
+      path: '/info',
+      name: 'Info',
+      component: InfoPage,
       beforeEnter: AuthGuardUser
     },
     {
