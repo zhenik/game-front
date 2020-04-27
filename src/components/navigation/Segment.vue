@@ -1,5 +1,6 @@
 <template>
   <router-link
+          @click.native="track('clicked segment')"
       :to="segmentLink" :segment="segment"
   >
 <!--    to="/currentLists/{{this.segment.id}}"-->
@@ -64,6 +65,13 @@
         let isAnswered = this.answeredQuestions()===this.segment.questions.length;
         // console.log("isAnswered "+ isAnswered);
         return isAnswered ? 'progress-bar-completed' : 'progress-bar'
+      },
+      track(value) {
+        this.$gtag.event(
+                'menu action', {
+                  'event_category': 'menu',
+                  'value': value
+                })
       }
     },
     computed: {
