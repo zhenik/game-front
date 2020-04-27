@@ -40,10 +40,10 @@ Vue.use(VueGtag, {
   config: { id: 'UA-163563458-1' }, // C3 Gamified SB
   includes: [
     { id: 'UA-163563458-2'}, // C3 Digital SB
-    { id: '' }, // C3 Gamified DS
-    { id: '' }, // C3 Digital DS
-    { id: '' }, // PRIV Gamified
-    { id: '' }, // PRIV Digital
+    { id: 'UA-163563458-3' }, // C3 Gamified DS
+    { id: 'UA-163563458-4' }, // C3 Digital DS
+    { id: 'UA-163563458-5' }, // PRIV Gamified
+    { id: 'UA-163563458-6' }, // PRIV Digital
   ]
 }, router);
 
