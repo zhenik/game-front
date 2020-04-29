@@ -1,7 +1,8 @@
 <template>
   <div class="segment-container">
 
-    <div class="segment-header">
+    <div v-if="!profile.role === 'ADMIN'"
+            class="segment-header">
       <p>{{this.segment.title}}</p>
 
         <!-- progress bar -->
@@ -64,7 +65,7 @@
       }
     },
     computed: {
-      ...mapGetters(["gamefication"]),
+      ...mapGetters(["gamefication", "profile"]),
     },
     mounted() {
       // console.log("segment "+ JSON.stringify(this.slug))
