@@ -2,26 +2,35 @@
   <div class="list-container">
     <!--header-->
     <div class="list-header">
-      <p>State {{currentList.state}}</p>
-
-      <div class="list-header-description">
-        <small>assigned: {{currentList.assignedToEmail}} </small>
-        <small>assigned date: {{currentList.assignedDate}} </small>
-        <small>deadline: {{currentList.deadline}} </small>
+      <div class="list-subheader">
+      <small>Status:</small>
+      <p v-if="currentList.state === 'UNDER_REVIEW'" :style="{'color':'#ffffff'}">Klar for feedback</p>
+      <p v-if="currentList.state === 'WORK_IN_PROGRESS'" :style="{'color':'#FA5C20'}">Ikke levert</p>
+      <p v-if="currentList.state === 'DELIVERED'" :style="{'color': '#26FF6F'}">Ferdig</p>
       </div>
 
-      <div v-if="currentList.state === 'UNDER_REVIEW'">
+      <div class="list-header-description">
+        <small class="list-header-user">{{currentList.assignedToEmail}} </small>
+        <div>
+        <small>Utlevert: {{timeStampConverter(currentList.assignedDate)}} </small>
+        <small>Innleveringsfrist: {{timeStampConverter(currentList.deadline)}} </small>
+        <small v-if="currentList.state === 'DELIVERED'">Ferdig: {{timeStampConverter(currentList.updatedAt)}} </small>
+        <small v-if="currentList.state === 'UNDER_REVIEW'">Endret: {{timeStampConverter(currentList.updatedAt)}} </small>
+        </div>
+      </div>
+
+      <div v-if="currentList.state === 'UNDER_REVIEW'" class="action-btns">
         <button type="button"
                 class="btn btn-warning btn-lg"
                 data-toggle="modal"
                 data-target="#review-update-modal"
                 v-on:click="saveListUserReview"
-        >Save review</button>
+        >Lagre</button>
         <button type="button"
                 class="btn btn-primary btn-lg"
                 data-toggle="modal"
                 data-target="#review-deliver-modal"
-        >Finish review</button>
+        >Ferdig</button>
       </div>
     </div>
 
@@ -44,7 +53,7 @@
          aria-hidden="true">
       <div class="modal-dialog modal-sm modal-dialog-centered">
         <div class="modal-content">
-          Listet lagret
+          Lista er lagret. Du kan komme tilbake og jobbe på den senere.
         </div>
       </div>
     </div>
@@ -58,22 +67,22 @@
       <div class="modal-dialog modal-dialog-centered" role="document">
         <div class="modal-content">
           <div class="modal-header">
-            <h5 class="modal-title" id="exampleModalLongTitle">Finish review</h5>
+            <h5 class="modal-title" id="exampleModalLongTitle">Godkjenn liste</h5>
             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
             </button>
           </div>
           <div class="modal-body">
-            Would you like to finish review?
+            Er du ferdig med feedback? Du kan ikke angre denne handlingen.
           </div>
           <div class="modal-footer">
-            <button type="button" class="btn btn-secondary" data-dismiss="modal">Back to edit</button>
+            <button type="button" class="btn btn-secondary" data-dismiss="modal">Avbryt</button>
             <button
                 type="button"
                 class="btn btn-primary"
                 data-dismiss="modal"
                 v-on:click="finishListUserReview"
-            >Yes</button>
+            >Ferdig</button>
           </div>
         </div>
       </div>
@@ -87,6 +96,8 @@
   import {mapGetters} from "vuex";
   import { store } from "@/store";
   import SegmentQuestions from "../SegmentQuestions";
+  import ListsCatalog from "./ListsCatalog";
+  import AuthGuardAdmin from "../../../router/auth-guard-admin";
 
   export default {
     name: "List",
@@ -117,7 +128,30 @@
       },
       finishListUserReview() {
         this.$store.dispatch("finishReview");
-      }
+        this.$router.push({
+          name: 'Lists',
+          path: '/lists',
+          component: ListsCatalog,
+          beforeEnter: AuthGuardAdmin
+        },)
+      },
+      timeStampConverter(dateIn){
+        const d = new Date(dateIn);
+        const months = ['Jan','Feb','Mar','Apr','Mai','Jun','Jul','Aug','Sep','Okt','Nov','Des'];
+        const year = d.getFullYear();
+        const month = months[d.getMonth()];
+        const date = d.getDate();
+        const hour = d.getHours();
+        const min = d.getMinutes();
+
+        let minChecked = '';
+        if(min < 10){
+          minChecked = '0' + min;
+        }else minChecked = min;
+
+        const time = date + ' ' + month + ' ' + year + ', ' + hour + ':' + minChecked;
+        return time;
+      },
     },
     components: {
       SegmentQuestions
@@ -135,19 +169,87 @@
     background-color: #3d3d3d;
     display: flex;
     flex-direction: revert;
+    position: fixed;
+    width: 100%;
+    top: 0;
+    z-index: 2;
+    box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   }
   .list-header p {
     font-size: large;
     margin: auto 1em auto 1em;
   }
 
+  .list-subheader {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 1em;
+  }
+
+  .list-subheader small {
+    font-style: italic;
+    opacity: 0.6;
+  }
+
+  .list-subheader p {
+    margin: 0;
+    font-weight: 500;
+  }
+
   .list-header-description {
     margin: 1em;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    opacity: 0.8;
+  }
+
+  .list-header-description * {
+    margin-left: 3em;
     display: flex;
     flex-direction: column;
   }
 
+  .list-header-user {
+    font-size: 1em;
+  }
+
   .list-segments-wrapper {
     margin-top: 1em;
+    padding-top: 4em;
+  }
+
+  .action-btns {
+    display: flex;
+    flex-direction: row;
+    margin: 1.5em;
+  }
+
+  .action-btns button {
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 1em;
+    font-weight: 300;
+    font-size: 1em;
+  }
+  .action-btns button:hover {
+    color: rgba(255, 255, 255, 1);
+  }
+  .modal-content {
+    color: white;
+    background-color: rgba(0, 0, 0, 0.95);
+    border-radius: 4px;
+    padding: 2em;
+    width: 100%;
+  }
+
+  .modal {
+    text-align: center;
+  }
+
+  .modal-body {
+    text-align: left;
   }
 </style>
