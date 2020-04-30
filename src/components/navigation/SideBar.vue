@@ -11,7 +11,8 @@
       <img v-if="gamefication" src="@/assets/dog1.png" alt="Avatar">
       <div v-else class="no-gamification-img"></div>
       <h4 v-if="profile.role === 'ADMIN'">{{profile.role.toLowerCase()}}</h4>
-      <p>Sjekkliste for {{profile.name}}</p>
+      <p v-if="profile.role === 'USER'">Sjekkliste for {{profile.name}}</p>
+      <p v-else>{{profile.name}}</p>
       <p class="profile-email">{{profile.email}}</p>
 
       <div v-if="gamefication && profile.role == 'USER'" class="gamification-actions">
@@ -53,10 +54,17 @@
     </div>
 
     <!--admin side bar block-->
-    <div v-if="profile.role == 'ADMIN'" class="dashboard-btn">
-      <router-link to="/lists">
-        <p>Lister</p>
-      </router-link>
+    <div v-if="profile.role == 'ADMIN'" class="admin-side-bar">
+      <ul>
+        <router-link to="/lists">
+          <li class="admin-side-bar-li">
+            <span class="material-icons">
+            reorder
+            </span>
+            <a>Lister</a>
+          </li>
+        </router-link>
+      </ul>
     </div>
 
     <hr>
@@ -342,6 +350,31 @@
 
   .list-actions .btn-warning {
     background-color: #ffc107;
+  }
+
+  .admin-side-bar *{
+    text-decoration: none;
+  }
+
+  .admin-side-bar-li {
+    width: 100%;
+    background-color: rgba(111, 111, 111, 0.4);
+    padding-top: 1em;
+    padding-bottom: 1em;
+    color: #ffffff;
+    display: flex;
+    flex-direction: row;
+  }
+  .admin-side-bar-li:hover {
+    background-color: rgba(0, 0, 0, 0.5);
+  }
+  .admin-side-bar-li:hover *{
+    color: rgba(255, 255, 255, 1);
+  }
+  .admin-side-bar-li *{
+    text-decoration: none;
+    color: rgba(255, 255, 255, 0.7);
+    margin-left: 0.5em;
   }
 
   .modal-content {
