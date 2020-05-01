@@ -39,7 +39,7 @@
                        @click="track('IRRELEVANT')"
                 ><i class="material-icons">remove</i>
               </label>
-              <label class="btn btn-secondary btn-to-checkbox reset-btn"
+              <label class="btn btn-secondary btn-to-checkbox"
                      :class="[{ active:  'NONE' === localQuestion.answer}, {'hide-btn': this.localQuestion.answer=='NONE'}]">
               <input type="radio"
                      :disabled="checkDisabled"
@@ -73,25 +73,26 @@
           </textarea>
       </div>
 
-      <!--Admin block appear only if user is admin and list has state UNDER_REVIEW-->
-      <!--info: be aware, tag `:name` should be unique per each radio, to support unique state-->
-      <div v-if="isAdmin && currentList.state === 'UNDER_REVIEW'">
-        <label class="btn btn-to-checkbox">
-          <input type="radio"
-                 v-model="localQuestion.score"
-                 :value=1
-                 :name="'approve-s-'+segmentId +'-q-'+ question.id"
-          ><i class="material-icons">event_available</i>
-        </label>
-        <label class="btn btn-to-checkbox">
-          <input type="radio"
-                 v-model="localQuestion.score"
-                 :value=0
-                 :name="'not-approve-s-'+segmentId +'-q-'+ question.id"
-          ><i class="material-icons">event_busy</i>
-        </label>
-      </div>
     </div>
+    <!--Admin block appear only if user is admin and list has state UNDER_REVIEW-->
+    <!--info: be aware, tag `:name` should be unique per each radio, to support unique state-->
+    <div v-if="isAdmin && currentList.state === 'UNDER_REVIEW'">
+      <label class="btn btn-to-checkbox admin-approve-btn" >
+        <input type="radio"
+               v-model="localQuestion.score"
+               :value=1
+               :name="'approve-s-'+segmentId +'-q-'+ question.id"
+        ><i class="material-icons">thumb_up_alt</i>
+      </label>
+      <label class="btn btn-to-checkbox admin-reject-btn">
+        <input type="radio"
+               v-model="localQuestion.score"
+               :value=0
+               :name="'not-approve-s-'+segmentId +'-q-'+ question.id"
+        ><i class="material-icons">thumb_down_alt</i>
+      </label>
+    </div>
+
   </div>
 </template>
 
@@ -332,5 +333,15 @@ Comment
 .question-irrelevant .btn-warning {
   border: 1px solid #FFB800 !important;
   background-color: #c38f15 !important;
+}
+
+.admin-reject-btn {
+  color: #FA5C20;
+  background-color: transparent;
+}
+
+.admin-approve-btn {
+  color: #26FF6F;
+  background-color: transparent;
 }
 </style>

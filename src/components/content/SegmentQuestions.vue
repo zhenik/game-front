@@ -1,7 +1,8 @@
 <template>
   <div class="segment-container">
 
-    <div class="segment-header">
+    <div v-if="profile.role !== 'ADMIN'"
+            class="segment-header">
       <p>{{this.segment.title}}</p>
 
         <!-- progress bar -->
@@ -26,6 +27,9 @@
 
 <!--    &lt;!&ndash;todo: style&ndash;&gt; <p>{{this.segment.description}}</p>-->
     <div class="questions-wrapper">
+        <div v-if="profile.role === 'ADMIN'" class="admin-segment-header">
+            <p>{{this.segment.title}}</p>
+        </div>
 <!--      <div class="segment-header">-->
 <!--        <p>{{this.segment.description}}</p>-->
 <!--      </div>-->
@@ -64,7 +68,7 @@
       }
     },
     computed: {
-      ...mapGetters(["gamefication"]),
+      ...mapGetters(["gamefication", "profile"]),
     },
     mounted() {
       // console.log("segment "+ JSON.stringify(this.slug))
@@ -128,6 +132,10 @@
     margin: auto auto auto 10px;
     z-index: 2;
     width: 70%;
+  }
+
+  .admin-segment-header p {
+      margin-top: -5em;
   }
 
   .questions-wrapper {
