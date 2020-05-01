@@ -96,8 +96,6 @@
   import {mapGetters} from "vuex";
   import { store } from "@/store";
   import SegmentQuestions from "../SegmentQuestions";
-  import ListsCatalog from "./ListsCatalog";
-  import AuthGuardAdmin from "../../../router/auth-guard-admin";
 
   export default {
     name: "List",
@@ -127,13 +125,8 @@
         this.$store.dispatch("updateList");
       },
       finishListUserReview() {
-        this.$store.dispatch("finishReview");
-        this.$router.push({
-          name: 'Lists',
-          path: '/lists',
-          component: ListsCatalog,
-          beforeEnter: AuthGuardAdmin
-        },)
+        this.$store.dispatch("finishReview")
+                .then(() => this.$router.push('/lists'));
       },
       timeStampConverter(dateIn){
         const d = new Date(dateIn);
