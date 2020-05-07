@@ -14,8 +14,6 @@
         <div>
         <small>Utlevert: {{timeStampConverter(currentList.assignedDate)}} </small>
         <small>Innleveringsfrist: {{timeStampConverter(currentList.deadline)}} </small>
-        <small v-if="currentList.state === 'DELIVERED'">Ferdig: {{timeStampConverter(currentList.updatedAt)}} </small>
-        <small v-if="currentList.state === 'UNDER_REVIEW'">Endret: {{timeStampConverter(currentList.updatedAt)}} </small>
         </div>
       </div>
 
