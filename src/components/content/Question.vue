@@ -93,6 +93,24 @@
       </label>
     </div>
 
+    <!-- Show feedback when state delivered-->
+    <div v-if="currentList.state === 'DELIVERED'">
+      <div v-if="localQuestion.score === 1"
+      class="delivered-feedback delivered-feedback-approved">
+        <span class="material-icons">
+        thumb_up
+        </span>
+        <small>GODKJENT</small>
+      </div>
+      <div v-if="localQuestion.score === 0"
+           class="delivered-feedback delivered-feedback-not-approved">
+        <span class="material-icons">
+        thumb_down
+        </span>
+        <small>IKKE GODKJENT</small>
+      </div>
+    </div>
+
   </div>
 </template>
 
@@ -343,5 +361,21 @@ Comment
 .admin-approve-btn {
   color: #26FF6F;
   background-color: transparent;
+}
+.delivered-feedback {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  margin-top: 0.5em;
+  margin-bottom: 0.7em;
+}
+.delivered-feedback *{
+  margin-right: 0.5em;
+}
+.delivered-feedback-not-approved {
+  color: #FA5C20;
+}
+.delivered-feedback-approved {
+  color: #26FF6F;
 }
 </style>

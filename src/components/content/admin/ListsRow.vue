@@ -16,8 +16,7 @@
         <div class="list-row-description">
           <div class="list-row-description-meta">
             <small v-if="list.state==='WORK_IN_PROGRESS'" class="list-deadline"><span class="make-bold">Frist:</span> {{timeStampConverter(list.deadline)}}</small>
-            <small v-if="list.state==='DELIVERED'" class="list-deadline"><span class="make-bold">Ferdig:</span> {{timeStampConverter(list.updatedAt)}}</small>
-            <small v-else class="list-deadline"><span class="make-bold">Sist endret:</span> {{timeStampConverter(list.updatedAt)}}</small>
+            <small v-else class="list-deadline"><span class="make-bold">Hadde frist:</span> {{timeStampConverter(list.deadline)}}</small>
             <small><span class="make-bold">Punkter:</span> {{questionsCount}}</small>
           </div>
           <span v-if="list.state ==='WORK_IN_PROGRESS'" class="material-icons status-icon">
