@@ -1,3 +1,6 @@
+### 1.24
+* update styling ADMIN
+
 ### 1.23
 * update styling USER
 * add info page
